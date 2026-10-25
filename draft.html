@@ -1,0 +1,453 @@
+<title>Where US Imports Went</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap">
+<style>
+/* Layout: one reading column with a left rail that names each story step and its sketch IDs; charts run the full column width. */
+:root {
+  --paper: #edf0f1;      /* customs-form grey-blue */
+  --sheet: #f8fafa;
+  --ink: #15212b;        /* navy ink */
+  --muted: #56636d;
+  --rule: #c5ced4;
+  --grid: #dde3e6;
+  /* story partners, fixed across every chart */
+  --c-Mexico: #2563c9;
+  --c-China: #d4690f;
+  --c-Vietnam: #0f8f8b;
+  --c-Taiwan: #7650c9;
+  --c-Canada: #b8337f;
+  --c-other: #a7b1b8;
+  --risk: #b42318;
+  --ok: #2f7d4f;
+  --warn: #9a6a00;
+  --display: "Archivo", "Arial Narrow", "Helvetica Neue", Arial, sans-serif;
+  --body: "Source Serif 4", Georgia, "Times New Roman", serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #111a21; --sheet: #17222b; --ink: #e4e9ec; --muted: #9aa7b0; --rule: #2e3b45; --grid: #222f38;
+    --c-Mexico: #6b9cf0; --c-China: #f08a3a; --c-Vietnam: #3cc2bd; --c-Taiwan: #a68af0; --c-Canada: #e46aae; --c-other: #55636d;
+    --risk: #f2766b; --ok: #6cc28f; --warn: #e0b04a;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #111a21; --sheet: #17222b; --ink: #e4e9ec; --muted: #9aa7b0; --rule: #2e3b45; --grid: #222f38;
+  --c-Mexico: #6b9cf0; --c-China: #f08a3a; --c-Vietnam: #3cc2bd; --c-Taiwan: #a68af0; --c-Canada: #e46aae; --c-other: #55636d;
+  --risk: #f2766b; --ok: #6cc28f; --warn: #e0b04a;
+  color-scheme: dark;
+}
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font: 400 1.0625rem/1.62 var(--body);
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+.wrap { max-width: 1040px; margin: 0 auto; }
+
+/* masthead + hero */
+.masthead {
+  display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 24px;
+  padding-block: 20px 14px; border-bottom: 2px solid var(--ink);
+  font: 600 0.875rem/1.3 var(--display); font-stretch: 85%;
+}
+.masthead span:last-child { color: var(--muted); font-weight: 500; }
+.hero { padding-block: 40px 8px; }
+h1 {
+  font-family: var(--display); font-weight: 800; font-stretch: 68%;
+  font-size: clamp(2.6rem, 7.4vw, 5.6rem); line-height: 0.94; letter-spacing: -0.01em;
+  margin: 0; max-width: 15ch; text-wrap: balance;
+}
+.deck { max-width: 62ch; margin: 22px 0 0; font-size: 1.1875rem; color: var(--ink); }
+
+/* figures */
+figure { margin: 0; }
+.chart { position: relative; width: 100%; }
+.chart svg { display: block; width: 100%; height: auto; overflow: visible; }
+.hero-fig { margin-block: 28px 0; }
+figcaption { font: 500 0.8125rem/1.45 var(--display); color: var(--muted); margin-top: 8px; max-width: 70ch; }
+.key { display: flex; flex-wrap: wrap; gap: 6px 16px; font: 600 0.875rem/1 var(--display); margin-bottom: 10px; }
+.key i { display: inline-block; width: 18px; height: 3px; vertical-align: middle; margin-right: 6px; border-radius: 2px; }
+
+svg text { font-family: var(--display); fill: var(--muted); font-size: 12px; }
+svg .axis line, svg .axis path { stroke: var(--rule); }
+svg .grid line { stroke: var(--grid); }
+svg .lab { font-weight: 700; font-size: 13px; }
+svg .event line { stroke: var(--muted); stroke-dasharray: 2 3; }
+svg .event text { font-size: 11px; fill: var(--muted); }
+
+/* story sections */
+.step {
+  display: grid; grid-template-columns: 170px minmax(0, 1fr); gap: 0 40px;
+  padding-block: 56px; border-top: 1px solid var(--rule);
+}
+.rail { font-family: var(--display); padding-top: 6px; }
+.rail b { display: block; font-size: 0.9375rem; font-weight: 700; font-stretch: 85%; }
+.rail span { display: block; font-size: 0.8125rem; color: var(--muted); margin-top: 2px; }
+.step h2 {
+  font-family: var(--display); font-weight: 750; font-stretch: 78%;
+  font-size: clamp(1.7rem, 3.4vw, 2.4rem); line-height: 1.05; margin: 0 0 14px; max-width: 24ch; text-wrap: balance;
+}
+.step p { max-width: 64ch; margin: 0 0 14px; }
+.step figure { margin-top: 26px; }
+.note { font-size: 0.9375rem; color: var(--muted); }
+
+/* data table fallback */
+details { margin-top: 12px; font: 500 0.875rem/1.4 var(--display); }
+summary { cursor: pointer; color: var(--ink); font-weight: 600; width: fit-content; }
+summary:focus-visible, button:focus-visible, .dot:focus-visible { outline: 2px solid var(--c-Mexico); outline-offset: 3px; }
+.tbl { overflow-x: auto; margin-top: 10px; background: var(--sheet); border: 1px solid var(--rule); }
+table { border-collapse: collapse; width: 100%; font-variant-numeric: tabular-nums; }
+th, td { padding: 6px 10px; text-align: right; border-bottom: 1px solid var(--grid); white-space: nowrap; }
+th:first-child, td:first-child { text-align: left; }
+th { font-weight: 700; color: var(--ink); }
+
+/* risk explorer */
+.risk { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); gap: 28px; margin-top: 26px; align-items: start; }
+.panel { background: var(--sheet); border: 1px solid var(--rule); border-top: 4px solid var(--ink); padding: 18px 20px; font-family: var(--display); }
+.panel h3 { margin: 0 0 2px; font-size: 1.25rem; font-weight: 750; font-stretch: 85%; line-height: 1.15; }
+.panel .hs { color: var(--muted); font-size: 0.8125rem; }
+.panel dl { display: grid; grid-template-columns: auto auto auto; gap: 8px 14px; margin: 16px 0 0; font-variant-numeric: tabular-nums; }
+.panel dt { color: var(--muted); font-size: 0.8125rem; }
+.panel dd { margin: 0; font-weight: 600; text-align: right; }
+.panel .hdr { color: var(--muted); font-size: 0.75rem; text-align: right; }
+.pill { display: inline-block; margin-top: 16px; padding: 4px 10px; border-radius: 999px; font-size: 0.8125rem; font-weight: 700; border: 1.5px solid currentColor; }
+.pill.high { color: var(--risk); } .pill.mod { color: var(--warn); } .pill.low { color: var(--ok); }
+.panel p { font-family: var(--body); font-size: 0.9375rem; margin: 12px 0 0; }
+.dot { cursor: pointer; }
+.dot circle { stroke: var(--paper); stroke-width: 1.5; }
+.dot.on circle { stroke: var(--ink); stroke-width: 2.5; }
+
+footer { border-top: 2px solid var(--ink); padding-block: 22px 48px; font: 500 0.8125rem/1.5 var(--display); color: var(--muted); }
+footer p { max-width: 80ch; margin: 0 0 6px; }
+
+@media (max-width: 760px) {
+  .step { grid-template-columns: minmax(0, 1fr); padding-block: 40px; }
+  .rail { display: flex; gap: 10px; align-items: baseline; margin-bottom: 10px; padding-top: 0; }
+  .rail span { margin-top: 0; }
+  .risk { grid-template-columns: minmax(0, 1fr); }
+}
+</style>
+
+<div class="wrap">
+  <header class="masthead">
+    <span>CS 6730 Team Viz Lab</span>
+    <span>Draft for the prototype review, October 2026</span>
+  </header>
+
+  <section class="hero">
+    <h1>The US didn't stop buying from China. It started buying from everyone else.</h1>
+    <p class="deck">China supplied <strong id="cnPeak">21.9%</strong> of US goods imports in 2017. By 2025 it supplied <strong id="cn25">9.4%</strong>. Mexico, Vietnam and Taiwan took much of that share. For sourcing teams the change matters less as a drop than as a new map of who the US depends on.</p>
+    <figure class="hero-fig">
+      <div class="key" id="key1"></div>
+      <div class="chart" id="c-share"></div>
+      <figcaption>Share of total US goods imports by partner, 2006–2025. The dashed line marks the first Section 301 tariffs on China (July 2018).</figcaption>
+      <details><summary>View data table</summary><div class="tbl" id="t-share"></div></details>
+    </figure>
+  </section>
+
+  <section class="step" aria-labelledby="h-rank">
+    <div class="rail"><b>Rising insight</b><span>Sketches 4, 10</span></div>
+    <div>
+      <h2 id="h-rank">Twenty years ago the top three were Canada, China and Mexico. Mexico now leads.</h2>
+      <p>Ranked by total trade (imports plus exports), the top of the table held steady for a decade. Then it moved. Mexico passed China in 2019 and passed Canada in 2023. Taiwan climbed from 11th to 4th in eight years, likely driven by AI-related semiconductors. Vietnam was 41st in 2006 and is 7th today.</p>
+      <figure>
+        <div class="chart" id="c-rank"></div>
+        <figcaption>Rank of each partner by total US goods trade. Partners outside the top 10 sit on the bottom line.</figcaption>
+        <details><summary>View data table</summary><div class="tbl" id="t-rank"></div></details>
+      </figure>
+    </div>
+  </section>
+
+  <section class="step" aria-labelledby="h-ch">
+    <div class="rail"><b>Rising insight</b><span>Sketches 21, 1</span></div>
+    <div>
+      <h2 id="h-ch">China's decline is concentrated in a few product groups.</h2>
+      <p>China's share fell fastest in electronics, machinery and furniture. In toys, China still supplies more than half of US imports. The largest US import groups, like vehicles, fuels and pharmaceuticals, were never mainly sourced from China, so the headline drop says less about them.</p>
+      <figure>
+        <div class="key"><span><i style="background:transparent;border:2px solid var(--c-China);width:10px;height:10px;border-radius:50%"></i>2017</span><span><i style="background:var(--c-China);width:10px;height:10px;border-radius:50%"></i>2025</span></div>
+        <div class="chart" id="c-ch"></div>
+        <figcaption>China's share of US imports in each HS chapter, 2017 vs 2025. Chapters are sorted by their 2025 US import value.</figcaption>
+        <details><summary>View data table</summary><div class="tbl" id="t-ch"></div></details>
+      </figure>
+    </div>
+  </section>
+
+  <section class="step" aria-labelledby="h-cn">
+    <div class="rail"><b>Rising insight</b><span>Sketch 29</span></div>
+    <div>
+      <h2 id="h-cn">US imports from China peaked at $576 billion in 2022, then fell 43% by 2025.</h2>
+      <p>Imports from China kept growing after the 2018 tariffs and recovered after COVID-19. The steep fall came after 2022. Exports to China moved much less, so the trade deficit with China shrank from $422 billion in 2022 to $221 billion in 2025.</p>
+      <p class="note">Policy markers show what happened at the same time. They don't show what caused the change.</p>
+      <figure>
+        <div class="key"><span><i style="background:var(--c-China)"></i>Imports from China</span><span><i style="background:var(--muted)"></i>Exports to China</span></div>
+        <div class="chart" id="c-cn"></div>
+        <figcaption>US goods trade with China, billions of US dollars.</figcaption>
+        <details><summary>View data table</summary><div class="tbl" id="t-cn"></div></details>
+      </figure>
+    </div>
+  </section>
+
+  <section class="step" aria-labelledby="h-risk">
+    <div class="rail"><b>Solution</b><span>Sketches 7, 8</span></div>
+    <div>
+      <h2 id="h-risk">Where is the US still relying on a single supplier?</h2>
+      <p>Each dot is a product group. Further right means the top supplier holds a larger share of US imports. Higher means that share grew between 2017 and 2025. Groups in the top right are the most exposed. Select a dot to see who supplies it.</p>
+      <div class="risk">
+        <figure>
+          <div class="chart" id="c-risk"></div>
+          <figcaption>Top supplier's share of US imports in 2025 (horizontal) and its change since 2017 in percentage points (vertical). The top supplier may differ between years.</figcaption>
+        </figure>
+        <aside class="panel" id="panel" aria-live="polite"></aside>
+      </div>
+      <details><summary>View data table</summary><div class="tbl" id="t-risk"></div></details>
+    </div>
+  </section>
+
+  <footer>
+    <p>Data: UN Comtrade, US-reported goods trade by partner and by HS2 chapter, 2006–2025. 2025 values are as reported when we downloaded them and may be revised. Comtrade lists Taiwan as "Other Asia, nes".</p>
+    <p>Concentration uses the Herfindahl–Hirschman Index (HHI) of supplier shares. Under 1,500 is unconcentrated, 1,500–2,500 is moderately concentrated, and over 2,500 is highly concentrated.</p>
+    <p>Navaneeth Biju, Enhui Li, Nitin Senthilkumar, Srivathsan Baskaran, Qiaosong Gao.</p>
+  </footer>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js"></script>
+<script>
+const DATA = {"years":[2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022,2023,2024,2025],"share":{"China":[15.93,16.86,16.46,19.32,19.46,18.44,19.03,19.73,20.17,21.79,21.42,21.86,21.57,18.4,19.01,18.46,17.07,14.14,13.78,9.35],"Mexico":[10.45,10.55,10.07,11.13,11.8,11.71,11.99,12.17,12.31,12.93,13.18,13.13,13.37,14.07,13.67,13.24,13.61,15.15,15.19,15.38],"Canada":[16.04,15.74,15.66,14.21,14.25,14.04,14.03,14.49,14.69,13.05,12.59,12.71,12.47,12.72,11.48,12.41,13.24,13.56,12.55,11.2],"Vietnam":[0.48,0.57,0.64,0.81,0.81,0.82,0.92,1.11,1.33,1.72,1.95,2.01,1.96,2.7,3.46,3.69,4.03,3.75,4.24,5.74],"Taiwan":[2.07,1.98,1.74,1.83,1.89,1.89,1.72,1.69,1.74,1.84,1.81,1.83,1.81,2.18,2.6,2.75,2.85,2.84,3.54,5.85]},"ranks":{"Canada":[1,1,1,1,1,1,1,1,1,2,2,2,2,1,3,2,1,2,2,2],"China":[2,2,2,2,2,2,2,2,2,1,1,1,1,3,1,1,3,3,3,3],"France":[9,8,8,8,8,9,10,8,8,8,8,8,8,8,14,15,12,12,14,14],"Germany":[5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,4,4,5],"Japan":[4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,5,5,6],"Mexico":[3,3,3,3,3,3,3,3,3,3,3,3,3,2,2,3,2,1,1,1],"South Korea":[7,7,7,7,7,7,7,6,6,6,6,6,6,6,6,6,6,6,6,8],"Taiwan":[8,9,12,10,9,10,11,12,10,9,10,11,11,10,10,9,9,8,7,4],"United Kingdom":[6,6,6,6,6,6,6,7,7,7,7,7,7,7,7,8,8,7,9,10],"Vietnam":[41,38,37,30,29,30,29,27,25,19,16,16,16,13,9,7,7,9,8,7]},"china":{"imports":[305.8,340.1,356.3,309.5,383.0,417.3,444.4,459.1,486.3,504.0,481.3,525.8,563.2,472.5,457.2,541.5,575.7,448.0,462.6,327.5],"exports":[55.2,65.2,71.5,69.6,91.9,104.1,110.5,121.7,123.7,116.1,115.6,129.8,120.1,106.6,124.6,151.1,153.8,147.8,143.5,106.3]},"chapters":[{"hs":"10","name":"Cereals","y2017":{"world":2.5,"china":0.5,"top":"Canada","topShare":50.9,"hhi":3005},"y2025":{"world":3.2,"china":1.0,"top":"Canada","topShare":39.4,"hhi":2668}},{"hs":"12","name":"Oil seeds","y2017":{"world":2.5,"china":11.1,"top":"Canada","topShare":27.1,"hhi":1101},"y2025":{"world":2.7,"china":5.8,"top":"Canada","topShare":26.9,"hhi":976}},{"hs":"27","name":"Mineral fuels & oil","y2017":{"world":204.0,"china":0.3,"top":"Canada","topShare":37.9,"hhi":1684},"y2025":{"world":216.4,"china":0.1,"top":"Canada","topShare":55.0,"hhi":3135}},{"hs":"28","name":"Inorganic chemicals (incl. rare earths)","y2017":{"world":11.5,"china":12.6,"top":"Canada","topShare":22.8,"hhi":932},"y2025":{"world":19.4,"china":7.2,"top":"Canada","topShare":19.3,"hhi":788}},{"hs":"30","name":"Pharmaceuticals","y2017":{"world":96.9,"china":1.5,"top":"Ireland","topShare":24.6,"hhi":1096},"y2025":{"world":213.8,"china":2.5,"top":"Ireland","topShare":19.9,"hhi":861}},{"hs":"39","name":"Plastics","y2017":{"world":54.7,"china":32.1,"top":"China","topShare":32.1,"hhi":1622},"y2025":{"world":74.0,"china":22.8,"top":"China","topShare":22.8,"hhi":1107}},{"hs":"61","name":"Apparel (knit)","y2017":{"world":45.7,"china":32.5,"top":"China","topShare":32.5,"hhi":1442},"y2025":{"world":46.6,"china":14.6,"top":"Vietnam","topShare":21.1,"hhi":910}},{"hs":"62","name":"Apparel (not knit)","y2017":{"world":37.8,"china":35.7,"top":"China","topShare":35.7,"hhi":1663},"y2025":{"world":35.1,"china":14.6,"top":"Vietnam","topShare":20.4,"hhi":1042}},{"hs":"72","name":"Iron & steel","y2017":{"world":28.8,"china":2.4,"top":"Canada","topShare":18.3,"hhi":713},"y2025":{"world":27.1,"china":1.6,"top":"Canada","topShare":20.1,"hhi":868}},{"hs":"73","name":"Articles of iron or steel","y2017":{"world":39.1,"china":31.9,"top":"China","topShare":31.9,"hhi":1421},"y2025":{"world":44.2,"china":21.0,"top":"China","topShare":21.0,"hhi":913}},{"hs":"84","name":"Machinery & computers","y2017":{"world":348.6,"china":32.2,"top":"China","topShare":32.2,"hhi":1503},"y2025":{"world":665.1,"china":7.9,"top":"Mexico","topShare":22.6,"hhi":1216}},{"hs":"85","name":"Electrical equipment & electronics","y2017":{"world":356.0,"china":42.1,"top":"China","topShare":42.1,"hhi":2213},"y2025":{"world":513.6,"china":16.4,"top":"Mexico","topShare":17.8,"hhi":954}},{"hs":"87","name":"Vehicles & parts","y2017":{"world":294.3,"china":5.3,"top":"Mexico","topShare":28.5,"hhi":1671},"y2025":{"world":337.9,"china":3.9,"top":"Mexico","topShare":36.8,"hhi":1946}},{"hs":"90","name":"Optical & medical instruments","y2017":{"world":86.0,"china":14.3,"top":"Mexico","topShare":16.2,"hhi":815},"y2025":{"world":125.7,"china":8.1,"top":"Mexico","topShare":19.2,"hhi":772}},{"hs":"94","name":"Furniture & lighting","y2017":{"world":67.0,"china":52.0,"top":"China","topShare":52.0,"hhi":3095},"y2025":{"world":66.6,"china":21.8,"top":"Vietnam","topShare":23.6,"hhi":1483}},{"hs":"95","name":"Toys & sports equipment","y2017":{"world":32.7,"china":81.7,"top":"China","topShare":81.7,"hhi":6707},"y2025":{"world":37.0,"china":54.5,"top":"China","topShare":54.5,"hhi":3406}}],"worldImports2025":3504};
+
+const STORY = ["Mexico", "China", "Canada", "Vietnam", "Taiwan"];
+const col = p => STORY.includes(p) ? `var(--c-${p})` : "var(--c-other)";
+const years = DATA.years;
+const fmt1 = d3.format(".1f");
+
+function table(id, head, rows) {
+  const el = document.getElementById(id);
+  el.innerHTML = "<table><thead><tr>" + head.map(h => `<th>${h}</th>`).join("") + "</tr></thead><tbody>" +
+    rows.map(r => "<tr>" + r.map(c => `<td>${c}</td>`).join("") + "</tr>").join("") + "</tbody></table>";
+}
+
+function svgFor(id, w, h) {
+  const el = document.getElementById(id);
+  el.innerHTML = "";
+  return d3.select(el).append("svg").attr("viewBox", `0 0 ${w} ${h}`).attr("role", "img");
+}
+const widthOf = id => Math.max(320, document.getElementById(id).clientWidth);
+
+// pushes sorted label positions apart so end labels never overlap
+function dodge(items, gap, lo, hi) {
+  items.sort((a, b) => a.y - b.y);
+  for (let i = 1; i < items.length; i++) if (items[i].y - items[i - 1].y < gap) items[i].y = items[i - 1].y + gap;
+  const over = items.length ? items[items.length - 1].y - hi : 0;
+  if (over > 0) items.forEach(d => d.y -= over);
+  return items;
+}
+
+/* hero: import share lines */
+function drawShare() {
+  const W = widthOf("c-share"), narrow = W < 560;
+  const H = narrow ? 300 : 400, m = { t: 14, r: narrow ? 92 : 116, b: 28, l: 34 };
+  const svg = svgFor("c-share", W, H).attr("aria-label", "Line chart of US import share by partner, 2006 to 2025");
+  const x = d3.scaleLinear([2006, 2025], [m.l, W - m.r]);
+  const y = d3.scaleLinear([0, 24], [H - m.b, m.t]);
+  svg.append("g").attr("class", "grid").selectAll("line").data(y.ticks(6)).join("line")
+    .attr("x1", m.l).attr("x2", W - m.r).attr("y1", y).attr("y2", y);
+  svg.append("g").attr("class", "axis").attr("transform", `translate(0,${H - m.b})`)
+    .call(d3.axisBottom(x).tickValues(narrow ? [2006, 2012, 2018, 2025] : [2006, 2009, 2012, 2015, 2018, 2021, 2025]).tickFormat(d3.format("d")).tickSizeOuter(0));
+  svg.append("g").attr("class", "axis").attr("transform", `translate(${m.l},0)`)
+    .call(d3.axisLeft(y).ticks(6).tickFormat(d => d + "%").tickSize(0)).call(g => g.select(".domain").remove());
+
+  const ev = svg.append("g").attr("class", "event");
+  ev.append("line").attr("x1", x(2018.5)).attr("x2", x(2018.5)).attr("y1", m.t).attr("y2", H - m.b);
+  ev.append("text").attr("x", x(2018.5) + 5).attr("y", m.t + 10).text("Tariffs on China");
+
+  const line = d3.line().x((d, i) => x(years[i])).y(d => y(d));
+  const order = ["Canada", "Taiwan", "Vietnam", "Mexico", "China"];
+  svg.append("g").selectAll("path").data(order).join("path")
+    .attr("fill", "none").attr("stroke", col).attr("stroke-width", p => p === "China" || p === "Mexico" ? 3.5 : 2.25)
+    .attr("stroke-linejoin", "round").attr("d", p => line(DATA.share[p]));
+
+  const last = years.length - 1;
+  svg.append("g").selectAll("circle").data(order).join("circle")
+    .attr("cx", x(2025)).attr("cy", p => y(DATA.share[p][last])).attr("r", 4).attr("fill", col);
+  const labs = dodge(order.map(p => ({ p, y: y(DATA.share[p][last]) })), 16, m.t, H - m.b);
+  svg.append("g").selectAll("text").data(labs).join("text").attr("class", "lab")
+    .attr("x", x(2025) + 10).attr("y", d => d.y + 4).style("fill", d => col(d.p))
+    .text(d => `${d.p} ${fmt1(DATA.share[d.p][last])}%`);
+
+  // China's 2017 peak
+  const pk = years.indexOf(2017);
+  svg.append("circle").attr("cx", x(2017)).attr("cy", y(DATA.share.China[pk])).attr("r", 4.5).attr("fill", "var(--c-China)");
+  svg.append("text").attr("x", x(2017)).attr("y", y(DATA.share.China[pk]) - 12).attr("text-anchor", "middle")
+    .style("fill", "var(--ink)").style("font-weight", 600).text(`2017 peak ${fmt1(DATA.share.China[pk])}%`);
+
+  document.getElementById("key1").innerHTML = STORY.map(p => `<span><i style="background:${col(p)}"></i>${p}</span>`).join("");
+}
+
+/* bump chart of rank */
+function drawRank() {
+  const W = widthOf("c-rank"), narrow = W < 560;
+  const H = narrow ? 320 : 380, m = { t: 12, r: narrow ? 78 : 104, b: 28, l: narrow ? 78 : 104 };
+  const svg = svgFor("c-rank", W, H).attr("aria-label", "Bump chart of US trading partner ranks, 2006 to 2025");
+  const x = d3.scaleLinear([2006, 2025], [m.l, W - m.r]);
+  const y = d3.scaleLinear([1, 11], [m.t, H - m.b]);
+  const clamp = r => Math.min(r, 11);
+  svg.append("g").attr("class", "axis").attr("transform", `translate(0,${H - m.b + 10})`)
+    .call(d3.axisBottom(x).tickValues(narrow ? [2006, 2015, 2025] : [2006, 2010, 2015, 2020, 2025]).tickFormat(d3.format("d")).tickSize(0))
+    .call(g => g.select(".domain").remove());
+  svg.append("line").attr("x1", m.l).attr("x2", W - m.r).attr("y1", y(11)).attr("y2", y(11)).attr("stroke", "var(--rule)").attr("stroke-dasharray", "3 3");
+
+  const names = Object.keys(DATA.ranks).sort((a, b) => STORY.includes(a) - STORY.includes(b));
+  const line = d3.line().x((d, i) => x(years[i])).y(d => y(clamp(d))).curve(d3.curveMonotoneX);
+  svg.append("g").selectAll("path").data(names).join("path")
+    .attr("fill", "none").attr("stroke", col).attr("stroke-width", p => STORY.includes(p) ? 3 : 1.5)
+    .attr("d", p => line(DATA.ranks[p]));
+
+  const side = (idx, anchor, dx) => {
+    const rows = names.filter(p => DATA.ranks[p][idx] <= 10);
+    svg.append("g").selectAll("text").data(rows).join("text")
+      .attr("x", x(years[idx]) + dx).attr("y", p => y(DATA.ranks[p][idx]) + 4).attr("text-anchor", anchor)
+      .attr("class", p => STORY.includes(p) ? "lab" : null)
+      .style("fill", p => STORY.includes(p) ? col(p) : "var(--muted)")
+      .text(p => `${DATA.ranks[p][idx]}. ${p === "United Kingdom" ? "UK" : p === "South Korea" ? "S. Korea" : p}`);
+  };
+  side(0, "end", -8);
+  side(years.length - 1, "start", 8);
+  svg.append("text").attr("x", m.l - 8).attr("y", y(11) + 4).attr("text-anchor", "end").text("Below 10");
+}
+
+/* dumbbell: China share by chapter */
+function drawChapters() {
+  const W = widthOf("c-ch"), narrow = W < 560;
+  const rows = [...DATA.chapters].sort((a, b) => b.y2025.world - a.y2025.world);
+  const rowH = 30, m = { t: 24, r: 20, b: 10, l: narrow ? 150 : 270 };
+  const H = m.t + rows.length * rowH + m.b;
+  const svg = svgFor("c-ch", W, H).attr("aria-label", "Dot plot of China's share of US imports by product group");
+  const x = d3.scaleLinear([0, 90], [m.l, W - m.r]);
+  const y = (d, i) => m.t + i * rowH + rowH / 2;
+  svg.append("g").attr("class", "grid").selectAll("line").data(x.ticks(narrow ? 3 : 6)).join("line")
+    .attr("x1", x).attr("x2", x).attr("y1", m.t - 6).attr("y2", H - m.b);
+  svg.append("g").selectAll("text").data(x.ticks(narrow ? 3 : 6)).join("text")
+    .attr("x", x).attr("y", m.t - 10).attr("text-anchor", "middle").text(d => d + "%");
+
+  const short = n => narrow ? n.replace(" (incl. rare earths)", "").replace("Electrical equipment & electronics", "Electronics").replace("Optical & medical instruments", "Optical & medical").replace("Articles of iron or steel", "Steel articles") : n;
+  const g = svg.append("g").selectAll("g").data(rows).join("g").attr("transform", (d, i) => `translate(0,${y(d, i)})`);
+  g.append("text").attr("x", m.l - 12).attr("y", 4).attr("text-anchor", "end").style("fill", "var(--ink)").style("font-size", "12.5px")
+    .text(d => narrow ? short(d.name) : `${d.name}  $${Math.round(d.y2025.world)}B`);
+  g.append("line").attr("x1", d => x(d.y2017.china)).attr("x2", d => x(d.y2025.china)).attr("stroke", "var(--c-China)").attr("stroke-width", 2).attr("opacity", 0.45);
+  g.append("circle").attr("cx", d => x(d.y2017.china)).attr("r", 5).attr("fill", "var(--paper)").attr("stroke", "var(--c-China)").attr("stroke-width", 2);
+  g.append("circle").attr("cx", d => x(d.y2025.china)).attr("r", 5.5).attr("fill", "var(--c-China)");
+  g.filter(d => d.y2017.china - d.y2025.china >= 15).append("text")
+    .attr("x", d => x(d.y2017.china) + 10).attr("y", 4).style("font-weight", 600)
+    .text(d => `−${Math.round(d.y2017.china - d.y2025.china)} pts`);
+}
+
+/* US-China columns with events */
+function drawChina() {
+  const W = widthOf("c-cn"), narrow = W < 560;
+  const H = narrow ? 300 : 360, m = { t: 58, r: 8, b: 28, l: 44 };
+  const svg = svgFor("c-cn", W, H).attr("aria-label", "Column chart of US imports from and exports to China, 2006 to 2025");
+  const x = d3.scaleBand(years, [m.l, W - m.r]).paddingInner(0.22);
+  const y = d3.scaleLinear([0, 600], [H - m.b, m.t]);
+  svg.append("g").attr("class", "grid").selectAll("line").data(y.ticks(6)).join("line")
+    .attr("x1", m.l).attr("x2", W - m.r).attr("y1", y).attr("y2", y);
+  svg.append("g").attr("class", "axis").attr("transform", `translate(${m.l},0)`)
+    .call(d3.axisLeft(y).ticks(6).tickFormat(d => "$" + d).tickSize(0)).call(g => g.select(".domain").remove());
+  svg.append("g").attr("class", "axis").attr("transform", `translate(0,${H - m.b})`)
+    .call(d3.axisBottom(x).tickValues(years.filter(v => v % (narrow ? 6 : 3) === 0 || v === 2025)).tickSizeOuter(0));
+
+  const bw = x.bandwidth() / 2;
+  svg.append("g").selectAll("rect").data(years).join("rect")
+    .attr("x", d => x(d)).attr("width", bw).attr("y", (d, i) => y(DATA.china.imports[i])).attr("height", (d, i) => y(0) - y(DATA.china.imports[i]))
+    .attr("fill", "var(--c-China)");
+  svg.append("g").selectAll("rect").data(years).join("rect")
+    .attr("x", d => x(d) + bw).attr("width", bw).attr("y", (d, i) => y(DATA.china.exports[i])).attr("height", (d, i) => y(0) - y(DATA.china.exports[i]))
+    .attr("fill", "var(--muted)");
+
+  const xt = t => x(Math.floor(t)) + x.step() * (t - Math.floor(t));
+  const events = [
+    { t: 2008.7, label: "Financial crisis" },
+    { t: 2018.5, label: "Sec. 301 tariffs" },
+    { t: 2020.04, label: "Phase One deal" },
+    { t: 2020.2, label: "COVID-19" },
+    { t: 2025.25, label: "2025 tariffs" },
+  ];
+  const ev = svg.append("g").attr("class", "event").selectAll("g").data(events).join("g");
+  ev.append("line").attr("x1", d => xt(d.t)).attr("x2", d => xt(d.t)).attr("y1", (d, i) => 12 + (i % 3) * 15).attr("y2", H - m.b);
+  ev.append("text").attr("x", d => xt(d.t) + (d.t > 2024 ? -4 : 4)).attr("y", (d, i) => 20 + (i % 3) * 15)
+    .attr("text-anchor", d => d.t > 2024 ? "end" : "start").text(d => d.label);
+}
+
+/* sourcing risk scatter + panel */
+let selected = "27";
+function drawRisk() {
+  const W = widthOf("c-risk");
+  const H = Math.round(Math.min(420, W * 0.82)), m = { t: 14, r: 14, b: 34, l: 40 };
+  const svg = svgFor("c-risk", W, H).attr("aria-label", "Scatter plot of supplier concentration by product group");
+  const pts = DATA.chapters.map(d => ({ ...d, sx: d.y2025.topShare, sy: d.y2025.topShare - d.y2017.topShare }));
+  const x = d3.scaleLinear([0, 60], [m.l, W - m.r]);
+  const y = d3.scaleLinear([-30, 20], [H - m.b, m.t]);
+  // exposed corner: concentrated and getting more so
+  svg.append("rect").attr("x", x(35)).attr("y", y(20)).attr("width", x(60) - x(35)).attr("height", y(0) - y(20))
+    .attr("fill", "var(--risk)").attr("opacity", 0.08);
+  svg.append("text").attr("x", x(35) + 6).attr("y", y(0) - 8).style("fill", "var(--risk)").style("font-weight", 700).text("Most exposed");
+  svg.append("g").attr("class", "grid").selectAll("line").data(x.ticks(6)).join("line").attr("x1", x).attr("x2", x).attr("y1", m.t).attr("y2", H - m.b);
+  svg.append("g").attr("class", "grid").selectAll("line").data(y.ticks(5)).join("line").attr("x1", m.l).attr("x2", W - m.r).attr("y1", y).attr("y2", y);
+  svg.append("line").attr("x1", m.l).attr("x2", W - m.r).attr("y1", y(0)).attr("y2", y(0)).attr("stroke", "var(--muted)");
+  svg.append("g").attr("class", "axis").attr("transform", `translate(0,${H - m.b})`).call(d3.axisBottom(x).ticks(6).tickFormat(d => d + "%").tickSize(0)).call(g => g.select(".domain").remove());
+  svg.append("g").attr("class", "axis").attr("transform", `translate(${m.l},0)`).call(d3.axisLeft(y).tickValues([-20, -10, 0, 10, 20]).tickFormat(d => (d > 0 ? "+" : "") + d).tickSize(0)).call(g => g.select(".domain").remove());
+
+  const dots = svg.append("g").selectAll("g").data(pts).join("g")
+    .attr("class", d => "dot" + (d.hs === selected ? " on" : ""))
+    .attr("transform", d => `translate(${x(d.sx)},${y(d.sy)})`)
+    .attr("tabindex", 0).attr("role", "button").attr("aria-label", d => `${d.name}: top supplier ${d.y2025.top}, ${d.y2025.topShare}%`)
+    .on("click", (e, d) => select(d.hs))
+    .on("keydown", (e, d) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); select(d.hs); } });
+  dots.append("circle").attr("r", d => 5 + Math.sqrt(d.y2025.world) * 0.45).attr("fill", d => col(d.y2025.top)).attr("opacity", 0.9);
+  const tag = { "27": "Fuels & oil", "87": "Vehicles", "95": "Toys", "10": "Cereals", "85": "Electronics", "94": "Furniture", "84": "Machinery", "30": "Pharma" };
+  dots.filter(d => tag[d.hs] || d.hs === selected).append("text")
+    .attr("x", d => d.sx > 48 ? -12 : 12).attr("text-anchor", d => d.sx > 48 ? "end" : "start").attr("y", -9)
+    .style("fill", "var(--ink)").style("font-weight", 600).text(d => tag[d.hs] || d.name);
+}
+
+function select(hs) {
+  selected = hs;
+  drawRisk();
+  const d = DATA.chapters.find(c => c.hs === hs), a = d.y2017, b = d.y2025;
+  const lvl = b.hhi > 2500 ? ["high", "Highly concentrated"] : b.hhi >= 1500 ? ["mod", "Moderately concentrated"] : ["low", "Unconcentrated"];
+  const dir = b.hhi > a.hhi ? "more" : "less";
+  document.getElementById("panel").innerHTML = `
+    <h3>${d.name}</h3><div class="hs">HS chapter ${d.hs}</div>
+    <dl>
+      <dt></dt><dd class="hdr">2017</dd><dd class="hdr">2025</dd>
+      <dt>US imports</dt><dd>$${fmt1(a.world)}B</dd><dd>$${fmt1(b.world)}B</dd>
+      <dt>Top supplier</dt><dd>${a.top}</dd><dd>${b.top}</dd>
+      <dt>Top supplier share</dt><dd>${fmt1(a.topShare)}%</dd><dd>${fmt1(b.topShare)}%</dd>
+      <dt>China's share</dt><dd>${fmt1(a.china)}%</dd><dd>${fmt1(b.china)}%</dd>
+      <dt>HHI</dt><dd>${a.hhi.toLocaleString()}</dd><dd>${b.hhi.toLocaleString()}</dd>
+    </dl>
+    <span class="pill ${lvl[0]}">${lvl[1]}</span>
+    <p>Supply became ${dir} concentrated between 2017 and 2025.</p>`;
+}
+
+function tables() {
+  table("t-share", ["Year", ...STORY], years.map((yr, i) => [yr, ...STORY.map(p => fmt1(DATA.share[p][i]) + "%")]));
+  const rn = Object.keys(DATA.ranks);
+  table("t-rank", ["Partner", "2006", "2017", "2025"], rn.map(p => [p, DATA.ranks[p][0], DATA.ranks[p][11], DATA.ranks[p][19]]).sort((a, b) => a[3] - b[3]));
+  table("t-ch", ["Chapter", "HS", "2025 imports", "China 2017", "China 2025"],
+    [...DATA.chapters].sort((a, b) => b.y2025.world - a.y2025.world).map(d => [d.name, d.hs, "$" + fmt1(d.y2025.world) + "B", fmt1(d.y2017.china) + "%", fmt1(d.y2025.china) + "%"]));
+  table("t-cn", ["Year", "Imports ($B)", "Exports ($B)", "Balance ($B)"],
+    years.map((yr, i) => [yr, fmt1(DATA.china.imports[i]), fmt1(DATA.china.exports[i]), fmt1(DATA.china.exports[i] - DATA.china.imports[i])]));
+  table("t-risk", ["Chapter", "Top 2017", "Share", "Top 2025", "Share", "HHI 2017", "HHI 2025"],
+    DATA.chapters.map(d => [d.name, d.y2017.top, fmt1(d.y2017.topShare) + "%", d.y2025.top, fmt1(d.y2025.topShare) + "%", d.y2017.hhi, d.y2025.hhi]));
+}
+
+function drawAll() { drawShare(); drawRank(); drawChapters(); drawChina(); select(selected); }
+tables();
+drawAll();
+let rt;
+window.addEventListener("resize", () => { clearTimeout(rt); rt = setTimeout(drawAll, 150); });
+</script>
