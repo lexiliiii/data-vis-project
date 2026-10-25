@@ -1,0 +1,25 @@
+{
+  "passed": true,
+  "checks": [
+    "240 CPI monthly slots, only October 2025 missing",
+    "20 annual CPI factors, 2025 factor exactly 1",
+    "16 categories \u00d7 20 years without duplicate keys",
+    "All 46,287 inflation-adjusted supplier values validated",
+    "All category shares bounded and invariant under common annual CPI adjustment",
+    "Source snapshot matches original byte-for-byte",
+    "Every manifest hash checked",
+    "Every saved PDF has a PDF signature",
+    "All 10 selected milestones have local source files",
+    "Downloader scripts compile"
+  ],
+  "source_trade_rows": 46287,
+  "category_year_rows": 320,
+  "cpi_observations": 239,
+  "policy_source_files": 19,
+  "max_world_reconciliation_difference_usd": 0.0,
+  "census_authenticated_download_tested": true,
+  "ui_browser_tested": true,
+  "unavailable_downloads": [],
+  "census_validation_report": "census_validation.json",
+  "ui_validation_report": "website_validation.json"
+}

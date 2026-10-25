@@ -1,0 +1,63 @@
+{
+  "passed": true,
+  "checks": [
+    "All five original charts render and are unchanged by explorer controls",
+    "Inserted directly before h-ch",
+    "Year drag, marker movement, milestone jumps, and keyboard input",
+    "Category selection",
+    "CPI changes amounts and preserves all shares",
+    "Policy dates and empty early history",
+    "Quantity disabled with explanation",
+    "Reduced motion",
+    "No explorer overflow at six widths",
+    "No JavaScript errors",
+    "Supplier ribbons: 160 compositions sum to 100%",
+    "View switch preserves year, category, and inflation",
+    "Ribbon segments animate with year and fill each bar",
+    "Keyboard view switching"
+  ],
+  "layouts": [
+    {
+      "viewport": 1440,
+      "width": 1040,
+      "overflow": [],
+      "marks": true
+    },
+    {
+      "viewport": 1000,
+      "width": 952,
+      "overflow": [],
+      "marks": true
+    },
+    {
+      "viewport": 768,
+      "width": 720,
+      "overflow": [],
+      "marks": true
+    },
+    {
+      "viewport": 520,
+      "width": 472,
+      "overflow": [],
+      "marks": true
+    },
+    {
+      "viewport": 390,
+      "width": 342,
+      "overflow": [],
+      "marks": true
+    },
+    {
+      "viewport": 320,
+      "width": 272,
+      "overflow": [],
+      "marks": true
+    }
+  ],
+  "existing_page_source_preserved": true,
+  "html_encoding": "UTF-8",
+  "screenshots_visually_reviewed": [
+    "Supplier ribbons desktop",
+    "Supplier ribbons 390px"
+  ]
+}

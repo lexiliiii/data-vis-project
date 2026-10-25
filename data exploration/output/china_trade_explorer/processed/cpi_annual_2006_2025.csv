@@ -1,0 +1,21 @@
+year,cpi_annual_average,months_observed,missing_months,method,factor_to_2025_usd
+2006,201.592,12,,"Mean of published nonmissing monthly CPI-U levels, rounded to 3 decimals",1.5970028572562402
+2007,207.342,12,,"Mean of published nonmissing monthly CPI-U levels, rounded to 3 decimals",1.5527148382865024
+2008,215.303,12,,"Mean of published nonmissing monthly CPI-U levels, rounded to 3 decimals",1.495301969782121
+2009,214.537,12,,"Mean of published nonmissing monthly CPI-U levels, rounded to 3 decimals",1.500640915086908
+2010,218.056,12,,"Mean of published nonmissing monthly CPI-U levels, rounded to 3 decimals",1.476423487544484
+2011,224.939,12,,"Mean of published nonmissing monthly CPI-U levels, rounded to 3 decimals",1.4312458044180867
+2012,229.594,12,,"Mean of published nonmissing monthly CPI-U levels, rounded to 3 decimals",1.402227410123958
+2013,232.957,12,,"Mean of published nonmissing monthly CPI-U levels, rounded to 3 decimals",1.3819846581128705
+2014,236.736,12,,"Mean of published nonmissing monthly CPI-U levels, rounded to 3 decimals",1.3599241349013247
+2015,237.017,12,,"Mean of published nonmissing monthly CPI-U levels, rounded to 3 decimals",1.358311851048659
+2016,240.007,12,,"Mean of published nonmissing monthly CPI-U levels, rounded to 3 decimals",1.3413900427904186
+2017,245.12,12,,"Mean of published nonmissing monthly CPI-U levels, rounded to 3 decimals",1.3134097584856397
+2018,251.107,12,,"Mean of published nonmissing monthly CPI-U levels, rounded to 3 decimals",1.2820948838542932
+2019,255.657,12,,"Mean of published nonmissing monthly CPI-U levels, rounded to 3 decimals",1.259277078272842
+2020,258.811,12,,"Mean of published nonmissing monthly CPI-U levels, rounded to 3 decimals",1.2439308993821747
+2021,270.97,12,,"Mean of published nonmissing monthly CPI-U levels, rounded to 3 decimals",1.1881130752481823
+2022,292.655,12,,"Mean of published nonmissing monthly CPI-U levels, rounded to 3 decimals",1.1000768823358562
+2023,304.702,12,,"Mean of published nonmissing monthly CPI-U levels, rounded to 3 decimals",1.0565831533760854
+2024,313.689,12,,"Mean of published nonmissing monthly CPI-U levels, rounded to 3 decimals",1.0263126854942315
+2025,321.943,11,10,"Mean of published nonmissing monthly CPI-U levels, rounded to 3 decimals",1.0

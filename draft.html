@@ -1,3 +1,4 @@
+<meta charset="utf-8">
 <title>Where US Imports Went</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -132,6 +133,97 @@ footer p { max-width: 80ch; margin: 0 0 6px; }
   .risk { grid-template-columns: minmax(0, 1fr); }
 }
 </style>
+<!-- BEGIN TRADE EXPLORER STYLE -->
+<style>
+/* China trade explorer — every rule is scoped to this new section. */
+#trade-explorer .te-body, #trade-explorer .te-left { min-width: 0; }
+#trade-explorer .te-controls, #trade-explorer .te-prices { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; font-family: var(--display); }
+#trade-explorer .te-controls { margin: 14px 0; }
+#trade-explorer .te-view-switch { width: fit-content; max-width: 100%; flex-wrap: wrap; margin-top: 24px; }
+#trade-explorer .te-supplier-breakdown { display: flex; flex-wrap: wrap; gap: 5px 16px; margin-top: 12px; }
+#trade-explorer .te-supplier-breakdown[hidden] { display: none; }
+#trade-explorer .te-supplier-breakdown span { white-space: nowrap; }
+#trade-explorer .te-supplier-breakdown b { color: var(--ink); font-weight: 650; }
+#trade-explorer .te-segment { stroke: var(--paper); stroke-width: .5; }
+#trade-explorer .te-prices { margin-bottom: 26px; }
+#trade-explorer .te-prices label { display: inline-flex; align-items: center; gap: 8px; font-size: .875rem; cursor: pointer; }
+#trade-explorer input { accent-color: var(--c-China); }
+#trade-explorer input[type=checkbox] { width: 18px; height: 18px; margin: 0; flex: 0 0 auto; }
+#trade-explorer button { font-family: var(--display); color: var(--ink); cursor: pointer; }
+#trade-explorer button:focus-visible, #trade-explorer input:focus-visible, #trade-explorer a:focus-visible { outline: 2px solid var(--c-Mexico); outline-offset: 3px; }
+#trade-explorer .te-measures { display: flex; border: 1px solid var(--rule); border-radius: 5px; padding: 3px; gap: 3px; }
+#trade-explorer .te-measures button { border: 0; background: transparent; border-radius: 3px; padding: 7px 12px; font-size: .875rem; }
+#trade-explorer .te-measures button[aria-pressed=true] { background: var(--ink); color: var(--paper); }
+#trade-explorer .te-measures button:disabled { color: var(--muted); cursor: not-allowed; }
+#trade-explorer .te-small { font: 500 .75rem/1.5 var(--display); color: var(--muted); }
+#trade-explorer .te-layout { display: grid; grid-template-columns: minmax(0, 1fr) 235px; gap: 24px; }
+#trade-explorer h3 { font: 700 1rem/1.3 var(--display); margin: 0 0 12px; }
+#trade-explorer .te-legend { display: flex; flex-wrap: wrap; gap: 8px 16px; font: 500 .75rem/1.5 var(--display); color: var(--muted); }
+#trade-explorer .te-legend span { display: inline-flex; align-items: center; gap: 6px; }
+#trade-explorer .te-legend i { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
+#trade-explorer .te-solid { background: var(--c-China); border: 1.5px solid var(--c-China); }
+#trade-explorer .te-hollow { border: 1.5px solid var(--muted); }
+#trade-explorer .te-axis, #trade-explorer .te-row { display: grid; grid-template-columns: 119px minmax(0, 1fr) 46px; align-items: center; }
+#trade-explorer .te-axis { font: 500 .6875rem/1.4 var(--display); color: var(--muted); margin-top: 16px; padding: 0 5px; }
+#trade-explorer .te-axis > div { display: flex; justify-content: space-between; padding: 0 5px; }
+#trade-explorer .te-axis > span:last-child { text-align: right; }
+#trade-explorer .te-rows { margin-top: 6px; }
+#trade-explorer .te-row { width: 100%; padding: 9px 5px; min-height: 49px; border: 0; border-radius: 4px; background: transparent; text-align: left; }
+#trade-explorer .te-row[aria-pressed=true] { background: var(--sheet); box-shadow: inset 3px 0 var(--c-China); }
+#trade-explorer .te-row-label { font-size: .75rem; line-height: 1.3; padding: 0 7px 0 4px; }
+#trade-explorer .te-row-label small { display: block; font-size: .6875rem; color: var(--muted); margin-top: 3px; }
+#trade-explorer .te-row svg { display: block; width: 100%; height: 28px; overflow: visible; }
+#trade-explorer .te-value { text-align: right; font-size: .75rem; font-variant-numeric: tabular-nums; }
+#trade-explorer .te-track { fill: var(--grid); }
+#trade-explorer .te-trail { stroke: var(--c-China); stroke-width: 4; opacity: .35; }
+#trade-explorer .te-baseline { fill: var(--paper); stroke: var(--muted); stroke-width: 1.5; }
+#trade-explorer .te-current { fill: var(--c-China); }
+#trade-explorer .te-amounts { display: flex; justify-content: space-between; gap: 15px; flex-wrap: wrap; border-top: 1px solid var(--rule); padding-top: 14px; margin-top: 12px; }
+#trade-explorer .te-amounts b { display: block; color: var(--ink); font-size: 1.25rem; font-weight: 650; font-variant-numeric: tabular-nums; }
+#trade-explorer .te-context { min-width: 0; border-left: 1px solid var(--rule); padding-left: 23px; }
+#trade-explorer .te-eyebrow { font: 600 .6875rem/1.3 var(--display); color: var(--muted); text-transform: uppercase; letter-spacing: .08em; }
+#trade-explorer .te-selected { margin: 6px 0 12px; }
+#trade-explorer .te-delta { font: 600 1.875rem/1.1 var(--display); font-variant-numeric: tabular-nums; margin-bottom: 8px; }
+#trade-explorer .te-history { display: block; width: 100%; height: 108px; margin: 12px 0 20px; }
+#trade-explorer .te-history text { font-size: 11px; }
+#trade-explorer .te-policy-context { border-top: 1px solid var(--rule); padding-top: 15px; }
+#trade-explorer .te-policy-context h3 { margin-bottom: 3px; }
+#trade-explorer .te-events { margin: 13px 0 0 4px; min-height: 205px; }
+#trade-explorer .te-event { position: relative; border-left: 1px solid var(--rule); padding: 0 0 14px 13px; font-family: var(--display); }
+#trade-explorer .te-event:before { content: ''; position: absolute; left: -4px; top: 6px; width: 7px; height: 7px; background: var(--muted); border-radius: 50%; }
+#trade-explorer .te-event:first-child:before { background: var(--c-China); }
+#trade-explorer .te-event strong { display: block; font-size: .8125rem; font-weight: 650; line-height: 1.4; margin: 4px 0; }
+#trade-explorer .te-event time { font-size: .6875rem; color: var(--muted); }
+#trade-explorer a { color: var(--ink); text-underline-offset: 2px; }
+#trade-explorer .te-event a { font-size: .6875rem; }
+#trade-explorer .te-scope { font: 500 .6875rem/1.5 var(--display); color: var(--muted); margin: 0; }
+#trade-explorer .te-timeline { border-top: 1px solid var(--rule); padding-top: 16px; margin-top: 24px; font-family: var(--display); }
+#trade-explorer .te-time-label { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; font-size: .875rem; }
+#trade-explorer output { font-size: 1.75rem; font-weight: 650; font-variant-numeric: tabular-nums; }
+#trade-explorer input[type=range] { width: 100%; height: 32px; margin: 5px 0 0; cursor: ew-resize; }
+#trade-explorer .te-ticks { display: flex; justify-content: space-between; font-size: .6875rem; color: var(--muted); }
+#trade-explorer .te-jumps { display: flex; flex-wrap: wrap; gap: 6px 16px; margin-top: 12px; }
+#trade-explorer .te-jumps button { border: 0; border-bottom: 1px dotted var(--muted); background: transparent; padding: 5px 0; font-size: .75rem; }
+#trade-explorer .te-source { font: 500 .75rem/1.5 var(--display); color: var(--muted); margin: 18px 0 0; max-width: none; }
+#trade-explorer .te-status { position: absolute; width: 1px; height: 1px; padding: 0; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+@media (max-width: 1000px) {
+  #trade-explorer .te-layout { grid-template-columns: minmax(0, 1fr); }
+  #trade-explorer .te-context { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; border-left: 0; border-top: 1px solid var(--rule); padding: 20px 0 0; }
+  #trade-explorer .te-policy-context { border-top: 0; padding-top: 0; }
+  #trade-explorer .te-events { min-height: 0; }
+}
+@media (max-width: 520px) {
+  #trade-explorer .te-context { grid-template-columns: minmax(0, 1fr); }
+  #trade-explorer .te-axis, #trade-explorer .te-row { grid-template-columns: 105px minmax(0, 1fr) 43px; }
+  #trade-explorer .te-policy-context { border-top: 1px solid var(--rule); padding-top: 18px; }
+}
+@media (pointer: coarse) {
+  #trade-explorer .te-measures button, #trade-explorer .te-jumps button, #trade-explorer .te-prices label { min-height: 44px; }
+  #trade-explorer input[type=range] { height: 44px; }
+}
+</style>
+<!-- END TRADE EXPLORER STYLE -->
+
 
 <div class="wrap">
   <header class="masthead">
@@ -162,6 +254,66 @@ footer p { max-width: 80ch; margin: 0 0 6px; }
     </div>
   </section>
 
+<!-- BEGIN TRADE EXPLORER SECTION -->
+  <!-- China trade explorer: additive section; existing story charts are unchanged. -->
+  <section class="step" id="trade-explorer" aria-labelledby="h-explorer">
+    <div class="rail"><b>Explore the shift</b><span>2006–2025</span></div>
+    <div class="te-body">
+      <h2 id="h-explorer">Watch America's reliance on China change.</h2>
+      <p>Drag through the years and select a product group. Compare China's share with its 2017 level, alongside the trade policies and events of the time.</p>
+      <div class="te-view-switch te-measures" role="group" aria-label="Chart view">
+        <button type="button" data-te-view="trails" aria-pressed="true">Share trails</button>
+        <button type="button" data-te-view="ribbons" aria-pressed="false">Supplier ribbons</button>
+      </div>
+      <div class="te-controls">
+        <div class="te-measures" role="group" aria-label="Import measure">
+          <button type="button" aria-pressed="true">By value</button>
+          <button type="button" disabled aria-describedby="te-quantity-note">By quantity</button>
+        </div>
+        <span class="te-small" id="te-quantity-note">Quantity needs a specific product and common unit.</span>
+      </div>
+      <div class="te-prices">
+        <label><input type="checkbox" id="te-inflation" role="switch" aria-describedby="te-price-note"> Adjust dollar amounts for inflation</label>
+        <span class="te-small" id="te-price-note">Nominal USD · percentage shares unchanged</span>
+      </div>
+      <div class="te-layout">
+        <div class="te-left">
+          <h3 class="te-chart-heading">China's share by category</h3>
+          <div class="te-legend"><span><i class="te-solid"></i>Selected year</span><span><i class="te-hollow"></i>2017 baseline</span></div>
+          <div class="te-axis"><span>HS commodity group</span><div><span>0%</span><span>50%</span><span>100%</span></div><span>China</span></div>
+          <div class="te-rows"></div>
+          <div class="te-amounts"></div>
+          <div class="te-supplier-breakdown te-small" hidden aria-label="Supplier shares for the selected category"></div>
+        </div>
+        <aside class="te-context" aria-label="Selected category and policy context">
+          <div class="te-detail">
+            <span class="te-eyebrow">Selected category</span>
+            <h3 class="te-selected"></h3>
+            <div class="te-delta"></div>
+            <div class="te-small te-change"></div>
+            <svg class="te-history" role="img" aria-label="China's share of imports in the selected category, 2006–2025"></svg>
+          </div>
+          <div class="te-policy-context">
+            <h3>Policy context</h3>
+            <div class="te-small te-policy-date"></div>
+            <div class="te-events"></div>
+            <p class="te-scope">Selected milestones, not a complete tariff history. Product coverage is not mapped; timing alone does not establish an effect.</p>
+          </div>
+        </aside>
+      </div>
+      <div class="te-timeline">
+        <div class="te-time-label"><label for="te-year">Drag through time</label><output id="te-year-output" for="te-year">2025</output></div>
+        <input id="te-year" type="range" min="2006" max="2025" step="1" value="2025" aria-describedby="te-source-note">
+        <div class="te-ticks" aria-hidden="true"><span>2006</span><span>2010</span><span>2015</span><span>2020</span><span>2025</span></div>
+        <div class="te-jumps" role="group" aria-label="Jump to a milestone year"><button type="button" data-te-year="2017">2017 baseline</button><button type="button" data-te-year="2018">2018 tariffs</button><button type="button" data-te-year="2020">2020 pandemic</button><button type="button" data-te-year="2025">2025 tariffs</button></div>
+      </div>
+      <p class="te-source" id="te-source-note">8 selected HS2 groups · Annual observations from the project's UN Comtrade extract. Inflation uses <a href="https://www.bls.gov/cpi/factsheets/cpi-series-ids.htm" target="_blank" rel="noopener noreferrer">BLS CPI-U</a> to express values in 2025 purchasing power, not physical volume. The 2025 CPI average uses 11 published months; October is missing.</p>
+      <details><summary>View selected-year data</summary><div class="tbl te-table"></div></details>
+      <div class="te-status" role="status" aria-live="polite"></div>
+      <noscript><p>Enable JavaScript to explore the annual trade data.</p></noscript>
+    </div>
+  </section>
+<!-- END TRADE EXPLORER SECTION -->
   <section class="step" aria-labelledby="h-ch">
     <div class="rail"><b>Rising insight</b><span>Sketches 21, 1</span></div>
     <div>
@@ -450,3 +602,141 @@ drawAll();
 let rt;
 window.addEventListener("resize", () => { clearTimeout(rt); rt = setTimeout(drawAll, 150); });
 </script>
+
+<!-- BEGIN TRADE EXPLORER SCRIPT -->
+<script type="application/json" id="trade-explorer-data">{"categories":[{"hs":"85","name":"Electronics","values":[{"share":28.650893,"china":66929520608.0,"world":233603613143.0,"suppliers":[28.650893,20.332199,0.097038,6.253758,44.666112]},{"share":31.139664,"china":78970289058.0,"world":253600325237.0,"suppliers":[31.139664,21.707338,0.14823,6.189744,40.815024]},{"share":32.221097,"china":82653918873.0,"world":256521117002.0,"suppliers":[32.221097,20.938849,0.200533,5.781879,40.857642]},{"share":34.319851,"china":74738679374.0,"world":217770987925.0,"suppliers":[34.319851,21.207033,0.304233,5.866878,38.302005]},{"share":35.474067,"china":93281371732.0,"world":262956516485.0,"suppliers":[35.474067,20.574453,0.316231,6.06656,37.568689]},{"share":35.708002,"china":101167679697.0,"world":283319355079.0,"suppliers":[35.708002,19.243187,0.361724,6.493761,38.193326]},{"share":38.23381,"china":113330045846.0,"world":296413164042.0,"suppliers":[38.23381,19.239294,0.498356,5.030541,36.997999]},{"share":39.615241,"china":120118587235.0,"world":303213066899.0,"suppliers":[39.615241,19.007812,0.660502,4.665425,36.05102]},{"share":40.605623,"china":129804432750.0,"world":319671074894.0,"suppliers":[40.605623,18.255548,1.189973,4.679537,35.269319]},{"share":40.778315,"china":136006203900.0,"world":333525810290.0,"suppliers":[40.778315,19.007185,2.513427,4.330519,33.370554]},{"share":39.244161,"china":131696596195.0,"world":335582652015.0,"suppliers":[39.244161,18.406059,3.134901,4.177393,35.037486]},{"share":42.13786,"china":150009697364.0,"world":355997429299.0,"suppliers":[42.13786,17.316115,3.107524,4.015777,33.422724]},{"share":42.500096,"china":155951060194.0,"world":366942844394.0,"suppliers":[42.500096,17.410138,3.034272,3.924215,33.131279]},{"share":36.535003,"china":128714774073.0,"world":352305358914.0,"suppliers":[36.535003,18.154102,6.172284,4.634343,34.504268]},{"share":33.325062,"china":114462936371.0,"world":343474039898.0,"suppliers":[33.325062,17.35415,8.021884,5.514731,35.784173]},{"share":32.48354,"china":135123701673.0,"world":415975908110.0,"suppliers":[32.48354,16.982942,8.724534,5.760627,36.048357]},{"share":30.558304,"china":145807695770.0,"world":477145907275.0,"suppliers":[30.558304,16.695529,9.800183,6.221592,36.724392]},{"share":27.339028,"china":126679090396.0,"world":463363545006.0,"suppliers":[27.339028,18.463918,9.017507,5.827875,39.351672]},{"share":26.149714,"china":127057532501.0,"world":485884987391.0,"suppliers":[26.149714,18.019956,8.760954,6.679334,40.390042]},{"share":16.362393,"china":84032316556.0,"world":513569834741.0,"suppliers":[16.362393,17.787562,12.057292,7.199869,46.592884]}]},{"hs":"84","name":"Machinery","values":[{"share":25.703072,"china":64277454063.0,"world":250076928662.0,"suppliers":[25.703072,9.449434,0.092479,3.100291,61.654724]},{"share":25.784804,"china":66092322070.0,"world":256322762807.0,"suppliers":[25.784804,9.773073,0.116406,2.488542,61.837175]},{"share":26.397202,"china":67369185033.0,"world":255213352675.0,"suppliers":[26.397202,9.780645,0.143706,2.233857,61.44459]},{"share":30.937161,"china":64202094213.0,"world":207524194337.0,"suppliers":[30.937161,10.706844,0.190792,2.010071,56.155132]},{"share":33.323046,"china":85109509285.0,"world":255407349719.0,"suppliers":[33.323046,13.245443,0.216386,2.08318,51.131945]},{"share":33.230142,"china":97822527716.0,"world":294378903984.0,"suppliers":[33.230142,13.176195,0.206701,2.275562,51.1114]},{"share":32.427584,"china":102177823405.0,"world":315095388852.0,"suppliers":[32.427584,13.501681,0.329822,2.155867,51.585046]},{"share":33.133593,"china":103144985093.0,"world":311300329389.0,"suppliers":[33.133593,13.795417,0.676717,2.18607,50.208203]},{"share":32.657168,"china":108162321667.0,"world":331205458062.0,"suppliers":[32.657168,13.658427,0.857444,2.182177,50.644784]},{"share":32.429592,"china":107032107525.0,"world":330044570117.0,"suppliers":[32.429592,14.928292,0.789225,2.088242,49.764649]},{"share":31.725932,"china":100047876202.0,"world":315350474948.0,"suppliers":[31.725932,16.169398,0.775699,2.225076,49.103895]},{"share":32.187897,"china":112207432016.0,"world":348601309246.0,"suppliers":[32.187897,15.524325,0.936822,2.409349,48.941607]},{"share":30.9836,"china":119566688800.0,"world":385903156133.0,"suppliers":[30.9836,16.52338,0.744548,2.601931,49.146541]},{"share":24.962131,"china":94616690227.0,"world":379040915551.0,"suppliers":[24.962131,17.505028,0.99671,4.16883,52.367301]},{"share":27.7796,"china":100437549028.0,"world":361551454128.0,"suppliers":[27.7796,17.291525,1.934505,5.217094,47.777276]},{"share":26.965506,"china":115635822543.0,"world":428828679646.0,"suppliers":[26.965506,16.669095,2.596943,5.65007,48.118386]},{"share":23.694588,"china":112770281180.0,"world":475932653125.0,"suppliers":[23.694588,18.190031,2.776037,6.080035,49.259309]},{"share":18.704327,"china":85889376499.0,"world":459195220449.0,"suppliers":[18.704327,17.774088,3.813221,7.516905,52.191459]},{"share":16.027293,"china":85129763877.0,"world":531154956946.0,"suppliers":[16.027293,19.924545,5.499446,10.901789,47.646927]},{"share":7.859844,"china":52277122691.0,"world":665116569606.0,"suppliers":[7.859844,22.644193,8.520176,21.10445,39.871337]}]},{"hs":"87","name":"Vehicles & parts","values":[{"share":2.55092,"china":5586731749.0,"world":219008536649.0,"suppliers":[2.55092,15.263794,0.011879,0.83602,81.337387]},{"share":3.018279,"china":6584482084.0,"world":218153542790.0,"suppliers":[3.018279,15.644727,0.016997,0.884996,80.435001]},{"share":3.466865,"china":6887093025.0,"world":198654780521.0,"suppliers":[3.466865,16.286107,0.029736,1.057661,79.159631]},{"share":4.001568,"china":5336271827.0,"world":133354531931.0,"suppliers":[4.001568,20.226444,0.043908,1.327852,74.400228]},{"share":4.056246,"china":7543875074.0,"world":185981677643.0,"suppliers":[4.056246,21.734699,0.046174,1.070529,73.092352]},{"share":4.235091,"china":8732024516.0,"world":206182706733.0,"suppliers":[4.235091,22.334779,0.047778,1.104293,72.278059]},{"share":4.092372,"china":9992542293.0,"world":244174855341.0,"suppliers":[4.092372,22.034857,0.063371,1.028163,72.781237]},{"share":4.13925,"china":10475695315.0,"world":253081966355.0,"suppliers":[4.13925,23.681052,0.064168,0.987504,71.128026]},{"share":4.59415,"china":12189379464.0,"world":265323956439.0,"suppliers":[4.59415,25.730294,0.07186,0.97124,68.632456]},{"share":4.886132,"china":13895361257.0,"world":284383662404.0,"suppliers":[4.886132,26.413441,0.082882,0.999181,67.618364]},{"share":5.029087,"china":14318414455.0,"world":284712023471.0,"suppliers":[5.029087,26.394251,0.084279,0.924906,67.567477]},{"share":5.280518,"china":15539676122.0,"world":294283171951.0,"suppliers":[5.280518,28.549735,0.0917,0.930937,65.14711]},{"share":6.109161,"china":18726225533.0,"world":306526967076.0,"suppliers":[6.109161,30.592542,0.102452,0.955914,62.239931]},{"share":4.807487,"china":14907330216.0,"world":310085730639.0,"suppliers":[4.807487,32.866961,0.145268,1.005682,61.174602]},{"share":5.35822,"china":13633280428.0,"world":254436751363.0,"suppliers":[5.35822,32.742911,0.217755,1.215921,60.465193]},{"share":6.127792,"china":17348304284.0,"world":283108563711.0,"suppliers":[6.127792,33.267844,0.316657,1.418956,58.868751]},{"share":5.944666,"china":19596487864.0,"world":329648232159.0,"suppliers":[5.944666,33.880078,0.38189,1.479094,58.314272]},{"share":4.307708,"china":16413985103.0,"world":381037566330.0,"suppliers":[4.307708,34.126125,0.267388,0.941212,60.357567]},{"share":4.595416,"china":17989320024.0,"world":391462301475.0,"suppliers":[4.595416,35.055843,0.28604,0.809256,59.253445]},{"share":3.913496,"china":13225531277.0,"world":337946752422.0,"suppliers":[3.913496,36.750982,0.425993,0.910693,57.998836]}]},{"hs":"94","name":"Furniture & lighting","values":[{"share":50.402741,"china":22142955715.0,"world":43932046415.0,"suppliers":[50.402741,12.853709,2.505684,2.075269,32.162597]},{"share":51.447563,"china":23091047202.0,"world":44882684317.0,"suppliers":[51.447563,12.732679,3.305444,1.993677,30.520637]},{"share":52.278217,"china":21914719627.0,"world":41919408862.0,"suppliers":[52.278217,12.117061,4.164677,2.146129,29.293916]},{"share":54.341283,"china":17646081065.0,"world":32472698508.0,"suppliers":[54.341283,11.961889,4.923243,2.030191,26.743394]},{"share":54.080671,"china":22323427713.0,"world":41278015226.0,"suppliers":[54.080671,13.850566,5.206286,2.054706,24.807771]},{"share":52.745888,"china":22711430159.0,"world":43058200772.0,"suppliers":[52.745888,14.781407,4.974391,2.116389,25.381925]},{"share":51.794315,"china":24786529706.0,"world":47855695648.0,"suppliers":[51.794315,16.566477,5.566697,2.153327,23.919184]},{"share":51.84262,"china":26613915459.0,"world":51335976707.0,"suppliers":[51.84262,16.790719,5.899773,2.027217,23.439671]},{"share":50.217235,"china":28012625557.0,"world":55782890791.0,"suppliers":[50.217235,17.566524,6.464681,1.98247,23.76909]},{"share":50.430132,"china":30844956486.0,"world":61163743268.0,"suppliers":[50.430132,17.598719,7.209478,2.00217,22.759501]},{"share":50.139504,"china":31664815018.0,"world":63153427370.0,"suppliers":[50.139504,17.846041,7.394179,1.856275,22.764001]},{"share":52.017898,"china":34831829938.0,"world":66961240385.0,"suppliers":[52.017898,16.047994,7.938735,1.83853,22.156843]},{"share":52.823932,"china":38064192580.0,"world":72058612905.0,"suppliers":[52.823932,15.425371,8.034424,1.66605,22.050223]},{"share":43.440805,"china":29180346153.0,"world":67172664710.0,"suppliers":[43.440805,16.111221,12.206118,2.064775,26.177081]},{"share":38.644196,"china":25304234954.0,"world":65480039196.0,"suppliers":[38.644196,14.689117,17.240984,2.374404,27.051299]},{"share":38.638772,"china":31446804124.0,"world":81386654542.0,"suppliers":[38.638772,14.197728,17.548639,2.378134,27.236727]},{"share":34.202814,"china":29666363241.0,"world":86736616123.0,"suppliers":[34.202814,15.209466,18.202915,2.173333,30.211472]},{"share":29.396458,"china":20285543547.0,"world":69006760592.0,"suppliers":[29.396458,19.359968,17.343632,2.010257,31.889685]},{"share":28.822801,"china":20935586566.0,"world":72635503034.0,"suppliers":[28.822801,17.652067,20.651821,1.820455,31.052856]},{"share":21.815883,"china":14532796509.0,"world":66615670281.0,"suppliers":[21.815883,18.471154,23.565291,1.674082,34.47359]}]},{"hs":"95","name":"Toys & sports","values":[{"share":81.138102,"china":22407481894.0,"world":27616472889.0,"suppliers":[81.138102,1.982652,0.183435,2.617546,14.078265]},{"share":84.338253,"china":27627845839.0,"world":32758380389.0,"suppliers":[84.338253,1.701912,0.236312,2.231453,11.49207]},{"share":85.582173,"china":28591239962.0,"world":33407938703.0,"suppliers":[85.582173,1.618049,0.262188,2.176763,10.360827]},{"share":85.191051,"china":24090089311.0,"world":28277723023.0,"suppliers":[85.191051,1.638613,0.447142,2.096454,10.62674]},{"share":84.117442,"china":26218272834.0,"world":31168652174.0,"suppliers":[84.117442,1.776664,0.486952,2.552942,11.066]},{"share":81.784438,"china":23733600402.0,"world":29019702225.0,"suppliers":[81.784438,2.314905,0.574412,2.786314,12.539931]},{"share":81.601627,"china":23105549548.0,"world":28315060040.0,"suppliers":[81.601627,3.383838,0.789455,3.10375,11.12133]},{"share":81.698753,"china":22813545502.0,"world":27923982374.0,"suppliers":[81.698753,3.409902,0.879515,3.033844,10.977986]},{"share":82.215004,"china":23746091920.0,"world":28882917836.0,"suppliers":[82.215004,3.412107,1.170162,3.134835,10.067892]},{"share":82.350431,"china":25765227509.0,"world":31287301254.0,"suppliers":[82.350431,3.240128,1.363673,3.138861,9.906907]},{"share":81.838496,"china":24925104170.0,"world":30456454434.0,"suppliers":[81.838496,3.252371,1.662667,3.194809,10.051657]},{"share":81.712913,"china":26723812652.0,"world":32704515936.0,"suppliers":[81.712913,3.259764,1.998841,3.161408,9.867074]},{"share":81.15372,"china":27925686610.0,"world":34410852178.0,"suppliers":[81.15372,3.194289,2.177838,3.221027,10.253126]},{"share":78.503549,"china":26782858712.0,"world":34116748726.0,"suppliers":[78.503549,2.7588,3.89445,3.831481,11.01172]},{"share":76.557269,"china":27845613734.0,"world":36372266164.0,"suppliers":[76.557269,2.421245,6.1424,4.909121,9.969965]},{"share":77.940493,"china":40420476130.0,"world":51860688172.0,"suppliers":[77.940493,2.380909,4.812932,5.753254,9.112412]},{"share":77.477727,"china":42768577094.0,"world":55201125443.0,"suppliers":[77.477727,2.608916,6.149235,3.597094,10.167028]},{"share":75.118461,"china":33388872754.0,"world":44448292044.0,"suppliers":[75.118461,3.492114,6.242863,3.003907,12.142655]},{"share":73.811005,"china":32041372520.0,"world":43410020414.0,"suppliers":[73.811005,4.015039,6.843075,2.945491,12.38539]},{"share":54.522384,"china":20186170608.0,"world":37023639008.0,"suppliers":[54.522384,5.28519,19.263302,3.585034,17.34409]}]},{"hs":"61","name":"Apparel · knit","values":[{"share":22.689193,"china":8440335396.0,"world":37199804845.0,"suppliers":[22.689193,5.991405,3.955768,2.015398,65.348236]},{"share":27.985132,"china":11096370936.0,"world":39650950533.0,"suppliers":[27.985132,4.615003,5.726335,1.638359,60.035171]},{"share":28.685665,"china":11195476202.0,"world":39028121400.0,"suppliers":[28.685665,4.130802,7.572905,1.439581,58.171047]},{"share":34.395122,"china":11924153004.0,"world":34668151912.0,"suppliers":[34.395122,3.703907,8.715966,1.072365,52.11264]},{"share":36.787996,"china":14696529630.0,"world":39949252910.0,"suppliers":[36.787996,3.391165,8.80894,0.939633,50.072266]},{"share":36.115005,"china":15632689273.0,"world":43285857103.0,"suppliers":[36.115005,3.312333,9.063468,0.806701,50.702493]},{"share":36.513157,"china":15553927848.0,"world":42598145913.0,"suppliers":[36.513157,3.116036,10.123034,0.722037,49.525736]},{"share":36.373239,"china":16158396997.0,"world":44423860186.0,"suppliers":[36.373239,3.005329,11.001158,0.612877,49.007397]},{"share":35.869248,"china":16724921864.0,"world":46627467575.0,"suppliers":[35.869248,2.91314,12.021048,0.580942,48.615622]},{"share":34.897404,"china":16930310577.0,"world":48514527157.0,"suppliers":[34.897404,2.667691,13.171385,0.519134,48.744386]},{"share":33.280551,"china":15115235559.0,"world":45417624169.0,"suppliers":[33.280551,2.914598,14.250254,0.403138,49.151459]},{"share":32.535304,"china":14884551494.0,"world":45748924363.0,"suppliers":[32.535304,3.434229,15.291383,0.369421,48.369663]},{"share":32.258051,"china":15386553651.0,"world":47698335626.0,"suppliers":[32.258051,2.810157,15.505185,0.294346,49.132261]},{"share":29.402517,"china":14184120764.0,"world":48241179417.0,"suppliers":[29.402517,2.336967,16.505627,0.258336,51.496553]},{"share":24.440959,"china":9352063324.0,"world":38263896504.0,"suppliers":[24.440959,2.144032,19.383884,0.246674,53.784451]},{"share":25.014486,"china":13078430785.0,"world":52283427843.0,"suppliers":[25.014486,2.052016,17.479668,0.225922,55.227908]},{"share":22.350664,"china":13585815682.0,"world":60784840541.0,"suppliers":[22.350664,1.902554,17.924884,0.220056,57.601842]},{"share":22.093426,"china":9996062695.0,"world":45244511786.0,"suppliers":[22.093426,2.334608,17.394203,0.177875,57.999888]},{"share":22.447212,"china":10634348302.0,"world":47374918519.0,"suppliers":[22.447212,2.081691,17.985767,0.144558,57.340772]},{"share":14.598515,"china":6808400966.0,"world":46637626231.0,"suppliers":[14.598515,2.194427,21.107229,0.153083,61.946746]}]},{"hs":"72","name":"Iron & steel","values":[{"share":7.736095,"china":2375255244.0,"world":30703542093.0,"suppliers":[7.736095,7.24601,0.021375,4.618324,80.378196]},{"share":8.345122,"china":2259761319.0,"world":27078828663.0,"suppliers":[8.345122,8.276249,0.002574,3.910608,79.465447]},{"share":8.704631,"china":2925537263.0,"world":33608975507.0,"suppliers":[8.704631,8.073384,0.012646,2.697351,80.511988]},{"share":4.145912,"china":541153574.0,"world":13052701981.0,"suppliers":[4.145912,8.026987,0.014146,3.170397,84.642558]},{"share":4.857469,"china":1093740764.0,"world":22516681146.0,"suppliers":[4.857469,8.324634,0.028358,2.683267,84.106272]},{"share":5.325462,"china":1579902004.0,"world":29666949112.0,"suppliers":[5.325462,7.427582,0.049206,2.533489,84.664261]},{"share":5.436468,"china":1655536583.0,"world":30452427616.0,"suppliers":[5.436468,6.075101,0.099632,3.044049,85.34475]},{"share":6.180169,"china":1652088416.0,"world":26732092936.0,"suppliers":[6.180169,7.413166,0.105951,2.951368,83.349346]},{"share":7.649079,"china":2753685370.0,"world":36000221552.0,"suppliers":[7.649079,6.488115,0.168944,3.300309,82.393553]},{"share":7.220725,"china":2012113825.0,"world":27865815733.0,"suppliers":[7.220725,5.435694,0.378712,4.017188,82.947681]},{"share":3.038446,"china":682438570.0,"world":22460117481.0,"suppliers":[3.038446,6.589133,2.232206,3.889365,84.25085]},{"share":2.364646,"china":681416428.0,"world":28816847585.0,"suppliers":[2.364646,6.216404,1.642073,3.575239,86.201638]},{"share":2.24267,"china":697393169.0,"world":31096551899.0,"suppliers":[2.24267,7.404819,2.489537,2.696825,85.166149]},{"share":2.180875,"china":536866314.0,"world":24617009608.0,"suppliers":[2.180875,8.887716,1.607557,2.407188,84.916664]},{"share":1.812856,"china":340912683.0,"world":18805282391.0,"suppliers":[1.812856,10.285283,0.959331,2.717173,84.225357]},{"share":1.542144,"china":599922796.0,"world":38901861997.0,"suppliers":[1.542144,12.003645,2.544857,3.267828,80.641526]},{"share":2.467979,"china":1108937818.0,"world":44933025763.0,"suppliers":[2.467979,12.489822,2.662554,3.664602,78.715043]},{"share":1.848725,"china":612964049.0,"world":33156046816.0,"suppliers":[1.848725,11.261314,1.240886,2.366989,83.282086]},{"share":1.62791,"china":537105298.0,"world":32993551226.0,"suppliers":[1.62791,10.026524,3.271974,3.427563,81.646029]},{"share":1.571537,"china":426268722.0,"world":27124314742.0,"suppliers":[1.571537,8.851324,1.791168,3.947337,83.838634]}]},{"hs":"30","name":"Pharmaceuticals","values":[{"share":0.810208,"china":345011109.0,"world":42583046959.0,"suppliers":[0.810208,0.782791,7e-05,0.019583,98.387348]},{"share":0.850967,"china":418724912.0,"world":49205766777.0,"suppliers":[0.850967,0.35571,0.00051,0.010868,98.781945]},{"share":1.240156,"china":656133431.0,"world":52907313698.0,"suppliers":[1.240156,0.43949,0.000643,0.009386,98.310325]},{"share":1.34103,"china":749697390.0,"world":55904582590.0,"suppliers":[1.34103,0.426998,0.000536,0.020642,98.210794]},{"share":1.387212,"china":859737080.0,"world":61975884991.0,"suppliers":[1.387212,0.42319,0.000811,0.040593,98.148194]},{"share":1.34514,"china":889811161.0,"world":66150066686.0,"suppliers":[1.34514,0.558356,0.000653,0.070978,98.024873]},{"share":1.438854,"china":935312476.0,"world":65004006330.0,"suppliers":[1.438854,0.523667,0.003506,0.082736,97.951237]},{"share":1.523601,"china":964647657.0,"world":63313660043.0,"suppliers":[1.523601,0.486055,0.003469,0.087829,97.899046]},{"share":1.551896,"china":1133540503.0,"world":73042298937.0,"suppliers":[1.551896,0.486389,0.001083,0.097124,97.863508]},{"share":1.495781,"china":1286583486.0,"world":86014133354.0,"suppliers":[1.495781,0.423511,0.000729,0.095781,97.984198]},{"share":1.500188,"china":1387854495.0,"world":92512012582.0,"suppliers":[1.500188,0.42786,0.001192,0.121407,97.949353]},{"share":1.535882,"china":1487949014.0,"world":96879110876.0,"suppliers":[1.535882,0.516582,0.002294,0.129463,97.815779]},{"share":1.373373,"china":1588092921.0,"world":115634521729.0,"suppliers":[1.373373,0.530627,0.003684,0.130766,97.96155]},{"share":1.25193,"china":1605449500.0,"world":128237981033.0,"suppliers":[1.25193,0.44982,0.003494,0.160843,98.133913]},{"share":1.569331,"china":2189500146.0,"world":139518097697.0,"suppliers":[1.569331,0.438929,0.003607,0.150565,97.837568]},{"share":2.320254,"china":3468768526.0,"world":149499507717.0,"suppliers":[2.320254,0.438729,0.003596,0.262091,96.97533]},{"share":6.299793,"china":10394244066.0,"world":164993417087.0,"suppliers":[6.299793,0.500562,0.006384,0.229925,92.963336]},{"share":3.373742,"china":6000148730.0,"world":177848475884.0,"suppliers":[3.373742,0.514665,0.014074,0.363548,95.733971]},{"share":3.687877,"china":7842888723.0,"world":212666782330.0,"suppliers":[3.687877,0.507241,0.023599,0.16976,95.611523]},{"share":2.539385,"china":5429784590.0,"world":213822857601.0,"suppliers":[2.539385,0.475339,0.02839,0.262774,96.694112]}]}],"inflation":{"series":"CUUR0000SA0","base_year":2025,"base_cpi":321.943,"method":"Annual CPI-U purchasing-power adjustment; not a physical-volume estimate","annual":[{"year":2006,"cpi_annual_average":201.592,"months_observed":12,"missing_months":"","method":"Mean of published nonmissing monthly CPI-U levels, rounded to 3 decimals","factor_to_2025_usd":1.5970028572562402},{"year":2007,"cpi_annual_average":207.342,"months_observed":12,"missing_months":"","method":"Mean of published nonmissing monthly CPI-U levels, rounded to 3 decimals","factor_to_2025_usd":1.5527148382865024},{"year":2008,"cpi_annual_average":215.303,"months_observed":12,"missing_months":"","method":"Mean of published nonmissing monthly CPI-U levels, rounded to 3 decimals","factor_to_2025_usd":1.495301969782121},{"year":2009,"cpi_annual_average":214.537,"months_observed":12,"missing_months":"","method":"Mean of published nonmissing monthly CPI-U levels, rounded to 3 decimals","factor_to_2025_usd":1.500640915086908},{"year":2010,"cpi_annual_average":218.056,"months_observed":12,"missing_months":"","method":"Mean of published nonmissing monthly CPI-U levels, rounded to 3 decimals","factor_to_2025_usd":1.476423487544484},{"year":2011,"cpi_annual_average":224.939,"months_observed":12,"missing_months":"","method":"Mean of published nonmissing monthly CPI-U levels, rounded to 3 decimals","factor_to_2025_usd":1.4312458044180867},{"year":2012,"cpi_annual_average":229.594,"months_observed":12,"missing_months":"","method":"Mean of published nonmissing monthly CPI-U levels, rounded to 3 decimals","factor_to_2025_usd":1.402227410123958},{"year":2013,"cpi_annual_average":232.957,"months_observed":12,"missing_months":"","method":"Mean of published nonmissing monthly CPI-U levels, rounded to 3 decimals","factor_to_2025_usd":1.3819846581128705},{"year":2014,"cpi_annual_average":236.736,"months_observed":12,"missing_months":"","method":"Mean of published nonmissing monthly CPI-U levels, rounded to 3 decimals","factor_to_2025_usd":1.3599241349013247},{"year":2015,"cpi_annual_average":237.017,"months_observed":12,"missing_months":"","method":"Mean of published nonmissing monthly CPI-U levels, rounded to 3 decimals","factor_to_2025_usd":1.358311851048659},{"year":2016,"cpi_annual_average":240.007,"months_observed":12,"missing_months":"","method":"Mean of published nonmissing monthly CPI-U levels, rounded to 3 decimals","factor_to_2025_usd":1.3413900427904186},{"year":2017,"cpi_annual_average":245.12,"months_observed":12,"missing_months":"","method":"Mean of published nonmissing monthly CPI-U levels, rounded to 3 decimals","factor_to_2025_usd":1.3134097584856397},{"year":2018,"cpi_annual_average":251.107,"months_observed":12,"missing_months":"","method":"Mean of published nonmissing monthly CPI-U levels, rounded to 3 decimals","factor_to_2025_usd":1.2820948838542932},{"year":2019,"cpi_annual_average":255.657,"months_observed":12,"missing_months":"","method":"Mean of published nonmissing monthly CPI-U levels, rounded to 3 decimals","factor_to_2025_usd":1.259277078272842},{"year":2020,"cpi_annual_average":258.811,"months_observed":12,"missing_months":"","method":"Mean of published nonmissing monthly CPI-U levels, rounded to 3 decimals","factor_to_2025_usd":1.2439308993821747},{"year":2021,"cpi_annual_average":270.97,"months_observed":12,"missing_months":"","method":"Mean of published nonmissing monthly CPI-U levels, rounded to 3 decimals","factor_to_2025_usd":1.1881130752481823},{"year":2022,"cpi_annual_average":292.655,"months_observed":12,"missing_months":"","method":"Mean of published nonmissing monthly CPI-U levels, rounded to 3 decimals","factor_to_2025_usd":1.1000768823358562},{"year":2023,"cpi_annual_average":304.702,"months_observed":12,"missing_months":"","method":"Mean of published nonmissing monthly CPI-U levels, rounded to 3 decimals","factor_to_2025_usd":1.0565831533760854},{"year":2024,"cpi_annual_average":313.689,"months_observed":12,"missing_months":"","method":"Mean of published nonmissing monthly CPI-U levels, rounded to 3 decimals","factor_to_2025_usd":1.0263126854942315},{"year":2025,"cpi_annual_average":321.943,"months_observed":11,"missing_months":"10","method":"Mean of published nonmissing monthly CPI-U levels, rounded to 3 decimals","factor_to_2025_usd":1.0}],"missing_months":["2025-10"]},"events":[{"id":"301-list1","date":"2018-07-06","date_type":"effective","title":"Section 301 List 1 begins","description":"25% additional duty on covered products.","additional_rate_percent":25,"affected_hts_codes":null,"coverage_status":"not_yet_mapped","source_url":"https://ustr.gov/sites/default/files/2018-13248.pdf","local_source":"raw/policy/list1_notice.pdf","source_downloaded":true,"scope_note":"Selected milestones only; not a complete tariff history or causal estimate"},{"id":"301-list2","date":"2018-08-23","date_type":"effective","title":"Section 301 List 2 begins","description":"25% additional duty on covered products.","additional_rate_percent":25,"affected_hts_codes":null,"coverage_status":"not_yet_mapped","source_url":"https://ustr.gov/sites/default/files/enforcement/301Investigations/2018-17709.pdf","local_source":"raw/policy/list2_notice.pdf","source_downloaded":true,"scope_note":"Selected milestones only; not a complete tariff history or causal estimate"},{"id":"301-list3","date":"2018-09-24","date_type":"effective","title":"Section 301 List 3 begins","description":"10% additional duty on covered products.","additional_rate_percent":10,"affected_hts_codes":null,"coverage_status":"not_yet_mapped","source_url":"https://ustr.gov/sites/default/files/enforcement/301Investigations/83%20FR%2047974.pdf","local_source":"raw/policy/list3_notice.pdf","source_downloaded":true,"scope_note":"Selected milestones only; not a complete tariff history or causal estimate"},{"id":"301-list3-increase","date":"2019-05-10","date_type":"effective","title":"List 3 additional duty increases","description":"10% to 25%; transit exceptions and later exclusions apply.","additional_rate_percent":25,"affected_hts_codes":null,"coverage_status":"not_yet_mapped","source_url":"https://ustr.gov/sites/default/files/enforcement/301Investigations/84_FR_20459.pdf","local_source":"raw/policy/list3_increase_may2019.pdf","source_downloaded":true,"scope_note":"Selected milestones only; not a complete tariff history or causal estimate"},{"id":"301-list4a","date":"2019-09-01","date_type":"effective","title":"List 4A additional duty begins","description":"15% on covered List 4A products; do not treat List 4B as implemented.","additional_rate_percent":15,"affected_hts_codes":null,"coverage_status":"not_yet_mapped","source_url":"https://ustr.gov/sites/default/files/enforcement/301Investigations/Notice_of_Modification%E2%80%93August_2019.pdf","local_source":"raw/policy/list4_rate_aug2019.pdf","source_downloaded":true,"scope_note":"Selected milestones only; not a complete tariff history or causal estimate"},{"id":"phase-one","date":"2020-01-15","date_type":"signed","title":"Phase One agreement signed","description":"Signing date; does not itself define all tariff effective dates.","additional_rate_percent":null,"affected_hts_codes":null,"coverage_status":"not_yet_mapped","source_url":"https://ustr.gov/phase-one","local_source":"raw/policy/phase_one.html","source_downloaded":true,"scope_note":"Selected milestones only; not a complete tariff history or causal estimate"},{"id":"301-list4a-reduction","date":"2020-02-14","date_type":"effective","title":"List 4A additional duty reduced","description":"15% to 7.5% on covered products.","additional_rate_percent":7.5,"affected_hts_codes":null,"coverage_status":"not_yet_mapped","source_url":"https://ustr.gov/sites/default/files/enforcement/301Investigations/Notice_of_Modification-January_2020.pdf","local_source":"raw/policy/list4a_reduction_jan2020.pdf","source_downloaded":true,"scope_note":"Selected milestones only; not a complete tariff history or causal estimate"},{"id":"covid-pandemic","date":"2020-03-11","date_type":"global_shock","title":"WHO characterizes COVID-19 as a pandemic","description":"Context event, not a tariff measure.","additional_rate_percent":null,"affected_hts_codes":null,"coverage_status":"not_yet_mapped","source_url":"https://www.who.int/docs/default-source/coronaviruse/situation-REPORTS/20200311-SITREP-51-COVID-19.PDF","local_source":"raw/policy/who_pandemic_20200311.pdf","source_downloaded":true,"scope_note":"Selected milestones only; not a complete tariff history or causal estimate"},{"id":"301-review-2024","date":"2024-09-13","date_type":"announced","title":"Section 301 review finalized","description":"Implementation dates and rates vary by product; no chapter-wide rate assigned.","additional_rate_percent":null,"affected_hts_codes":null,"coverage_status":"not_yet_mapped","source_url":"https://ustr.gov/about-us/policy-offices/press-office/press-releases/2024/september/ustr-finalizes-action-china-tariffs-following-statutory-four-year-review","local_source":"raw/policy/section301_review_2024.html","source_downloaded":true,"scope_note":"Selected milestones only; not a complete tariff history or causal estimate"},{"id":"reciprocal-2025","date":"2025-04-02","date_type":"announced","title":"Reciprocal tariff executive order","description":"Announcement only; subsequent amendments, exceptions and litigation are not mapped in this dataset.","additional_rate_percent":null,"affected_hts_codes":null,"coverage_status":"not_yet_mapped","source_url":"https://www.govinfo.gov/content/pkg/FR-2025-04-07/pdf/2025-06063.pdf","local_source":"raw/policy/reciprocal_announcement_2025.pdf","source_downloaded":true,"scope_note":"Selected milestones only; not a complete tariff history or causal estimate"}],"supplier_order":["China","Mexico","Vietnam","Taiwan","Other"],"trade_source":"Existing UN Comtrade annual extract; original retrieval date unknown","scope":"8 selected categories, 2006–2025. Census monthly data is separate."}</script>
+<script>
+// Isolated from the existing story charts; all values are embedded at build time.
+(() => {
+  const root = document.getElementById('trade-explorer');
+  const payload = JSON.parse(document.getElementById('trade-explorer-data').textContent);
+  const data = payload.categories;
+  const factors = new Map(payload.inflation.annual.map(d => [d.year, d.factor_to_2025_usd]));
+  const events = [...payload.events].sort((a, b) => a.date.localeCompare(b.date));
+  const state = { year: 2025, hs: '85', real: false, view: 'trails' };
+  const supplierNames = payload.supplier_order;
+  const supplierColors = ['var(--c-China)', 'var(--c-Mexico)', 'var(--c-Vietnam)', 'var(--c-Taiwan)', 'var(--c-other)'];
+  const q = selector => root.querySelector(selector);
+  const yearInput = q('#te-year');
+  const money = value => '$' + (value / 1e9).toFixed(1) + 'B';
+  const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
+  const rows = d3.select(q('.te-rows')).selectAll('button').data(data, d => d.hs).join('button')
+    .attr('type', 'button').attr('class', 'te-row')
+    .on('click', (_, d) => { state.hs = d.hs; render(); announce(); });
+  rows.append('span').attr('class', 'te-row-label').html(d => `${d.name}<small>HS ${d.hs}</small>`);
+  rows.append('svg').attr('aria-hidden', 'true').each(function() {
+    const s = d3.select(this);
+    s.append('rect').attr('class', 'te-track').attr('y', 11).attr('height', 6);
+    s.append('line').attr('class', 'te-trail').attr('y1', 14).attr('y2', 14);
+    s.append('circle').attr('class', 'te-baseline').attr('cy', 14).attr('r', 4);
+    s.append('circle').attr('class', 'te-current').attr('cy', 14).attr('r', 5);
+    s.selectAll('.te-segment').data(supplierNames).join('rect').attr('class', 'te-segment')
+      .attr('y', 7).attr('height', 14).attr('x', 5).attr('width', 0)
+      .attr('fill', (_, i) => supplierColors[i]).append('title');
+  });
+  rows.append('span').attr('class', 'te-value');
+  function move(selection, attrs, animate) {
+    selection.interrupt();
+    const target = animate && !reducedMotion.matches ? selection.transition().duration(160).ease(d3.easeCubicOut) : selection;
+    for (const [name, value] of Object.entries(attrs)) target.attr(name, value);
+  }
+  function announce() {
+    const d = data.find(d => d.hs === state.hs);
+    q('.te-status').textContent = `${d.name}, ${state.year}: China supplies ${d.values[state.year - 2006].share.toFixed(1)}% by value. Dollar amounts are ${state.real ? 'in 2025 purchasing power' : 'nominal'}.`;
+  }
+  function render(animate = true) {
+    const ribbons = state.view === 'ribbons';
+    root.querySelectorAll('[data-te-view]').forEach(button => button.setAttribute('aria-pressed', String(button.dataset.teView === state.view)));
+    q('.te-chart-heading').textContent = ribbons ? 'Who supplies each category?' : "China's share by category";
+    q('.te-legend').innerHTML = ribbons
+      ? supplierNames.map((name, i) => `<span><i style="background:${supplierColors[i]}"></i>${name}</span>`).join('')
+      : '<span><i class="te-solid"></i>Selected year</span><span><i class="te-hollow"></i>2017 baseline</span>';
+    const index = state.year - 2006;
+    const selected = data.find(d => d.hs === state.hs);
+    const value = selected.values[index];
+    const base = selected.values[11];
+    const factor = state.real ? factors.get(state.year) : 1;
+    const basis = state.real ? '2025 USD · CPI-U' : 'Nominal USD';
+    yearInput.value = state.year;
+    q('#te-year-output').textContent = state.year;
+    q('#te-price-note').textContent = basis + ' · percentage shares unchanged';
+    rows.attr('aria-pressed', d => String(d.hs === state.hs))
+      .attr('aria-label', d => ribbons
+        ? `${d.name}, HS ${d.hs}, ${state.year}: ${supplierNames.map((name, i) => name + ' ' + d.values[index].suppliers[i].toFixed(1) + '%').join(', ')}. Select category.`
+        : `${d.name}, HS ${d.hs}: China ${d.values[index].share.toFixed(1)}% in ${state.year}, ${d.values[11].share.toFixed(1)}% in 2017. Select category.`);
+    rows.select('.te-value').text(d => d.values[index].share.toFixed(1) + '%');
+    rows.select('svg').each(function(d) {
+      const width = this.getBoundingClientRect().width;
+      const s = d3.select(this).attr('viewBox', `0 0 ${width} 28`);
+      const x = d3.scaleLinear().domain([0, 100]).range([5, width - 5]);
+      s.select('.te-track').attr('x', 5).attr('width', Math.max(0, width - 10));
+      s.selectAll('.te-track,.te-baseline,.te-trail,.te-current').style('display', ribbons ? 'none' : null);
+      s.selectAll('.te-segment').style('display', ribbons ? null : 'none');
+      let cumulative = 0;
+      s.selectAll('.te-segment').each(function(name, i) {
+        const share = d.values[index].suppliers[i];
+        const segment = d3.select(this);
+        segment.select('title').text(`${name}: ${share.toFixed(1)}% of ${d.name} imports in ${state.year}`);
+        move(segment, { x: x(cumulative), width: Math.max(0, (width - 10) * share / 100) }, animate && ribbons);
+        cumulative += share;
+      });
+      s.select('.te-baseline').attr('cx', x(d.values[11].share));
+      move(s.select('.te-trail'), { x1: x(d.values[11].share), x2: x(d.values[index].share) }, animate);
+      move(s.select('.te-current'), { cx: x(d.values[index].share) }, animate);
+    });
+    q('.te-selected').textContent = `${selected.name} · HS ${selected.hs}`;
+    const change = value.share - base.share;
+    q('.te-delta').textContent = (change > 0 ? '+' : '') + change.toFixed(1) + ' pp';
+    q('.te-change').textContent = `${base.share.toFixed(1)}% in 2017 → ${value.share.toFixed(1)}% in ${state.year}`;
+    q('.te-amounts').innerHTML = `<div class="te-small">China → US · ${selected.name}<b>${money(value.china * factor)}</b>${basis}</div><div class="te-small">All suppliers → US<b>${money(value.world * factor)}</b>${basis}</div>`;
+    q('.te-supplier-breakdown').hidden = !ribbons;
+    q('.te-supplier-breakdown').innerHTML = `<span>${selected.name} · ${state.year}</span>` + supplierNames.map((name, i) => `<span>${name} <b>${value.suppliers[i].toFixed(1)}%</b></span>`).join('');
+    drawHistory(selected, value, animate);
+    q('.te-policy-date').textContent = `Latest selected milestones as of year-end ${state.year}`;
+    const relevant = events.filter(e => +e.date.slice(0, 4) <= state.year).slice(-2).reverse();
+    q('.te-events').innerHTML = relevant.length ? relevant.map(e => `<article class="te-event"><time datetime="${e.date}">${e.date} · ${e.date_type.replaceAll('_', ' ')}</time><strong>${e.title}</strong><div class="te-small">${e.description}</div><a href="${e.source_url}" target="_blank" rel="noopener noreferrer">Official source ↗</a></article>`).join('') : '<p class="te-small">No selected milestone before this year. This curated timeline begins in 2018.</p>';
+    const supplierHeaders = ribbons ? supplierNames.slice(1).map(name => `<th scope="col">${name} share</th>`).join('') : '';
+    q('.te-table').innerHTML = `<table><caption>${state.year} · ${basis}</caption><thead><tr><th scope="col">Category</th><th scope="col">China share</th>${supplierHeaders}<th scope="col">2017 share</th><th scope="col">Change (pp)</th><th scope="col">China imports</th><th scope="col">All suppliers</th></tr></thead><tbody>${data.map(d => { const v = d.values[index], b = d.values[11]; return `<tr><th scope="row">${d.name} (HS ${d.hs})</th><td>${v.share.toFixed(1)}%</td>${ribbons ? v.suppliers.slice(1).map(share => `<td>${share.toFixed(1)}%</td>`).join('') : ''}<td>${b.share.toFixed(1)}%</td><td>${(v.share - b.share).toFixed(1)}</td><td>${money(v.china * factor)}</td><td>${money(v.world * factor)}</td></tr>`; }).join('')}</tbody></table>`;
+  }
+  function drawHistory(selected, value, animate) {
+    const element = q('.te-history');
+    const width = element.getBoundingClientRect().width, height = 108;
+    const s = d3.select(element).attr('viewBox', `0 0 ${width} ${height}`)
+      .attr('aria-label', `${selected.name}: China's share of US imports by value, 0 to 100 percent, 2006 to 2025. ${value.share.toFixed(1)} percent in ${state.year}.`);
+    const x = d3.scaleLinear().domain([2006, 2025]).range([42, width - 6]);
+    const y = d3.scaleLinear().domain([0, 100]).range([height - 21, 9]);
+    s.selectAll('.te-mini-grid').data([0, 50, 100]).join('line').attr('class', 'te-mini-grid')
+      .attr('x1', 42).attr('x2', width - 6).attr('y1', y).attr('y2', y).attr('stroke', 'var(--grid)');
+    s.selectAll('.te-mini-y').data([0, 100]).join('text').attr('class', 'te-mini-y')
+      .attr('x', 36).attr('y', d => y(d) + 4).attr('text-anchor', 'end').text(d => d + '%');
+    s.selectAll('.te-mini-x').data([2006, 2025]).join('text').attr('class', 'te-mini-x')
+      .attr('x', x).attr('y', height - 3).attr('text-anchor', d => d === 2006 ? 'start' : 'end').text(String);
+    const path = s.selectAll('.te-mini-path').data([selected.values]).join('path').attr('class', 'te-mini-path')
+      .attr('fill', 'none').attr('stroke', 'var(--muted)').attr('stroke-width', 1.5);
+    move(path, { d: d3.line().x((d, i) => x(i + 2006)).y(d => y(d.share))(selected.values) }, animate);
+    const guide = s.selectAll('.te-mini-guide').data([state.year]).join('line').attr('class', 'te-mini-guide')
+      .attr('y1', 9).attr('y2', height - 21).attr('stroke', 'var(--c-China)').attr('opacity', .4);
+    move(guide, { x1: x(state.year), x2: x(state.year) }, animate);
+    const dot = s.selectAll('.te-mini-dot').data([value]).join('circle').attr('class', 'te-mini-dot').attr('r', 4).attr('fill', 'var(--c-China)');
+    move(dot, { cx: x(state.year), cy: y(value.share) }, animate);
+  }
+  root.querySelectorAll('[data-te-view]').forEach(button => button.addEventListener('click', () => {
+    state.view = button.dataset.teView;
+    render(); announce();
+    q('.te-status').textContent = `${button.textContent}. ` + q('.te-status').textContent;
+  }));
+  yearInput.addEventListener('input', () => { state.year = +yearInput.value; render(); });
+  yearInput.addEventListener('change', announce);
+  q('#te-inflation').addEventListener('change', e => { state.real = e.target.checked; render(false); announce(); });
+  root.querySelectorAll('[data-te-year]').forEach(button => button.addEventListener('click', () => {
+    state.year = +button.dataset.teYear; render(); announce();
+  }));
+  let previousWidth = 0;
+  new ResizeObserver(entries => {
+    const width = entries[0].contentRect.width;
+    if (width !== previousWidth) { previousWidth = width; render(false); }
+  }).observe(q('.te-body'));
+  render(false);
+})();
+</script>
+<!-- END TRADE EXPLORER SCRIPT -->

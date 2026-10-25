@@ -1,0 +1,33 @@
+{
+  "passed": true,
+  "validated_utc": "2026-10-25T21:01:45.511127+00:00",
+  "authenticated_download": true,
+  "raw_files": 256,
+  "raw_records": 470973,
+  "category_months": 3072,
+  "gaps": [],
+  "duplicate_keys": 0,
+  "china_and_world_present_every_month": true,
+  "all_sha256_hashes_match": true,
+  "provenance_urls_have_no_key": true,
+  "country_groups_excluded_from_supplier_sum": [
+    "0001",
+    "0003",
+    "0014",
+    "0017",
+    "0020",
+    "0021",
+    "0022",
+    "0023",
+    "0024",
+    "0025",
+    "0026",
+    "0027",
+    "0028"
+  ],
+  "max_world_reconciliation_difference_usd": 0,
+  "missing_inflation_category_months": 16,
+  "missing_cpi_dates": [
+    "2025-10"
+  ]
+}

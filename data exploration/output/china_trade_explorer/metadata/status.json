@@ -1,0 +1,16 @@
+{
+  "annual_comtrade": "ready_reused_existing_extract",
+  "inflation": "ready_downloaded_240_month_slots_239_observations",
+  "census_monthly": "ready_authenticated_download",
+  "quantity": "not_downloaded_specific_products_and_comparable_units_required",
+  "policy_sources_downloaded": 19,
+  "policy_events": "10_selected_milestones_not_complete_history",
+  "policy_product_mapping": "not_done",
+  "policy_exclusions_and_2025_rate_history": "not_complete",
+  "trade_rows": 46287,
+  "category_year_rows": 320,
+  "cpi_base_year": 2025,
+  "census_monthly_rows": 470973,
+  "census_category_month_rows": 3072,
+  "census_period": "2010-01/2025-12"
+}

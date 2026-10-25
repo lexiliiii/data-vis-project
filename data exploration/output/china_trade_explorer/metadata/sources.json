@@ -1,0 +1,222 @@
+{
+  "created_utc": "2026-10-25T20:37:50.226840+00:00",
+  "downloads": [
+    {
+      "path": "raw/bls/bls_cpi_post_2006_2015.json",
+      "url": "https://api.bls.gov/publicAPI/v1/timeseries/data/",
+      "request_method": "POST",
+      "request_body": {
+        "seriesid": [
+          "CUUR0000SA0"
+        ],
+        "startyear": "2006",
+        "endyear": "2015"
+      },
+      "status": "downloaded",
+      "retrieved_utc": "2026-10-25T20:35:42.272744+00:00",
+      "sha256": "c0289fcd8c0a2d099ea273ed03e759b0adf9da19d5af7cf1789cfd5fd858d22c"
+    },
+    {
+      "path": "raw/bls/bls_cpi_post_2016_2025.json",
+      "url": "https://api.bls.gov/publicAPI/v1/timeseries/data/",
+      "request_method": "POST",
+      "request_body": {
+        "seriesid": [
+          "CUUR0000SA0"
+        ],
+        "startyear": "2016",
+        "endyear": "2025"
+      },
+      "status": "downloaded",
+      "retrieved_utc": "2026-10-25T20:35:42.428055+00:00",
+      "sha256": "1aec7c6adb6da3ba7e45645616649c9684af06fdb0d0b5b89550335e2f1acbf1"
+    },
+    {
+      "path": "raw/existing_comtrade/us_imports_by_chapter_partner.csv",
+      "status": "reused_existing_local_extract_not_redownloaded",
+      "original_path": "/Users/gqs/Documents/CS6730/data-vis-project/data exploration/output/us_imports_by_chapter_partner.csv",
+      "original_download_date": "unknown",
+      "sha256": "b51ed222a711b6ad413a93bffbdacbbad08132ead603b7755f91401b75304149"
+    },
+    {
+      "path": "metadata/census_variables.json",
+      "url": "https://api.census.gov/data/timeseries/intltrade/imports/hs/variables.json",
+      "status": "downloaded",
+      "retrieved_utc": "2026-10-25T20:37:50.642287+00:00",
+      "content_type": "application/json;charset=utf-8",
+      "bytes": 13710,
+      "sha256": "9421bc365b04f4068754ad26ddf01d1d3e557bbfad90d949d0a3a657b1c6af4e"
+    },
+    {
+      "path": "raw/policy/list1.html",
+      "url": "https://ustr.gov/issue-areas/enforcement/section-301-investigations/section-301-china/34-billion-trade-action",
+      "status": "downloaded",
+      "retrieved_utc": "2026-10-25T20:37:50.806264+00:00",
+      "content_type": "text/html; charset=UTF-8",
+      "bytes": 52259,
+      "sha256": "e0486eb7aedc07ff824d7f3b57d1f2c1e247bd956b9057d534c3d64cb091e122"
+    },
+    {
+      "path": "raw/policy/list2.html",
+      "url": "https://ustr.gov/issue-areas/enforcement/section-301-investigations/section-301-china/16-billion-trade-action",
+      "status": "downloaded",
+      "retrieved_utc": "2026-10-25T20:37:50.934100+00:00",
+      "content_type": "text/html; charset=UTF-8",
+      "bytes": 37159,
+      "sha256": "8c8fd99c1f2f6f661373c53b8c0995f13d71875e9359b0ff479307e4745f83bb"
+    },
+    {
+      "path": "raw/policy/list3.html",
+      "url": "https://ustr.gov/issue-areas/enforcement/section-301-investigations/section-301-china/200-billion-trade-action",
+      "status": "downloaded",
+      "retrieved_utc": "2026-10-25T20:37:50.979784+00:00",
+      "content_type": "text/html; charset=UTF-8",
+      "bytes": 45939,
+      "sha256": "d433ddd28713ebc68003fb292f25ce6aa17a934d68eea700ba95d375af877b48"
+    },
+    {
+      "path": "raw/policy/list4.html",
+      "url": "https://ustr.gov/issue-areas/enforcement/section-301-investigations/section-301-china/300-billion-trade-action",
+      "status": "downloaded",
+      "retrieved_utc": "2026-10-25T20:37:51.086852+00:00",
+      "content_type": "text/html; charset=UTF-8",
+      "bytes": 37500,
+      "sha256": "1a46ea6977659e88631c8d87fc961ec67e33902854b13cd2e8c1b59fdb038f13"
+    },
+    {
+      "path": "raw/policy/list1_notice.pdf",
+      "url": "https://ustr.gov/sites/default/files/2018-13248.pdf",
+      "status": "downloaded",
+      "retrieved_utc": "2026-10-25T20:37:51.206658+00:00",
+      "content_type": "application/pdf",
+      "bytes": 2440810,
+      "sha256": "3e27dfb420dc308a079e7a71f2715fa29ed00fbbd84dbec4514f2cd66b9cf301"
+    },
+    {
+      "path": "raw/policy/list2_notice.pdf",
+      "url": "https://ustr.gov/sites/default/files/enforcement/301Investigations/2018-17709.pdf",
+      "status": "downloaded",
+      "retrieved_utc": "2026-10-25T20:37:51.304454+00:00",
+      "content_type": "application/pdf",
+      "bytes": 1008314,
+      "sha256": "97a1883d0617b038e4b5bd2f6e36400168fcc27d67fe6562149cc85866c08729"
+    },
+    {
+      "path": "raw/policy/list3_notice.pdf",
+      "url": "https://ustr.gov/sites/default/files/enforcement/301Investigations/83%20FR%2047974.pdf",
+      "status": "downloaded",
+      "retrieved_utc": "2026-10-25T20:37:51.757698+00:00",
+      "content_type": "application/pdf",
+      "bytes": 14120361,
+      "sha256": "1673a0954c3d0f50db8f275c9aafe4a6c576b487897d0821d7af128b25b19cdc"
+    },
+    {
+      "path": "raw/policy/list3_remove_subheadings.pdf",
+      "url": "https://ustr.gov/sites/default/files/enforcement/301Investigations/2018-21303.pdf",
+      "status": "downloaded",
+      "retrieved_utc": "2026-10-25T20:37:51.822245+00:00",
+      "content_type": "application/pdf",
+      "bytes": 222597,
+      "sha256": "0df57661c7d61e40e517ae51ceb0063825483fb1810c1edf2bd6a31f3a0e4c54"
+    },
+    {
+      "path": "raw/policy/list3_delay_dec2018.pdf",
+      "url": "https://ustr.gov/sites/default/files/enforcement/301Investigations/83_FR_65198.pdf",
+      "status": "downloaded",
+      "retrieved_utc": "2026-10-25T20:37:51.907269+00:00",
+      "content_type": "application/pdf",
+      "bytes": 177999,
+      "sha256": "61727b28a75adca007bd8aabef94c1fbe97ff90075939a130b8a3ea688e382bf"
+    },
+    {
+      "path": "raw/policy/list3_delay_mar2019.pdf",
+      "url": "https://ustr.gov/sites/default/files/enforcement/301Investigations/84_FR_7966.pdf",
+      "status": "downloaded",
+      "retrieved_utc": "2026-10-25T20:37:51.988819+00:00",
+      "content_type": "application/pdf",
+      "bytes": 226841,
+      "sha256": "76f4b514663d8f081a0c68c9fd6e22f955701f02406585a0db31b3d67068fbf2"
+    },
+    {
+      "path": "raw/policy/list3_increase_may2019.pdf",
+      "url": "https://ustr.gov/sites/default/files/enforcement/301Investigations/84_FR_20459.pdf",
+      "status": "downloaded",
+      "retrieved_utc": "2026-10-25T20:37:52.064136+00:00",
+      "content_type": "application/pdf",
+      "bytes": 261257,
+      "sha256": "13fee2989c96fea685a60538a8336dc1cbbf7968806aff1f25b9d9e4d2bb1c60"
+    },
+    {
+      "path": "raw/policy/list4a_list4b_notice.pdf",
+      "url": "https://ustr.gov/sites/default/files/enforcement/301Investigations/Notice_of_Modification_(List_4A_and_List_4B).pdf",
+      "status": "downloaded",
+      "retrieved_utc": "2026-10-25T20:37:52.444696+00:00",
+      "content_type": "application/pdf",
+      "bytes": 9765277,
+      "sha256": "d0df1ca6ee0f9c08f31af519cab32ad2adb1607fd8a53880463bebb9136d939c"
+    },
+    {
+      "path": "raw/policy/list4_rate_aug2019.pdf",
+      "url": "https://ustr.gov/sites/default/files/enforcement/301Investigations/Notice_of_Modification%E2%80%93August_2019.pdf",
+      "status": "downloaded",
+      "retrieved_utc": "2026-10-25T20:37:52.527036+00:00",
+      "content_type": "application/pdf",
+      "bytes": 292461,
+      "sha256": "bb10d06f99e0c6a5014d1ea90fe84c58dfcd365f5e457c03fe476117fb6373b6"
+    },
+    {
+      "path": "raw/policy/list4a_reduction_jan2020.pdf",
+      "url": "https://ustr.gov/sites/default/files/enforcement/301Investigations/Notice_of_Modification-January_2020.pdf",
+      "status": "downloaded",
+      "retrieved_utc": "2026-10-25T20:37:52.592115+00:00",
+      "content_type": "application/pdf",
+      "bytes": 246177,
+      "sha256": "9aea666cab1e985351f3797df71a117047675d9ebee8ad341e5a145ffc687e43"
+    },
+    {
+      "path": "raw/policy/phase_one.html",
+      "url": "https://ustr.gov/phase-one",
+      "status": "downloaded",
+      "retrieved_utc": "2026-10-25T20:37:52.686345+00:00",
+      "content_type": "text/html; charset=UTF-8",
+      "bytes": 16451,
+      "sha256": "a0c0ae67df863c9599094e9d4f92c4bb9eb51855ff249f3d1d5636688f80b911"
+    },
+    {
+      "path": "raw/policy/who_pandemic_20200311.pdf",
+      "url": "https://www.who.int/docs/default-source/coronaviruse/situation-REPORTS/20200311-SITREP-51-COVID-19.PDF",
+      "status": "downloaded",
+      "retrieved_utc": "2026-10-25T20:38:56.055614+00:00",
+      "content_type": "application/pdf",
+      "bytes": 1250004,
+      "sha256": "32faca6b029c10c8d99d5985c47dc4c017060d09bfd1e1dccfeb29886d730269"
+    },
+    {
+      "path": "raw/policy/section301_review_2024.html",
+      "url": "https://ustr.gov/about-us/policy-offices/press-office/press-releases/2024/september/ustr-finalizes-action-china-tariffs-following-statutory-four-year-review",
+      "status": "downloaded",
+      "retrieved_utc": "2026-10-25T20:38:56.586247+00:00",
+      "content_type": "text/html; charset=UTF-8",
+      "bytes": 42308,
+      "sha256": "1b1f4b8e1cc583b0d83cb48f14063af255bc108f2eef382df43c5b23df152926"
+    },
+    {
+      "path": "raw/policy/reciprocal_announcement_2025.pdf",
+      "url": "https://www.govinfo.gov/content/pkg/FR-2025-04-07/pdf/2025-06063.pdf",
+      "status": "downloaded",
+      "retrieved_utc": "2026-10-25T20:38:58.950173+00:00",
+      "content_type": "application/pdf",
+      "bytes": 7230094,
+      "sha256": "3a4df0606c889ae072c030c8ca698adb1d373506d2e53881546874efad9fa2ca"
+    },
+    {
+      "path": "raw/policy/usitc_archive_index.html",
+      "url": "https://hts.usitc.gov/download/archive",
+      "status": "downloaded",
+      "retrieved_utc": "2026-10-25T20:38:59.209448+00:00",
+      "content_type": "text/html; charset=UTF-8",
+      "bytes": 11044,
+      "sha256": "490922233951aa3190ab6d69d66772cec5e9d00a5a5744eccfd95cbba92b3d7c"
+    }
+  ]
+}

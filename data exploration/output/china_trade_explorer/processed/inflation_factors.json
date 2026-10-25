@@ -1,0 +1,171 @@
+{
+  "series": "CUUR0000SA0",
+  "base_year": 2025,
+  "base_cpi": 321.943,
+  "method": "Annual CPI-U purchasing-power adjustment; not a physical-volume estimate",
+  "annual": [
+    {
+      "year": 2006,
+      "cpi_annual_average": 201.592,
+      "months_observed": 12,
+      "missing_months": "",
+      "method": "Mean of published nonmissing monthly CPI-U levels, rounded to 3 decimals",
+      "factor_to_2025_usd": 1.5970028572562402
+    },
+    {
+      "year": 2007,
+      "cpi_annual_average": 207.342,
+      "months_observed": 12,
+      "missing_months": "",
+      "method": "Mean of published nonmissing monthly CPI-U levels, rounded to 3 decimals",
+      "factor_to_2025_usd": 1.5527148382865024
+    },
+    {
+      "year": 2008,
+      "cpi_annual_average": 215.303,
+      "months_observed": 12,
+      "missing_months": "",
+      "method": "Mean of published nonmissing monthly CPI-U levels, rounded to 3 decimals",
+      "factor_to_2025_usd": 1.495301969782121
+    },
+    {
+      "year": 2009,
+      "cpi_annual_average": 214.537,
+      "months_observed": 12,
+      "missing_months": "",
+      "method": "Mean of published nonmissing monthly CPI-U levels, rounded to 3 decimals",
+      "factor_to_2025_usd": 1.500640915086908
+    },
+    {
+      "year": 2010,
+      "cpi_annual_average": 218.056,
+      "months_observed": 12,
+      "missing_months": "",
+      "method": "Mean of published nonmissing monthly CPI-U levels, rounded to 3 decimals",
+      "factor_to_2025_usd": 1.476423487544484
+    },
+    {
+      "year": 2011,
+      "cpi_annual_average": 224.939,
+      "months_observed": 12,
+      "missing_months": "",
+      "method": "Mean of published nonmissing monthly CPI-U levels, rounded to 3 decimals",
+      "factor_to_2025_usd": 1.4312458044180867
+    },
+    {
+      "year": 2012,
+      "cpi_annual_average": 229.594,
+      "months_observed": 12,
+      "missing_months": "",
+      "method": "Mean of published nonmissing monthly CPI-U levels, rounded to 3 decimals",
+      "factor_to_2025_usd": 1.402227410123958
+    },
+    {
+      "year": 2013,
+      "cpi_annual_average": 232.957,
+      "months_observed": 12,
+      "missing_months": "",
+      "method": "Mean of published nonmissing monthly CPI-U levels, rounded to 3 decimals",
+      "factor_to_2025_usd": 1.3819846581128705
+    },
+    {
+      "year": 2014,
+      "cpi_annual_average": 236.736,
+      "months_observed": 12,
+      "missing_months": "",
+      "method": "Mean of published nonmissing monthly CPI-U levels, rounded to 3 decimals",
+      "factor_to_2025_usd": 1.3599241349013247
+    },
+    {
+      "year": 2015,
+      "cpi_annual_average": 237.017,
+      "months_observed": 12,
+      "missing_months": "",
+      "method": "Mean of published nonmissing monthly CPI-U levels, rounded to 3 decimals",
+      "factor_to_2025_usd": 1.358311851048659
+    },
+    {
+      "year": 2016,
+      "cpi_annual_average": 240.007,
+      "months_observed": 12,
+      "missing_months": "",
+      "method": "Mean of published nonmissing monthly CPI-U levels, rounded to 3 decimals",
+      "factor_to_2025_usd": 1.3413900427904186
+    },
+    {
+      "year": 2017,
+      "cpi_annual_average": 245.12,
+      "months_observed": 12,
+      "missing_months": "",
+      "method": "Mean of published nonmissing monthly CPI-U levels, rounded to 3 decimals",
+      "factor_to_2025_usd": 1.3134097584856397
+    },
+    {
+      "year": 2018,
+      "cpi_annual_average": 251.107,
+      "months_observed": 12,
+      "missing_months": "",
+      "method": "Mean of published nonmissing monthly CPI-U levels, rounded to 3 decimals",
+      "factor_to_2025_usd": 1.2820948838542932
+    },
+    {
+      "year": 2019,
+      "cpi_annual_average": 255.657,
+      "months_observed": 12,
+      "missing_months": "",
+      "method": "Mean of published nonmissing monthly CPI-U levels, rounded to 3 decimals",
+      "factor_to_2025_usd": 1.259277078272842
+    },
+    {
+      "year": 2020,
+      "cpi_annual_average": 258.811,
+      "months_observed": 12,
+      "missing_months": "",
+      "method": "Mean of published nonmissing monthly CPI-U levels, rounded to 3 decimals",
+      "factor_to_2025_usd": 1.2439308993821747
+    },
+    {
+      "year": 2021,
+      "cpi_annual_average": 270.97,
+      "months_observed": 12,
+      "missing_months": "",
+      "method": "Mean of published nonmissing monthly CPI-U levels, rounded to 3 decimals",
+      "factor_to_2025_usd": 1.1881130752481823
+    },
+    {
+      "year": 2022,
+      "cpi_annual_average": 292.655,
+      "months_observed": 12,
+      "missing_months": "",
+      "method": "Mean of published nonmissing monthly CPI-U levels, rounded to 3 decimals",
+      "factor_to_2025_usd": 1.1000768823358562
+    },
+    {
+      "year": 2023,
+      "cpi_annual_average": 304.702,
+      "months_observed": 12,
+      "missing_months": "",
+      "method": "Mean of published nonmissing monthly CPI-U levels, rounded to 3 decimals",
+      "factor_to_2025_usd": 1.0565831533760854
+    },
+    {
+      "year": 2024,
+      "cpi_annual_average": 313.689,
+      "months_observed": 12,
+      "missing_months": "",
+      "method": "Mean of published nonmissing monthly CPI-U levels, rounded to 3 decimals",
+      "factor_to_2025_usd": 1.0263126854942315
+    },
+    {
+      "year": 2025,
+      "cpi_annual_average": 321.943,
+      "months_observed": 11,
+      "missing_months": "10",
+      "method": "Mean of published nonmissing monthly CPI-U levels, rounded to 3 decimals",
+      "factor_to_2025_usd": 1.0
+    }
+  ],
+  "missing_months": [
+    "2025-10"
+  ]
+}

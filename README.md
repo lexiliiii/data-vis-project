@@ -28,6 +28,26 @@ python -m http.server 8000
 # then open http://localhost:8000/draft.html
 ```
 
+## China share explorer
+
+An interactive **Share trails / Supplier ribbons** section appears just before “China's decline is concentrated in a few product groups.” It uses eight selected HS2 categories from the existing 2006–2025 annual Comtrade extract, matching the rest of the page.
+
+- Switch between **Share trails** and **Supplier ribbons**. Ribbons show China, Mexico, Vietnam, Taiwan, and all other suppliers as a 100% stacked bar; the year, selected category, and inflation setting are shared between views.
+- Drag the year slider, or jump to a milestone year; marks animate from their previous positions and respect reduced-motion settings.
+- Select a category to view its share history, change from 2017, dollar amounts, and sourced policy context as of the selected year-end.
+- Turn on inflation adjustment to express dollar amounts in **2025 USD using CPI-U**. The share percentages stay unchanged. The 2025 CPI average uses 11 published months because October is unavailable.
+- Quantity is disabled until specific products with comparable units are selected. Broad commodity groups cannot combine kilograms, item counts, and other units.
+
+The chart renders in the browser using D3/SVG, with embedded data; it does not load saved images or call Python/API services at runtime. It remains usable by opening `draft.html` directly. Policy dates are selected context, not a complete tariff history, product-coverage mapping, or a causal estimate.
+
+Downloaded sources, processed tables, and provenance are in [`data exploration/output/china_trade_explorer/`](data%20exploration/output/china_trade_explorer/README.md). Census monthly imports for consumption are stored separately and are not spliced into the annual Comtrade series. No API key is embedded in the page.
+
+To refresh only this explorer's embedded data after rebuilding its processed source tables:
+
+```bash
+python "data exploration/output/china_trade_explorer/scripts/build_website_explorer.py"
+```
+
 ## Running the data scripts
 
 ### Setup
@@ -44,14 +64,14 @@ pip install requests pandas numpy matplotlib
 
 Run every script from inside `data exploration/`. Some of them import from each other (for example, `fetch_commodity_partners.py` imports `us_trade_by_commodity.py`).
 
-### API keys (optional)
+### API keys
 
-Every fetch script works without a key. Keys only raise the rate limits:
+Comtrade supports public requests without a key; a key raises its rate limits. Census data requests require an activated API key:
 
 | Variable | Used by | Get one at |
 |---|---|---|
 | `COMTRADE_API_KEY` | `us_trading_partners.py`, `us_trade_by_commodity.py`, `fetch_commodity_partners.py` | https://comtradedeveloper.un.org (free) |
-| `CENSUS_API_KEY` | `us_trading_partners.py --source census` | https://api.census.gov/data/key_signup.html |
+| `CENSUS_API_KEY` | `us_trading_partners.py --source census`, `output/china_trade_explorer/scripts/download_census_trade.py` | https://api.census.gov/data/key_signup.html |
 
 Without `COMTRADE_API_KEY` the scripts use the public Comtrade preview endpoint and wait about 2.5 s between calls, so a full pull can take a while.
 
@@ -93,7 +113,7 @@ Every script that takes arguments supports `--help`.
 
 ```bash
 python us_trading_partners.py --start 2005 --end 2024
-python us_trading_partners.py --source census --start 2013     # Census data only goes back to 2013
+python us_trading_partners.py --source census --start 2013     # legacy Census totals workflow
 python us_trade_by_commodity.py --years 2017 2019 2025 --no-plot
 python fetch_commodity_partners.py --chapters 85 72 --years 2017 2025
 python forex_reserves.py --start 2005 --end 2024
@@ -105,5 +125,5 @@ python plot_top10_line_charts.py --show                        # also open inter
 ## Data sources
 
 - **UN Comtrade** reports US-reported goods trade, in current USD. Comtrade lists Taiwan as "Other Asia, nes", and the scripts relabel it as Taiwan.
-- **US Census Bureau International Trade API** is an optional cross-check, available from 2013 onward.
+- **US Census Bureau International Trade API** supplies the separate monthly HS import package from January 2010 onward. The legacy totals-script example above uses 2013 onward.
 - **World Bank WDI** provides `FI.RES.TOTL.CD` and `FI.RES.XGLD.CD` for total reserves and reserves minus gold. No public source breaks down an individual country's reserves by currency, so the only split available is gold vs. non-gold.
