@@ -157,18 +157,12 @@ footer p { max-width: 80ch; margin: 0 0 6px; }
 <style>
 /* China trade explorer — every rule is scoped to this new section. */
 #trade-explorer .te-body, #trade-explorer .te-left { min-width: 0; }
-#trade-explorer .te-controls, #trade-explorer .te-prices { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; font-family: var(--display); }
-#trade-explorer .te-controls { margin: 14px 0; }
-#trade-explorer .te-view-switch { width: fit-content; max-width: 100%; flex-wrap: wrap; margin-top: 24px; }
+#trade-explorer .te-view-switch { width: fit-content; max-width: 100%; flex-wrap: wrap; margin: 24px 0 26px; }
 #trade-explorer .te-supplier-breakdown { display: flex; flex-wrap: wrap; gap: 5px 16px; margin-top: 12px; }
 #trade-explorer .te-supplier-breakdown[hidden] { display: none; }
 #trade-explorer .te-supplier-breakdown span { white-space: nowrap; }
 #trade-explorer .te-supplier-breakdown b { color: var(--ink); font-weight: 650; }
 #trade-explorer .te-segment { stroke: var(--paper); stroke-width: .5; }
-#trade-explorer .te-prices { margin-bottom: 26px; }
-#trade-explorer .te-prices label { display: inline-flex; align-items: center; gap: 8px; font-size: .875rem; cursor: pointer; }
-#trade-explorer input { accent-color: var(--c-China); }
-#trade-explorer input[type=checkbox] { width: 18px; height: 18px; margin: 0; flex: 0 0 auto; }
 #trade-explorer button { font-family: var(--display); color: var(--ink); cursor: pointer; }
 #trade-explorer button:focus-visible, #trade-explorer input:focus-visible, #trade-explorer a:focus-visible { outline: 2px solid var(--c-Mexico); outline-offset: 3px; }
 #trade-explorer .te-measures { display: flex; border: 1px solid var(--rule); border-radius: 5px; padding: 3px; gap: 3px; }
@@ -176,7 +170,7 @@ footer p { max-width: 80ch; margin: 0 0 6px; }
 #trade-explorer .te-measures button[aria-pressed=true] { background: var(--ink); color: var(--paper); }
 #trade-explorer .te-measures button:disabled { color: var(--muted); cursor: not-allowed; }
 #trade-explorer .te-small { font: 500 .75rem/1.5 var(--display); color: var(--muted); }
-#trade-explorer .te-layout { display: grid; grid-template-columns: minmax(0, 1fr) 235px; gap: 24px; }
+#trade-explorer .te-layout { display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(330px, .9fr); gap: 32px; align-items: stretch; }
 #trade-explorer h3 { font: 700 1rem/1.3 var(--display); margin: 0 0 12px; }
 #trade-explorer .te-legend { display: flex; flex-wrap: wrap; gap: 8px 16px; font: 500 .75rem/1.5 var(--display); color: var(--muted); }
 #trade-explorer .te-legend span { display: inline-flex; align-items: center; gap: 6px; }
@@ -200,7 +194,7 @@ footer p { max-width: 80ch; margin: 0 0 6px; }
 #trade-explorer .te-current { fill: var(--c-China); }
 #trade-explorer .te-amounts { display: flex; justify-content: space-between; gap: 15px; flex-wrap: wrap; border-top: 1px solid var(--rule); padding-top: 14px; margin-top: 12px; }
 #trade-explorer .te-amounts b { display: block; color: var(--ink); font-size: 1.25rem; font-weight: 650; font-variant-numeric: tabular-nums; }
-#trade-explorer .te-context { min-width: 0; border-left: 1px solid var(--rule); padding-left: 23px; }
+#trade-explorer .te-context { min-width: 0; height: 100%; box-sizing: border-box; border-left: 1px solid var(--rule); padding-left: 28px; }
 #trade-explorer .te-eyebrow { font: 600 .6875rem/1.3 var(--display); color: var(--muted); text-transform: uppercase; letter-spacing: .08em; }
 #trade-explorer .te-selected { margin: 6px 0 12px; }
 #trade-explorer .te-delta { font: 600 1.875rem/1.1 var(--display); font-variant-numeric: tabular-nums; margin-bottom: 8px; }
@@ -238,7 +232,7 @@ footer p { max-width: 80ch; margin: 0 0 6px; }
   #trade-explorer .te-policy-context { border-top: 1px solid var(--rule); padding-top: 18px; }
 }
 @media (pointer: coarse) {
-  #trade-explorer .te-measures button, #trade-explorer .te-jumps button, #trade-explorer .te-prices label { min-height: 44px; }
+  #trade-explorer .te-measures button, #trade-explorer .te-jumps button { min-height: 44px; }
   #trade-explorer input[type=range] { height: 44px; }
 }
 </style>
@@ -549,17 +543,6 @@ footer { width: min(1120px, calc(100% - 44px)); box-sizing: border-box; margin: 
         <button type="button" data-te-view="trails" aria-pressed="true">Share trails</button>
         <button type="button" data-te-view="ribbons" aria-pressed="false">Supplier ribbons</button>
       </div>
-      <div class="te-controls">
-        <div class="te-measures" role="group" aria-label="Import measure">
-          <button type="button" aria-pressed="true">By value</button>
-          <button type="button" disabled aria-describedby="te-quantity-note">By quantity</button>
-        </div>
-        <span class="te-small" id="te-quantity-note">Quantity needs a specific product and common unit.</span>
-      </div>
-      <div class="te-prices">
-        <label><input type="checkbox" id="te-inflation" role="switch" aria-describedby="te-price-note"> Adjust dollar amounts for inflation</label>
-        <span class="te-small" id="te-price-note">Nominal USD · percentage shares unchanged</span>
-      </div>
       <div class="te-layout">
         <div class="te-left">
           <h3 class="te-chart-heading">China's share by category</h3>
@@ -591,7 +574,7 @@ footer { width: min(1120px, calc(100% - 44px)); box-sizing: border-box; margin: 
         <div class="te-ticks" aria-hidden="true"><span>2006</span><span>2010</span><span>2015</span><span>2020</span><span>2025</span></div>
         <div class="te-jumps" role="group" aria-label="Jump to a milestone year"><button type="button" data-te-year="2017">2017 baseline</button><button type="button" data-te-year="2018">2018 tariffs</button><button type="button" data-te-year="2020">2020 pandemic</button><button type="button" data-te-year="2025">2025 tariffs</button></div>
       </div>
-      <p class="te-source" id="te-source-note">8 selected HS2 groups · Annual observations from the project's UN Comtrade extract. Inflation uses <a href="https://www.bls.gov/cpi/factsheets/cpi-series-ids.htm" target="_blank" rel="noopener noreferrer">BLS CPI-U</a> to express values in 2025 purchasing power, not physical volume. The 2025 CPI average uses 11 published months; October is missing.</p>
+      <p class="te-source" id="te-source-note">8 selected HS2 groups · Annual observations from the project's UN Comtrade extract. Dollar amounts are nominal.</p>
       <details><summary>View selected-year data</summary><div class="tbl te-table"></div></details>
       </div>
       <div class="te-status" role="status" aria-live="polite"></div>
@@ -613,9 +596,9 @@ footer { width: min(1120px, calc(100% - 44px)); box-sizing: border-box; margin: 
     </article>
     <div class="story-visual">
       <figure>
-        <div class="key"><span><i style="background:var(--c-China)"></i>Imports from China</span><span><i style="background:var(--ink)"></i>Exports to China</span><span><i style="background:var(--focus)"></i>Brushed years</span></div>
+        <div class="key"><span><i style="background:var(--c-China)"></i>Imports from China</span><span><i style="background:var(--ink)"></i>Exports to China</span></div>
         <div class="chart" id="c-cn"></div>
-        <figcaption>US goods trade with China, billions of US dollars. The gold band is the year range brushed in the opening chart.</figcaption>
+        <figcaption>US goods trade with China, billions of current US dollars, 2006–2025.</figcaption>
         <details><summary>View data table</summary><div class="tbl" id="t-cn"></div></details>
       </figure>
     </div>
@@ -709,7 +692,6 @@ function setLinkedRange(range, { redrawHero = false } = {}) {
   document.getElementById("reset-brush").disabled = allYears;
   if (redrawHero) drawShare();
   drawRank();
-  drawChina();
   window.dispatchEvent(new CustomEvent("trade-brush-change", { detail: { start: range[0], end: range[1] } }));
 }
 
@@ -848,17 +830,14 @@ function drawRank() {
   svg.append("text").attr("x", m.l - 8).attr("y", y(11) + 4).attr("text-anchor", "end").style("font-weight", 700).text("Ranks 11+");
 }
 
-/* US-China trade: linked area and lines */
+/* US-China trade: static area and lines */
 function drawChina() {
   const W = widthOf("c-cn"), narrow = W < 560;
   const H = narrow ? 310 : 450, m = { t: 58, r: narrow ? 64 : 92, b: 36, l: 50 };
-  const [startYear, endYear] = LINK.range;
-  const svg = svgFor("c-cn", W, H).attr("aria-label", `Linked line chart of US imports from and exports to China, 2006 to 2025. Selected years ${startYear} through ${endYear}.`);
+  const svg = svgFor("c-cn", W, H).attr("aria-label", "Line chart of US imports from and exports to China, 2006 to 2025.");
   const x = d3.scaleLinear([2006, 2025], [m.l, W - m.r]);
   const y = d3.scaleLinear([0, 600], [H - m.b, m.t]);
   const series = years.map((year, i) => ({ year, imports: DATA.china.imports[i], exports: DATA.china.exports[i] }));
-  svg.append("rect").attr("class", "linked-band").attr("x", x(startYear)).attr("y", m.t)
-    .attr("width", Math.max(2, x(endYear) - x(startYear))).attr("height", H - m.t - m.b).attr("rx", 4);
   svg.append("g").attr("class", "grid").selectAll("line").data(y.ticks(6)).join("line")
     .attr("x1", m.l).attr("x2", W - m.r).attr("y1", y).attr("y2", y);
   svg.append("g").attr("class", "axis").attr("transform", `translate(${m.l},0)`)
@@ -873,9 +852,9 @@ function drawChina() {
   svg.append("path").datum(series).attr("d", area).attr("fill", "var(--c-China)").attr("opacity", .14);
   svg.append("path").datum(series).attr("d", importLine).attr("fill", "none").attr("stroke", "var(--c-China)").attr("stroke-width", 3.5);
   svg.append("path").datum(series).attr("d", exportLine).attr("fill", "none").attr("stroke", "var(--ink)").attr("stroke-width", 2.25);
-  svg.append("g").selectAll("circle.import").data(series.filter(d => d.year === startYear || d.year === endYear)).join("circle")
+  svg.append("g").selectAll("circle.import").data(series.filter(d => d.year === 2006 || d.year === 2025)).join("circle")
     .attr("cx", d => x(d.year)).attr("cy", d => y(d.imports)).attr("r", 4.5).attr("fill", "var(--c-China)");
-  svg.append("g").selectAll("circle.export").data(series.filter(d => d.year === startYear || d.year === endYear)).join("circle")
+  svg.append("g").selectAll("circle.export").data(series.filter(d => d.year === 2006 || d.year === 2025)).join("circle")
     .attr("cx", d => x(d.year)).attr("cy", d => y(d.exports)).attr("r", 3.5).attr("fill", "var(--ink)");
 
   const events = [
@@ -885,7 +864,7 @@ function drawChina() {
     { t: 2025, label: "2025 tariffs", row: 0 },
   ];
   const ev = svg.append("g").attr("class", "event").selectAll("g").data(events).join("g");
-  ev.attr("opacity", d => d.t >= startYear && d.t <= endYear ? 1 : .28);
+  ev.attr("opacity", 1);
   ev.append("line").attr("x1", d => x(d.t)).attr("x2", d => x(d.t)).attr("y1", d => 24 + d.row * 15).attr("y2", H - m.b);
   ev.append("text").attr("x", d => x(d.t) + (d.t > 2024 ? -4 : 4)).attr("y", d => 31 + d.row * 15)
     .attr("text-anchor", d => d.t > 2024 ? "end" : "start").text(d => d.label);
@@ -980,9 +959,8 @@ window.addEventListener("resize", () => { clearTimeout(rt); rt = setTimeout(draw
   const root = document.getElementById('trade-explorer');
   const payload = JSON.parse(document.getElementById('trade-explorer-data').textContent);
   const data = payload.categories;
-  const factors = new Map(payload.inflation.annual.map(d => [d.year, d.factor_to_2025_usd]));
   const events = [...payload.events].sort((a, b) => a.date.localeCompare(b.date));
-  const state = { year: 2025, hs: '85', real: false, view: 'trails' };
+  const state = { year: 2025, hs: '85', view: 'trails' };
   const supplierNames = payload.supplier_order;
   const supplierColors = ['var(--c-China)', 'var(--c-Mexico)', 'var(--c-Vietnam)', 'var(--c-Taiwan)', 'var(--c-other)'];
   const q = selector => root.querySelector(selector);
@@ -1011,7 +989,7 @@ window.addEventListener("resize", () => { clearTimeout(rt); rt = setTimeout(draw
   }
   function announce() {
     const d = data.find(d => d.hs === state.hs);
-    q('.te-status').textContent = `${d.name}, ${state.year}: China supplies ${d.values[state.year - 2006].share.toFixed(1)}% by value. Dollar amounts are ${state.real ? 'in 2025 purchasing power' : 'nominal'}.`;
+    q('.te-status').textContent = `${d.name}, ${state.year}: China supplies ${d.values[state.year - 2006].share.toFixed(1)}% by value. Dollar amounts are nominal.`;
   }
   function render(animate = true) {
     const ribbons = state.view === 'ribbons';
@@ -1024,11 +1002,10 @@ window.addEventListener("resize", () => { clearTimeout(rt); rt = setTimeout(draw
     const selected = data.find(d => d.hs === state.hs);
     const value = selected.values[index];
     const base = selected.values[11];
-    const factor = state.real ? factors.get(state.year) : 1;
-    const basis = state.real ? '2025 USD · CPI-U' : 'Nominal USD';
+    const factor = 1;
+    const basis = 'Nominal USD';
     yearInput.value = state.year;
     q('#te-year-output').textContent = state.year;
-    q('#te-price-note').textContent = basis + ' · percentage shares unchanged';
     rows.attr('aria-pressed', d => String(d.hs === state.hs))
       .attr('aria-label', d => ribbons
         ? `${d.name}, HS ${d.hs}, ${state.year}: ${supplierNames.map((name, i) => name + ' ' + d.values[index].suppliers[i].toFixed(1) + '%').join(', ')}. Select category.`
@@ -1096,7 +1073,6 @@ window.addEventListener("resize", () => { clearTimeout(rt); rt = setTimeout(draw
   }));
   yearInput.addEventListener('input', () => { state.year = +yearInput.value; render(); });
   yearInput.addEventListener('change', announce);
-  q('#te-inflation').addEventListener('change', e => { state.real = e.target.checked; render(false); announce(); });
   window.addEventListener('trade-brush-change', event => {
     state.year = event.detail.end;
     render();
