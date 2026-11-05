@@ -278,9 +278,7 @@ html { background: var(--paper); scroll-behavior: smooth; }
 body {
   padding: 0;
   overflow-x: hidden;
-  background:
-    linear-gradient(90deg, transparent 0 49.9%, rgba(18, 49, 59, .025) 50%, transparent 50.1%),
-    var(--paper);
+  background: var(--paper);
   font-family: var(--display);
   font-size: .95rem;
   line-height: 1.65;
@@ -324,7 +322,6 @@ body {
     radial-gradient(circle at 88% 12%, color-mix(in srgb, var(--c-Mexico) 10%, transparent) 0, transparent 25rem),
     linear-gradient(125deg, color-mix(in srgb, var(--c-China) 5%, transparent), transparent 45%);
 }
-.opening-viz::before { content: "01"; position: absolute; top: 2vh; right: 3vw; color: color-mix(in srgb, var(--ink) 4%, transparent); font: 800 clamp(9rem, 20vw, 19rem)/.8 var(--display); letter-spacing: -.09em; pointer-events: none; }
 .chapter-intro { width: min(1460px, 100%); position: relative; z-index: 1; margin: 0 auto 46px; padding-bottom: 30px; display: grid; grid-template-columns: minmax(350px, .9fr) minmax(440px, 1.1fr); gap: clamp(48px, 7vw, 110px); align-items: end; border-bottom: 1px solid var(--rule); }
 .chapter-intro h2 { max-width: 12ch; margin: 0; font: 760 clamp(2rem, 3.8vw, 4.15rem)/.98 var(--display); letter-spacing: -.04em; text-transform: uppercase; }
 .chapter-intro h2 em { color: var(--c-China); font-style: normal; }
@@ -465,7 +462,6 @@ footer { width: min(1120px, calc(100% - 44px)); box-sizing: border-box; margin: 
   .hero .deck { margin-top: 24px; }
   .scroll-cue { bottom: 18px; }
   .opening-viz { padding-inline: 16px; }
-  .opening-viz::before { font-size: 9rem; }
   .overview-stats { grid-template-columns: 1fr; }
   .overview-stats span, .overview-stats span:first-child { padding: 12px 0; border-left: 0; border-top: 1px solid var(--rule); }
   .overview-stats span:first-child { border-top: 0; }
