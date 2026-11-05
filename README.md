@@ -4,8 +4,8 @@ CS 6730 Data Visualization project. It looks at how US goods trade has shifted b
 
 ```
 .
-├── index.html              # placeholder landing page
-├── draft.html              # draft interactive visualization (D3 v7, loaded from a CDN)
+├── index.html              # final interactive visualization (D3 v7, loaded from a CDN)
+├── supplier-dashboard-data.js  # compact generated payload for the sourcing dashboard
 └── data exploration/
     ├── us_trading_partners.py       # fetch: US trade totals by partner (UN Comtrade / Census)
     ├── us_trade_by_commodity.py     # fetch: US trade by HS2 chapter for 9 key partners
@@ -16,21 +16,22 @@ CS 6730 Data Visualization project. It looks at how US goods trade has shifted b
     ├── where_did_it_go.py           # plot: change in import share, 2017 vs 2025
     ├── storyboard_sketch.py         # plot: 5-panel data storyboard
     ├── build_site_data.py           # build: compact JSON for the website
+    ├── build_supplier_dashboard_data.py # build: sourcing dashboard payload
     └── output/                      # all generated CSVs, PNGs, and cached API pulls
 ```
 
 ## Viewing the website
 
-`draft.html` is self-contained apart from D3, which it loads from cdnjs, so you need an internet connection. You can open it straight in a browser, or serve the folder locally:
+`index.html` is self-contained apart from D3 and web fonts, which it loads from CDNs, so you need an internet connection. You can open it straight in a browser, or serve the folder locally:
 
 ```bash
 python -m http.server 8000
-# then open http://localhost:8000/draft.html
+# then open http://localhost:8000/
 ```
 
 ## China share explorer
 
-An interactive **Share trails / Supplier ribbons** section appears just before “China's decline is concentrated in a few product groups.” It uses eight selected HS2 categories from the existing 2006–2025 annual Comtrade extract, matching the rest of the page.
+An interactive **Share trails / Supplier ribbons** section appears after the partner-ranking story. It uses eight selected HS2 categories from the existing 2006–2025 annual Comtrade extract, matching the rest of the page.
 
 - Switch between **Share trails** and **Supplier ribbons**. Ribbons show China, Mexico, Vietnam, Taiwan, and all other suppliers as a 100% stacked bar; the year, selected category, and inflation setting are shared between views.
 - Drag the year slider, or jump to a milestone year; marks animate from their previous positions and respect reduced-motion settings.
@@ -38,7 +39,7 @@ An interactive **Share trails / Supplier ribbons** section appears just before �
 - Turn on inflation adjustment to express dollar amounts in **2025 USD using CPI-U**. The share percentages stay unchanged. The 2025 CPI average uses 11 published months because October is unavailable.
 - Quantity is disabled until specific products with comparable units are selected. Broad commodity groups cannot combine kilograms, item counts, and other units.
 
-The chart renders in the browser using D3/SVG, with embedded data; it does not load saved images or call Python/API services at runtime. It remains usable by opening `draft.html` directly. Policy dates are selected context, not a complete tariff history, product-coverage mapping, or a causal estimate.
+The chart renders in the browser using D3/SVG, with embedded data; it does not load saved images or call Python/API services at runtime. It remains usable by opening `index.html` directly. Policy dates are selected context, not a complete tariff history, product-coverage mapping, or a causal estimate.
 
 Downloaded sources, processed tables, and provenance are in [`data exploration/output/china_trade_explorer/`](data%20exploration/output/china_trade_explorer/README.md). Census monthly imports for consumption are stored separately and are not spliced into the annual Comtrade series. No API key is embedded in the page.
 
@@ -46,6 +47,18 @@ To refresh only this explorer's embedded data after rebuilding its processed sou
 
 ```bash
 python "data exploration/output/china_trade_explorer/scripts/build_website_explorer.py"
+```
+
+## Supplier sourcing dashboard
+
+The linked sourcing dashboard near the end of the story uses all 16 HS2 categories and the full 2006–2025 partner history. Its commodity selector is linked to the final concentration scatterplot, while its year brush is linked to the opening chart, partner ranking, China trade chart, and product explorer.
+
+The compact browser payload keeps suppliers that reached at least 1% of a category's US import market in any year. Smaller suppliers remain included in `Other`; yearly leaders and HHI are calculated from every partner row before compaction.
+
+To rebuild the payload after refreshing `us_imports_by_chapter_partner.csv`:
+
+```bash
+python "data exploration/build_supplier_dashboard_data.py"
 ```
 
 ## Running the data scripts
