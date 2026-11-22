@@ -1,6 +1,24 @@
-# Mapping U.S. Trade: Patterns, Shifts, and Global Events
+# Where US Imports Went
 
-CS 6730 Data Visualization project. It looks at how US goods trade has shifted between partner countries since 2006, and especially at where imports went once they left China after the 2018 tariffs.
+Final project for CS 6730 Data Visualization. This interactive data story examines how US goods imports changed from 2006 to 2025. It focuses on China's declining share, the growth of Mexico, Vietnam, and Taiwan, and the product categories that still depend heavily on one supplier.
+
+## Project links
+
+- **Public website:** https://lexiliiii.github.io/data-vis-project/
+- **Three-minute screencast:** **[ADD FINAL VIDEO URL BEFORE SUBMISSION]**
+- **Source repository:** https://github.com/lexiliiii/data-vis-project
+
+## What is included
+
+| Path | Contents |
+|---|---|
+| `index.html` | Final data story, page layout, styles, embedded story data, and D3 interaction code |
+| `supplier-dashboard-data.js` | Generated data payload used by the linked supplier dashboard |
+| `data exploration/` | Our Python scripts for downloading, cleaning, analyzing, and visualizing the data |
+| `data exploration/output/` | Cleaned data, cached API results, generated figures, and source documentation |
+| `README.md` | Project overview, instructions, data sources, and interface notes |
+
+`index.html`, `supplier-dashboard-data.js`, and the Python files in `data exploration/` are project code. Generated CSV, JSON, and image files are project outputs. D3, Google Fonts, and the Python packages listed below are third-party libraries.
 
 ```
 .
@@ -20,14 +38,28 @@ CS 6730 Data Visualization project. It looks at how US goods trade has shifted b
     └── output/                      # all generated CSVs, PNGs, and cached API pulls
 ```
 
-## Viewing the website
+## Run the final website
 
-`index.html` is self-contained apart from D3 and web fonts, which it loads from CDNs, so you need an internet connection. You can open it straight in a browser, or serve the folder locally:
+Keep `index.html` and `supplier-dashboard-data.js` in the same directory. The page also loads D3 v7 and web fonts from public CDNs, so an internet connection is required for the complete presentation.
+
+Open `index.html` directly, or serve the project directory locally:
 
 ```bash
-python -m http.server 8000
-# then open http://localhost:8000/
+python3 -m http.server 8000
 ```
+
+Then open http://localhost:8000/.
+
+## Interface guide
+
+- **Select a period:** Use the From/To menus, the 2017–2025 preset, or drag across the opening chart. The selected period updates the partner ranking and supplier dashboard.
+- **Explore product categories:** In “Watch America's reliance on China change,” select a product row and move the year slider. Use the view buttons to compare China with 2017 or show all suppliers.
+- **Use the guided examples:** Expand “Try the explorer” or “Try the linked charts” for one-click interaction examples.
+- **Read linked feedback:** Text below the controls reports the active years and identifies the charts that changed.
+- **Inspect supplier concentration:** In the supplier dashboard, choose a commodity to update all three panels. The same commodity is selected in the final concentration comparison.
+- **Open the detailed comparison:** The 16-product concentration chart is collapsed by default. Select “Open comparison” near the end of the story to display it.
+- **View exact values:** Select “View data table” below a chart when a table is available.
+- **Keyboard use:** Interactive bubbles and buttons can be reached with Tab and activated with Enter or Space.
 
 ## China share explorer
 
@@ -36,8 +68,6 @@ An interactive **Share trails / Supplier ribbons** section appears after the par
 - Switch between **Share trails** and **Supplier ribbons**. Ribbons show China, Mexico, Vietnam, Taiwan, and all other suppliers as a 100% stacked bar; the year, selected category, and inflation setting are shared between views.
 - Drag the year slider, or jump to a milestone year; marks animate from their previous positions and respect reduced-motion settings.
 - Select a category to view its share history, change from 2017, dollar amounts, and sourced policy context as of the selected year-end.
-- Turn on inflation adjustment to express dollar amounts in **2025 USD using CPI-U**. The share percentages stay unchanged. The 2025 CPI average uses 11 published months because October is unavailable.
-- Quantity is disabled until specific products with comparable units are selected. Broad commodity groups cannot combine kilograms, item counts, and other units.
 
 The chart renders in the browser using D3/SVG, with embedded data; it does not load saved images or call Python/API services at runtime. It remains usable by opening `index.html` directly. Policy dates are selected context, not a complete tariff history, product-coverage mapping, or a causal estimate.
 
@@ -51,7 +81,7 @@ python "data exploration/output/china_trade_explorer/scripts/build_website_explo
 
 ## Supplier sourcing dashboard
 
-The linked sourcing dashboard near the end of the story uses all 16 HS2 categories and the full 2006–2025 partner history. Its commodity selector is linked to the final concentration scatterplot, while its year brush is linked to the opening chart, partner ranking, China trade chart, and product explorer.
+The linked sourcing dashboard near the end of the story uses all 16 HS2 categories and the full 2006–2025 partner history. Its commodity selector is linked to the final concentration chart. Its year controls are linked to the opening chart and partner ranking, while the product explorer follows the selected end year.
 
 The compact browser payload keeps suppliers that reached at least 1% of a category's US import market in any year. Smaller suppliers remain included in `Other`; yearly leaders and HHI are calculated from every partner row before compaction.
 
