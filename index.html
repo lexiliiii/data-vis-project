@@ -577,6 +577,37 @@ select:focus-visible, input:focus-visible, a:focus-visible { outline: 3px solid 
   .scroll-scene, .scroll-scene.reveal.in-view { opacity: 1; transform: none; }
 }
 </style>
+<style id="breathing-room">
+.breathing-step { padding: 13vh max(7vw,24px); border-block: 1px solid var(--rule); }
+.breathing-inner { max-width: 800px; margin: 0 auto; }
+.breathing-inner h2 { margin: 0 0 48px; font: 750 clamp(2rem,4.5vw,4rem)/1.08 var(--display); letter-spacing: -.03em; }
+.breathing-inner h2 em { color: var(--c-China); font-style: normal; }
+.breathing-inner > p { max-width: 48ch; margin: 32px 0 0; font-size: 1.1rem; color: var(--muted); }
+.breathing-inner > p strong { color: var(--ink); }
+.pause-row { display: grid; grid-template-columns: 50px minmax(0,1fr) 70px; align-items: center; gap: 20px; margin: 24px 0; font: 500 1rem/1.4 var(--display); }
+.pause-track i { display: block; height: 28px; background: var(--c-China); border-radius: 0 2px 2px 0; }
+.pause-row strong { font-size: 1.25rem; color: var(--c-China); }
+.view-option { display: flex; gap: 9px; align-items: center; margin: 0 0 18px; color: var(--muted); font: 500 .875rem/1.4 var(--display); cursor: pointer; min-height: 36px; }
+.view-option input { accent-color: var(--c-China); width: 16px; height: 16px; }
+#trade-explorer .te-policy-context { height: auto; margin-top: 24px; }
+#trade-explorer .te-policy-context summary { font: 600 .875rem/1.5 var(--display); color: var(--c-Mexico); }
+#trade-explorer .te-events { min-height: 0; }
+#trade-explorer .te-history { height: 150px; }
+#trade-explorer .te-row { min-height: 64px; }
+#trade-explorer .te-layout { gap: 40px; }
+.sd-grid { grid-template-columns: minmax(0,1fr) minmax(0,1.35fr); gap: 28px; margin-top: 32px; }
+.sd-panel { padding: clamp(20px,2.5vw,32px); }
+.sd-panel-risk { grid-column: 1 / -1; display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); column-gap: 48px; }
+.sd-panel-risk > * { grid-column: 1; }
+.sd-panel-risk .sd-growers { grid-column: 2; grid-row: 1 / 8; margin-top: 0; }
+.sd-subtitle { font-size: .8125rem; line-height: 1.5; }
+#risk-step.optional-risk { width: min(1440px,calc(100% - 48px)); margin: 0 auto; padding: 6vh 0 10vh; position: static; transform: none; }
+#risk-more { margin: 0; border-block: 1px solid var(--rule); padding: 22px 0; }
+#risk-more > summary { color: var(--c-Mexico); font: 600 clamp(1rem,1.8vw,1.3rem)/1.5 var(--display); width: auto; }
+#risk-more > summary span { display: block; font: 400 .875rem/1.5 var(--display); color: var(--muted); margin-top: 6px; }
+#risk-more .story-pair { position: static; margin-top: 40px; }
+@media(max-width:760px) { .sd-grid { grid-template-columns: 1fr; } .sd-panel-risk { display: block; } .sd-panel-risk .sd-growers { margin-top: 24px; } #trade-explorer .te-layout { gap: 24px; } .pause-row { gap: 12px; grid-template-columns: 42px minmax(0,1fr) 64px; } }
+</style>
 </head>
 <body>
 <div class="wrap">
@@ -624,16 +655,25 @@ select:focus-visible, input:focus-visible, a:focus-visible { outline: 3px solid 
 </article>
     <div class="story-visual">
       <figure>
-        <p class="linked-feedback">Linked years: <strong data-linked-years>2006–2025</strong> · The shaded range and endpoint labels follow your selection. <a href="#overview-controls">Change years in the overview</a>.</p><div class="chart" id="c-rank"></div>
-        <figcaption>Rank of each partner by total US goods trade. “Ranks 11+” means the partner is outside the top ten; brushed years are lightly shaded and become the labeled endpoints.</figcaption>
+        <p class="linked-feedback">Linked years: <strong data-linked-years>2006–2025</strong> · The shaded range and endpoint labels follow your selection. <a href="#overview-controls">Change years in the overview</a>.</p><label class="view-option"><input type="checkbox" id="rank-expanded"> Show the broader partner ranking</label><div class="chart" id="c-rank"></div>
+        <figcaption>Rank by total US goods trade. Five highlighted partners shown by default. “Ranks 11+” means the partner is outside the top ten; brushed years are lightly shaded and become the labeled endpoints.</figcaption>
         <details><summary>View data table</summary><div class="tbl" id="t-rank"></div></details>
       </figure>
     </div>
   </div></section>
 
-  <aside class="statement" aria-label="Key takeaway">
-    <p class="reveal">Dependency did not disappear. It <em>changed addresses.</em></p>
-  </aside>
+  <section class="breathing-step feature-step" aria-labelledby="h-share-pause">
+    <div class="breathing-inner">
+      <span class="kicker">The shift, in one comparison</span>
+      <h2 id="h-share-pause">China’s share fell<br><em>by more than half.</em></h2>
+      <figure class="share-pause">
+        <div class="pause-row"><span>2017</span><div class="pause-track"><i style="width:87.44%;opacity:.45"></i></div><strong>21.9%</strong></div>
+        <div class="pause-row"><span>2025</span><div class="pause-track"><i style="width:37.4%"></i></div><strong>9.4%</strong></div>
+        <figcaption>China’s share of all US goods imports. Both bars start at zero and use the same scale.</figcaption>
+      </figure>
+      <p>That is the national picture. <strong>The shift looks different for each product.</strong></p>
+    </div>
+  </section>
 
 <!-- BEGIN TRADE EXPLORER SECTION -->
   <!-- China trade explorer: additive section; existing story charts are unchanged. -->
@@ -674,12 +714,11 @@ select:focus-visible, input:focus-visible, a:focus-visible { outline: 3px solid 
             <div class="te-small te-change"></div>
             <svg class="te-history" role="img" aria-label="China's share of imports in the selected category, 2006–2025"></svg>
           </div>
-          <div class="te-policy-context">
-            <h3>Policy context</h3>
+          <details class="te-policy-context"><summary>Explore policy context</summary>
             <div class="te-small te-policy-date"></div>
             <div class="te-events"></div>
             <p class="te-scope">Selected milestones, not a complete tariff history. Product coverage is not mapped; timing alone does not establish an effect.</p>
-          </div>
+          </details>
         </aside>
       </div>
       <p class="te-source" id="te-source-note">8 selected HS2 groups · Annual observations from the project's UN Comtrade extract. Dollar amounts are nominal.</p>
@@ -705,7 +744,7 @@ select:focus-visible, input:focus-visible, a:focus-visible { outline: 3px solid 
 </article>
     <div class="story-visual">
       <figure>
-        <div class="key"><span><i style="background:var(--c-China)"></i>Imports from China</span><span><i style="background:var(--ink)"></i>Exports to China</span></div>
+        <label class="view-option"><input id="china-expanded" type="checkbox"> Add exports and historical events</label><div class="key"><span><i style="background:var(--c-China)"></i>Imports from China</span><span id="china-export-key" hidden><i style="background:var(--ink)"></i>Exports to China</span></div>
         <div class="chart" id="c-cn"></div>
         <figcaption>US goods trade with China, billions of current US dollars, 2006–2025.</figcaption>
         <details><summary>View data table</summary><div class="tbl" id="t-cn"></div></details>
@@ -759,7 +798,7 @@ select:focus-visible, input:focus-visible, a:focus-visible { outline: 3px solid 
     </div>
   </section>
 
-  <section class="step scrolly" id="risk-step" aria-labelledby="h-risk"><div class="story-pair">
+  <section class="feature-step optional-risk" id="risk-step" aria-labelledby="risk-summary"><details id="risk-more"><summary id="risk-summary">Go deeper · Compare all product groups<span>Open the cross-category concentration chart</span></summary><div class="story-pair">
     <article class="story-copy reveal">
       <div class="rail"><b>06 · What remains</b><span>Cross-category concentration</span></div>
       <h2 id="h-risk">Where does dependence remain?</h2>
@@ -777,7 +816,7 @@ select:focus-visible, input:focus-visible, a:focus-visible { outline: 3px solid 
       </div>
       <details><summary>View data table</summary><div class="tbl" id="t-risk"></div></details>
     </div>
-  </div></section>
+  </div></details></section>
 
   <section class="closing" aria-labelledby="h-closing">
     <div class="closing-inner reveal">
@@ -931,7 +970,7 @@ function drawRank() {
     .call(g => g.select(".domain").remove());
   svg.append("line").attr("x1", m.l).attr("x2", W - m.r).attr("y1", y(11)).attr("y2", y(11)).attr("stroke", "var(--rule)").attr("stroke-dasharray", "3 3");
 
-  const names = Object.keys(DATA.ranks).sort((a, b) => STORY.includes(a) - STORY.includes(b));
+  const names = Object.keys(DATA.ranks).filter(name => document.getElementById("rank-expanded").checked || STORY.includes(name)).sort((a, b) => STORY.includes(a) - STORY.includes(b));
   const line = d3.line().x((d, i) => x(years[i])).y(d => y(clamp(d))).curve(d3.curveMonotoneX);
   svg.append("g").selectAll("path").data(names).join("path")
     .attr("fill", "none").attr("stroke", col).attr("stroke-width", p => STORY.includes(p) ? 3 : 1.5)
@@ -958,9 +997,11 @@ function drawRank() {
 
 /* US-China trade: static area and lines */
 function drawChina() {
+  const expanded = document.getElementById("china-expanded").checked;
+  document.getElementById("china-export-key").hidden = !expanded;
   const W = widthOf("c-cn"), narrow = W < 560;
   const H = narrow ? 310 : 450, m = { t: 58, r: narrow ? 64 : 92, b: 36, l: 50 };
-  const svg = svgFor("c-cn", W, H).attr("aria-label", "Line chart of US imports from and exports to China, 2006 to 2025.");
+  const svg = svgFor("c-cn", W, H).attr("aria-label", expanded ? "US imports from and exports to China, 2006 to 2025." : "US imports from China, 2006 to 2025.");
   const x = d3.scaleLinear([2006, 2025], [m.l, W - m.r]);
   const y = d3.scaleLinear([0, 600], [H - m.b, m.t]);
   const series = years.map((year, i) => ({ year, imports: DATA.china.imports[i], exports: DATA.china.exports[i] }));
@@ -977,10 +1018,10 @@ function drawChina() {
   const exportLine = d3.line().x(d => x(d.year)).y(d => y(d.exports)).curve(d3.curveMonotoneX);
   svg.append("path").datum(series).attr("d", area).attr("fill", "var(--c-China)").attr("opacity", .14);
   svg.append("path").datum(series).attr("d", importLine).attr("fill", "none").attr("stroke", "var(--c-China)").attr("stroke-width", 3.5);
-  svg.append("path").datum(series).attr("d", exportLine).attr("fill", "none").attr("stroke", "var(--ink)").attr("stroke-width", 2.25);
+  if (expanded) svg.append("path").datum(series).attr("d", exportLine).attr("fill", "none").attr("stroke", "var(--ink)").attr("stroke-width", 2.25);
   svg.append("g").selectAll("circle.import").data(series.filter(d => d.year === 2006 || d.year === 2025)).join("circle")
     .attr("cx", d => x(d.year)).attr("cy", d => y(d.imports)).attr("r", 4.5).attr("fill", "var(--c-China)");
-  svg.append("g").selectAll("circle.export").data(series.filter(d => d.year === 2006 || d.year === 2025)).join("circle")
+  if (expanded) svg.append("g").selectAll("circle.export").data(series.filter(d => d.year === 2006 || d.year === 2025)).join("circle")
     .attr("cx", d => x(d.year)).attr("cy", d => y(d.exports)).attr("r", 3.5).attr("fill", "var(--ink)");
 
   const events = [
@@ -989,7 +1030,7 @@ function drawChina() {
     { t: 2020.2, label: "COVID-19", row: 1 },
     { t: 2025, label: "2025 tariffs", row: 0 },
   ];
-  const ev = svg.append("g").attr("class", "event").selectAll("g").data(events).join("g");
+  const ev = svg.append("g").attr("class", "event").selectAll("g").data(expanded ? events : []).join("g");
   ev.attr("opacity", 1);
   ev.append("line").attr("x1", d => x(d.t)).attr("x2", d => x(d.t)).attr("y1", d => 24 + d.row * 15).attr("y2", H - m.b);
   ev.append("text").attr("x", d => x(d.t) + (d.t > 2024 ? -4 : 4)).attr("y", d => 31 + d.row * 15)
@@ -999,7 +1040,7 @@ function drawChina() {
   svg.append("circle").attr("cx", x(peak.year)).attr("cy", y(peak.imports)).attr("r", 5).attr("fill", "var(--sheet)").attr("stroke", "var(--c-China)").attr("stroke-width", 3);
   svg.append("text").attr("x", x(peak.year)).attr("y", y(peak.imports) - 12).attr("text-anchor", "middle").style("fill", "var(--ink)").style("font-weight", 700).text("2022 peak · $576B");
   svg.append("text").attr("class", "lab").attr("x", x(2025) + 8).attr("y", y(last.imports) + 4).style("fill", "var(--c-China)").text(narrow ? "Imports" : "Imports · $328B");
-  svg.append("text").attr("class", "lab").attr("x", x(2025) + 8).attr("y", y(last.exports) + 4).style("fill", "var(--ink)").text(narrow ? "Exports" : "Exports · $106B");
+  if (expanded) svg.append("text").attr("class", "lab").attr("x", x(2025) + 8).attr("y", y(last.exports) + 4).style("fill", "var(--ink)").text(narrow ? "Exports" : "Exports · $106B");
 }
 
 /* sourcing risk scatter + panel */
@@ -1086,6 +1127,9 @@ document.querySelectorAll('[data-range-picker]').forEach(picker => {
   start.addEventListener('change', change); end.addEventListener('change', change);
   picker.querySelector('[data-range-preset]').addEventListener('click', () => setLinkedRange([2017, 2025], { redrawHero: true }));
 });
+document.getElementById('rank-expanded').addEventListener('change', drawRank);
+document.getElementById('china-expanded').addEventListener('change', drawChina);
+document.getElementById('risk-more').addEventListener('toggle', () => { if (document.getElementById('risk-more').open) drawRisk(); });
 tables();
 drawAll();
 document.getElementById("reset-brush").addEventListener("click", () => setLinkedRange([2006, 2025], { redrawHero: true }));
@@ -1456,6 +1500,15 @@ window.addEventListener("resize", () => { clearTimeout(rt); rt = setTimeout(draw
 })();
 </script>
 <script>
+// Deep links retain access to the optional comparison.
+function openRiskFromHash() {
+  if (['#risk-step', '#c-risk', '#panel'].includes(location.hash)) {
+    document.getElementById('risk-more').open = true;
+    drawRisk();
+  }
+}
+window.addEventListener('hashchange', openRiskFromHash);
+openRiskFromHash();
 // Guide actions operate the existing controls; chart state stays in one place.
 document.querySelectorAll('[data-guide-action]').forEach(button => {
   button.addEventListener('click', () => {
@@ -1463,6 +1516,8 @@ document.querySelectorAll('[data-guide-action]').forEach(button => {
     let message = '';
     const reveal = selector => {
       const target = document.querySelector(selector);
+      const disclosure = target.closest('details');
+      if (disclosure) { disclosure.open = true; if (disclosure.id === 'risk-more') drawRisk(); }
       target.scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'center' });
     };
     if (action === 'year') { document.querySelector('[data-te-year="2018"]').click(); message = 'Showing 2018. Try another year using the handle or milestone buttons.'; }
