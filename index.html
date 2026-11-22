@@ -472,6 +472,76 @@ footer { width: min(1120px, calc(100% - 44px)); box-sizing: border-box; margin: 
 }
 </style>
 
+
+<style id="interaction-discovery">
+/* Interaction affordances share the story's original country palette. */
+.play-guide { padding: 14px 16px; margin: 0 0 16px; border: 1px solid var(--c-Mexico); border-left: 2px solid var(--c-Mexico); background: color-mix(in srgb, var(--c-Mexico) 7%, var(--sheet)); color: var(--ink); font: 500 .875rem/1.5 var(--display); }
+.play-guide strong { display: block; font-size: 1rem; margin-bottom: 4px; }
+.play-guide p { margin: 4px 0 0; }
+.play-guide a, .linked-feedback a { color: var(--c-Mexico); font-weight: 700; text-underline-offset: 3px; }
+.action-icon { display: inline-grid; place-items: center; width: 32px; height: 32px; margin-right: 8px; border-radius: 7px; background: color-mix(in srgb, var(--c-China) 12%, var(--sheet)); color: var(--ink); font-size: 22px; vertical-align: middle; }
+.range-picker { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin: 12px 0; font: 650 .875rem/1.4 var(--display); }
+.range-picker label { display: flex; align-items: center; gap: 8px; }
+.range-picker select, .range-picker button, #supplier-dashboard #sd-commodity { min-height: 44px; border: 1px solid var(--rule); border-radius: 6px; padding: 8px 12px; background: var(--sheet); color: var(--ink); font: 650 .875rem/1.3 var(--display); cursor: pointer; }
+.range-picker button { background: color-mix(in srgb, var(--c-China) 12%, var(--sheet)); border-color: var(--c-China); }
+.linked-feedback { margin: 10px 0 14px; padding: 10px 12px; border-left: 1px solid var(--c-Mexico); background: color-mix(in srgb, var(--c-Mexico) 7%, var(--sheet)); color: var(--ink); font: 500 .875rem/1.5 var(--display); }
+.interaction-guide { font-size: .875rem; }
+.brush .selection { fill: var(--c-China); fill-opacity: .08; stroke: var(--c-China); stroke-opacity: .5; stroke-width: 1; cursor: grab; }
+.brush .handle { fill: var(--c-China); fill-opacity: .65; stroke: none; rx: 3; }
+.brush .handle:hover { fill-opacity: .8; }
+.brush .handle--w, .brush .handle--e { cursor: ew-resize; }
+#trade-explorer .te-measures { width: 100%; box-sizing: border-box; background: color-mix(in srgb, var(--c-Mexico) 7%, var(--sheet)); border: 1px solid var(--c-Mexico); gap: 8px; padding: 6px; }
+#trade-explorer .te-measures button { flex: 1; min-height: 52px; border: 1px solid var(--c-Mexico); background: var(--sheet); font-size: .9375rem; font-weight: 700; }
+#trade-explorer .te-measures button[aria-pressed=true] { background: var(--c-Mexico); color: var(--sheet); }
+#trade-explorer .te-row { border: 1px solid var(--rule); margin-bottom: 6px; min-height: 58px; background: var(--sheet); cursor: pointer; }
+#trade-explorer .te-row:hover { border-color: var(--c-Mexico); background: color-mix(in srgb, var(--c-Mexico) 7%, var(--sheet)); }
+#trade-explorer .te-row[aria-pressed=true] { border-color: var(--c-Mexico); background: color-mix(in srgb, var(--c-Mexico) 7%, var(--sheet)); box-shadow: inset 2px 0 var(--c-Mexico); }
+#trade-explorer .te-row-label::after { content: 'Select'; display: block; margin-top: 3px; color: var(--c-Mexico); font-size: .75rem; font-weight: 700; }
+#trade-explorer .te-row[aria-pressed=true] .te-row-label::after { content: '✓ Selected'; }
+#trade-explorer .te-timeline { padding: 18px; margin: 0 0 24px; border: 1px solid var(--rule); border-radius: 8px; background: color-mix(in srgb, var(--c-Mexico) 7%, var(--sheet)); }
+#trade-explorer .te-time-label label { font-size: 1rem; font-weight: 750; }
+#trade-explorer input[type=range] { appearance: none; -webkit-appearance: none; height: 48px; margin: 8px 0; background: transparent; touch-action: pan-y; }
+#trade-explorer input[type=range]::-webkit-slider-runnable-track { height: 6px; border-radius: 3px; background: var(--c-Mexico); }
+#trade-explorer input[type=range]::-moz-range-track { height: 6px; border-radius: 3px; background: var(--c-Mexico); }
+#trade-explorer input[type=range]::-webkit-slider-thumb { appearance: none; -webkit-appearance: none; width: 36px; height: 24px; margin-top: -9px; border: 1px solid var(--c-China); border-radius: 7px; background: var(--c-China); box-shadow: 0 3px 0 transparent; cursor: ew-resize; }
+#trade-explorer input[type=range]::-moz-range-thumb { width: 34px; height: 22px; border: 1px solid var(--c-China); border-radius: 7px; background: var(--c-China); cursor: ew-resize; }
+#trade-explorer .te-jumps button { min-height: 44px; border: 1px solid var(--c-Mexico); border-radius: 5px; background: var(--sheet); padding: 8px 12px; font-size: .875rem; font-weight: 650; }
+#trade-explorer .te-jumps button[aria-pressed=true] { background: color-mix(in srgb, var(--c-China) 12%, var(--sheet)); color: var(--ink); }
+.dot:hover circle, .dot:focus-visible circle { stroke: var(--ink); stroke-width: 3.5; }
+select:focus-visible, input:focus-visible, a:focus-visible { outline: 3px solid var(--c-Mexico); outline-offset: 4px; }
+@media(max-width:560px) { #trade-explorer .te-measures { flex-direction: column; } .range-picker label { flex: 1; } .range-picker select { flex: 1; } }
+
+.play-guide { padding: 0; border: 1px solid var(--rule); border-radius: 6px; background: var(--sheet); }
+.play-guide summary { display: flex; align-items: center; gap: 10px; width: auto; min-height: 44px; padding: 4px 14px; box-sizing: border-box; font: 600 .875rem/1.4 var(--display); color: var(--c-Mexico); cursor: pointer; list-style: none; }
+.play-guide summary::-webkit-details-marker { display: none; }
+.play-guide summary::after { content: '+'; margin-left: auto; font-size: 20px; font-weight: 400; }
+.play-guide[open] summary::after { content: '−'; }
+.play-guide .guide-steps { list-style: none; counter-reset: steps; display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 16px; margin: 0; padding: 8px 14px 16px; }
+.guide-steps li { counter-increment: steps; display: flex; flex-direction: column; align-items: flex-start; min-width: 0; padding: 12px; border-top: 1px solid var(--rule); }
+.guide-steps li::before { content: '0' counter(steps); color: var(--c-China); font: 500 .75rem/1 var(--display); margin-bottom: 10px; }
+.play-guide .guide-steps strong { font: 600 .875rem/1.4 var(--display); margin: 0 0 6px; }
+.play-guide .guide-steps p { font: 400 .8125rem/1.5 var(--display); color: var(--muted); margin: 0 0 12px; }
+.play-guide .guide-steps button { margin-top: auto; min-height: 38px; border: 1px solid var(--c-Mexico); border-radius: 4px; padding: 7px 10px; background: color-mix(in srgb, var(--c-Mexico) 6%, var(--sheet)); color: var(--c-Mexico); font: 500 .8125rem/1.3 var(--display); cursor: pointer; }
+.play-guide .guide-steps button:hover { background: color-mix(in srgb, var(--c-Mexico) 14%, var(--sheet)); }
+.guide-result:empty { display: none; }
+.guide-result, #trade-explorer .guide-result { display: block; padding: 0 26px 14px; color: var(--c-Mexico); font: 500 .8125rem/1.5 var(--display); }
+#trade-explorer .te-timeline { padding: 14px 16px; }
+#trade-explorer .te-time-label { align-items: center; }
+#trade-explorer .te-time-label label { font-size: .875rem; font-weight: 600; display: flex; align-items: center; }
+#trade-explorer .te-time-label output { font-size: 1.4rem; }
+#trade-explorer .te-ticks { padding-inline: 18px; }
+#trade-explorer .te-measures button { min-height: 44px; font-size: .875rem; font-weight: 600; }
+#trade-explorer .te-jumps button { font-weight: 500; border-color: var(--rule); }
+#trade-explorer .te-row { border-color: transparent; border-bottom-color: var(--rule); }
+.range-picker select, .range-picker button, #supplier-dashboard #sd-commodity { font-weight: 500; }
+.sd-controls { align-items: start; }
+.sd-controls .range-picker { margin-top: 0; }
+.sd-field label, .sd-range-head { min-height: 20px; display: flex; align-items: center; margin-bottom: 8px; }
+#trade-explorer .te-small#te-year-help { margin: 8px 0 0; }
+.linked-band { fill: var(--c-China); opacity: .08; }
+@media(max-width:760px) { .play-guide .guide-steps { grid-template-columns: 1fr; gap: 0; } .guide-steps li { display: grid; grid-template-columns: 24px 1fr; column-gap: 10px; padding: 12px 0; } .guide-steps li::before { grid-row: 1 / 4; margin-top: 4px; } .guide-steps li button { justify-self: start; } }
+</style>
+
 </head>
 <body>
 <div class="wrap">
@@ -490,7 +560,7 @@ footer { width: min(1120px, calc(100% - 44px)); box-sizing: border-box; margin: 
     <div class="chapter-intro reveal">
       <h2 id="h-overview"><span class="kicker">01 · The overview</span>Where did China's share <em>go?</em></h2>
       <div class="overview-copy">
-        <p>The headline is a fall in China's share. The larger story is a rewiring of the supplier network. Brush a period below to carry the same years through the rest of the story.</p>
+        <p>The headline is a fall in China's share. The larger story is a rewiring of the supplier network. Choose a period below to compare the linked ranking and supplier dashboard, and set the product explorer’s year.</p>
         <div class="overview-stats" aria-label="Change in share of US imports from 2017 to 2025">
           <span><b>−12.5 pp</b><small>China · since 2017</small></span>
           <span><b>+3.7 pp</b><small>Vietnam · since 2017</small></span>
@@ -500,11 +570,11 @@ footer { width: min(1120px, calc(100% - 44px)); box-sizing: border-box; margin: 
     </div>
     <figure class="hero-fig">
       <div class="key" id="key1"></div>
-      <div class="interaction-guide">
-        <span><strong>Brush &amp; link:</strong> drag across the chart to select a year range. The ranking, China trade, and product explorer update together.</span>
-        <span class="brush-controls"><output id="brush-status" aria-live="polite">All years · 2006–2025</output><button class="reset-brush" id="reset-brush" type="button" disabled>Reset</button></span>
+      <div class="interaction-guide" id="overview-controls">
+        <span><strong><span class="action-icon" aria-hidden="true">↔</span>Try it: choose two years or drag across the plot.</strong> Drag either coral edge to adjust your selection.</span>
+        <span class="brush-controls"><output id="brush-status" aria-live="polite">All years · 2006–2025</output><button class="reset-brush" id="reset-brush" type="button" disabled>Reset years</button></span>
       </div>
-      <div class="chart" id="c-share"></div>
+      <div class="range-picker" data-range-picker><label>From <select data-range-start aria-label="Overview: start year"></select></label><label>To <select data-range-end aria-label="Overview: end year"></select></label><button type="button" data-range-preset>Try 2017–2025</button></div><p class="linked-feedback">Linked years: <strong data-linked-years>2006–2025</strong> · Updates <a href="#rank-step">partner ranking</a> and <a href="#supplier-dashboard">supplier dashboard</a>; <a href="#trade-explorer">product explorer</a> shows the end year.</p><div class="chart" id="c-share"></div>
       <figcaption>Share of total US goods imports by partner, 2006–2025. Drag horizontally inside the plot to brush a time window; the dashed line marks the first Section 301 tariffs on China (July 2018).</figcaption>
       <details><summary>View data table</summary><div class="tbl" id="t-share"></div></details>
     </figure>
@@ -518,8 +588,8 @@ footer { width: min(1120px, calc(100% - 44px)); box-sizing: border-box; margin: 
     </article>
     <div class="story-visual">
       <figure>
-        <div class="chart" id="c-rank"></div>
-        <figcaption>Rank of each partner by total US goods trade. “Ranks 11+” means the partner is outside the top ten; brushed years are highlighted in gold and become the labeled endpoints.</figcaption>
+        <p class="linked-feedback">Linked years: <strong data-linked-years>2006–2025</strong> · The shaded range and endpoint labels follow your selection. <a href="#overview-controls">Change years in the overview</a>.</p><div class="chart" id="c-rank"></div>
+        <figcaption>Rank of each partner by total US goods trade. “Ranks 11+” means the partner is outside the top ten; brushed years are lightly shaded and become the labeled endpoints.</figcaption>
         <details><summary>View data table</summary><div class="tbl" id="t-rank"></div></details>
       </figure>
     </div>
@@ -539,9 +609,17 @@ footer { width: min(1120px, calc(100% - 44px)); box-sizing: border-box; margin: 
         <p>Drag through the years and select a product group. Compare China's share with its 2017 level, alongside the trade policies and events of the time.</p>
       </div>
       <div class="te-interface">
+      <details class="play-guide"><summary>Try the explorer · 3 quick steps</summary><ol class="guide-steps"><li><strong>Move through time</strong><p>Drag the coral handle or choose a milestone. Watch the shares and policy context change.</p><button type="button" data-guide-action="year">Try the 2018 milestone</button></li><li><strong>Switch the comparison</strong><p>Choose All suppliers to compare the colored segments. Switch back to compare China with 2017.</p><button type="button" data-guide-action="view">Show all suppliers</button></li><li><strong>Select a product</strong><p>Click a product row. Its share history and dollar amounts appear beside the chart.</p><button type="button" data-guide-action="product">Select electronics</button></li></ol><output class="guide-result" aria-live="polite"></output></details>
+      <div class="te-timeline">
+        <div class="te-time-label"><label for="te-year"><span class="action-icon" aria-hidden="true">↔</span>Drag the coral handle to change year</label><output id="te-year-output" for="te-year">2025</output></div>
+        <p id="te-year-help" class="te-small">Drag, tap the bar, or use arrow keys to update this section.</p>
+        <input id="te-year" type="range" min="2006" max="2025" step="1" value="2025" aria-describedby="te-year-help">
+        <div class="te-ticks" aria-hidden="true"><span>2006</span><span>2010</span><span>2015</span><span>2020</span><span>2025</span></div>
+        <div class="te-jumps" role="group" aria-label="Jump to a milestone year"><button type="button" data-te-year="2017">2017 baseline</button><button type="button" data-te-year="2018">2018 tariffs</button><button type="button" data-te-year="2020">2020 pandemic</button><button type="button" data-te-year="2025">2025 tariffs</button></div>
+      </div>
       <div class="te-view-switch te-measures" role="group" aria-label="Chart view">
-        <button type="button" data-te-view="trails" aria-pressed="true">Share trails</button>
-        <button type="button" data-te-view="ribbons" aria-pressed="false">Supplier ribbons</button>
+        <button type="button" data-te-view="trails" aria-pressed="true">China vs. 2017 · Share trails</button>
+        <button type="button" data-te-view="ribbons" aria-pressed="false">All suppliers · Supplier ribbons</button>
       </div>
       <div class="te-layout">
         <div class="te-left">
@@ -567,12 +645,6 @@ footer { width: min(1120px, calc(100% - 44px)); box-sizing: border-box; margin: 
             <p class="te-scope">Selected milestones, not a complete tariff history. Product coverage is not mapped; timing alone does not establish an effect.</p>
           </div>
         </aside>
-      </div>
-      <div class="te-timeline">
-        <div class="te-time-label"><label for="te-year">Drag through time</label><output id="te-year-output" for="te-year">2025</output></div>
-        <input id="te-year" type="range" min="2006" max="2025" step="1" value="2025" aria-describedby="te-source-note">
-        <div class="te-ticks" aria-hidden="true"><span>2006</span><span>2010</span><span>2015</span><span>2020</span><span>2025</span></div>
-        <div class="te-jumps" role="group" aria-label="Jump to a milestone year"><button type="button" data-te-year="2017">2017 baseline</button><button type="button" data-te-year="2018">2018 tariffs</button><button type="button" data-te-year="2020">2020 pandemic</button><button type="button" data-te-year="2025">2025 tariffs</button></div>
       </div>
       <p class="te-source" id="te-source-note">8 selected HS2 groups · Annual observations from the project's UN Comtrade extract. Dollar amounts are nominal.</p>
       <details><summary>View selected-year data</summary><div class="tbl te-table"></div></details>
@@ -611,14 +683,15 @@ footer { width: min(1120px, calc(100% - 44px)); box-sizing: border-box; margin: 
       <p>Choose a commodity, then brush a time period. The three views update together to show the leading suppliers, how their shares changed, and which established alternatives grew fastest.</p>
     </div>
     <div class="sd-shell">
+      <details class="play-guide"><summary>Try the linked charts · 3 quick steps</summary><ol class="guide-steps"><li><strong>Choose a commodity</strong><p>Use the selector to update all three panels and the selected bubble below.</p><button type="button" data-guide-action="commodity">Try electronics</button></li><li><strong>Set a time range</strong><p>Drag either timeline edge or use From / To. The overview and ranking follow these years too.</p><button type="button" data-guide-action="range">Compare 2017–2025</button></li><li><strong>See the linked selection</strong><p>Open the concentration chart to inspect the same commodity’s 2017–2025 comparison.</p><button type="button" data-guide-action="risk">Show selected bubble</button></li></ol><output class="guide-result" aria-live="polite"></output></details>
       <div class="sd-controls">
         <div class="sd-field">
-          <label for="sd-commodity">Commodity group</label>
+          <label for="sd-commodity">Choose a commodity group</label>
           <select id="sd-commodity"></select>
         </div>
         <div>
-          <div class="sd-range-head"><span>Brush years</span><output id="sd-range-status">2006–2025</output></div>
-          <svg class="sd-timeline" role="img" aria-label="Brushable timeline from 2006 to 2025"></svg>
+          <div class="sd-range-head"><span>Drag the coral edges to choose years</span><output id="sd-range-status">2006–2025</output></div>
+          <div class="range-picker" data-range-picker><label>From <select data-range-start aria-label="Supplier dashboard: start year"></select></label><label>To <select data-range-end aria-label="Supplier dashboard: end year"></select></label><button type="button" data-range-preset>Try 2017–2025</button></div><svg class="sd-timeline" role="img" aria-label="Brushable timeline from 2006 to 2025"></svg>
         </div>
       </div>
       <div class="sd-grid">
@@ -656,6 +729,7 @@ footer { width: min(1120px, calc(100% - 44px)); box-sizing: border-box; margin: 
       <p>Each dot is a product group. Further right means the top supplier holds a larger share of US imports. Higher means that share grew between 2017 and 2025. Groups in the top right are the most exposed. Select a dot to see who supplies it; the chart now labels both axes directly.</p>
     </article>
     <div class="story-visual">
+      <details class="play-guide"><summary>Explore the bubbles · 3 quick steps</summary><ol class="guide-steps"><li><strong>Select a bubble</strong><p>Click a bubble, or Tab to one and press Enter. Its supplier details update beside it.</p><button type="button" data-guide-action="bubble">Select electronics</button></li><li><strong>Read the comparison</strong><p>Compare the selected product’s supplier, share, and HHI across the two years.</p><button type="button" data-guide-action="panel">Show supplier details</button></li><li><strong>Explore its suppliers</strong><p>The supplier dashboard uses the same commodity. Return there to explore other year ranges.</p><button type="button" data-guide-action="dashboard">Show linked dashboard</button></li></ol><output class="guide-result" aria-live="polite"></output></details>
       <div class="risk">
         <figure>
           <div class="chart" id="c-risk"></div>
@@ -687,6 +761,11 @@ const LINK = { range: [2006, 2025] };
 
 function setLinkedRange(range, { redrawHero = false } = {}) {
   LINK.range = range;
+  document.querySelectorAll('[data-linked-years]').forEach(el => el.textContent = `${range[0]}–${range[1]}`);
+  document.querySelectorAll('[data-range-picker]').forEach(el => {
+    el.querySelector('[data-range-start]').value = range[0];
+    el.querySelector('[data-range-end]').value = range[1];
+  });
   const allYears = range[0] === 2006 && range[1] === 2025;
   document.getElementById("brush-status").textContent = allYears ? "All years · 2006–2025" : `Selected · ${range[0]}–${range[1]}`;
   document.getElementById("reset-brush").disabled = allYears;
@@ -764,7 +843,7 @@ function drawShare() {
   svg.append("text").attr("x", x(2017)).attr("y", y(DATA.share.China[pk]) - 12).attr("text-anchor", "middle")
     .style("fill", "var(--ink)").style("font-weight", 600).text(`2017 peak ${fmt1(DATA.share.China[pk])}%`);
 
-  const brush = d3.brushX()
+  const brush = d3.brushX().handleSize(10)
     .extent([[m.l, m.t], [W - m.r, H - m.b]])
     .on("end", ({ selection, sourceEvent }) => {
       if (!sourceEvent) return;
@@ -944,6 +1023,22 @@ function tables() {
 }
 
 function drawAll() { drawShare(); drawRank(); drawChina(); select(selected); }
+document.querySelectorAll('[data-range-picker]').forEach(picker => {
+  const start = picker.querySelector('[data-range-start]');
+  const end = picker.querySelector('[data-range-end]');
+  [start, end].forEach(input => input.innerHTML = years.map(year => `<option value="${year}">${year}</option>`).join(''));
+  start.value = LINK.range[0]; end.value = LINK.range[1];
+  const change = event => {
+    let a = +start.value, b = +end.value;
+    if (a >= b) {
+      if (event.target === start) { a = Math.min(a, 2024); b = a + 1; }
+      else { b = Math.max(b, 2007); a = b - 1; }
+    }
+    setLinkedRange([a, b], { redrawHero: true });
+  };
+  start.addEventListener('change', change); end.addEventListener('change', change);
+  picker.querySelector('[data-range-preset]').addEventListener('click', () => setLinkedRange([2017, 2025], { redrawHero: true }));
+});
 tables();
 drawAll();
 document.getElementById("reset-brush").addEventListener("click", () => setLinkedRange([2006, 2025], { redrawHero: true }));
@@ -1005,6 +1100,7 @@ window.addEventListener("resize", () => { clearTimeout(rt); rt = setTimeout(draw
     const factor = 1;
     const basis = 'Nominal USD';
     yearInput.value = state.year;
+    root.querySelectorAll('[data-te-year]').forEach(button => button.setAttribute('aria-pressed', String(+button.dataset.teYear === state.year)));
     q('#te-year-output').textContent = state.year;
     rows.attr('aria-pressed', d => String(d.hs === state.hs))
       .attr('aria-label', d => ribbons
@@ -1176,10 +1272,10 @@ window.addEventListener("resize", () => { clearTimeout(rt); rt = setTimeout(draw
     const rangeStart = x(state.start), rangeEnd = x(state.end);
     const focusedRange = state.start !== dashYears[0] || state.end !== dashYears.at(-1);
     svg.append('rect').attr('x', rangeStart).attr('y', margin.top).attr('width', Math.max(2, rangeEnd - rangeStart))
-      .attr('height', height - margin.top - margin.bottom).attr('fill', 'var(--c-China)').attr('opacity', focusedRange ? .18 : 0).attr('pointer-events', 'none');
+      .attr('height', height - margin.top - margin.bottom).attr('fill', 'var(--c-China)').attr('opacity', focusedRange ? .08 : 0).attr('pointer-events', 'none');
     svg.append('g').selectAll('line').data([rangeStart, rangeEnd]).join('line')
       .attr('x1', d => d).attr('x2', d => d).attr('y1', margin.top).attr('y2', height - margin.bottom)
-      .attr('stroke', 'var(--c-China)').attr('stroke-width', 1.5).attr('stroke-opacity', focusedRange ? .82 : 0).attr('pointer-events', 'none');
+      .attr('stroke', 'var(--c-China)').attr('stroke-width', 1).attr('stroke-opacity', focusedRange ? .5 : 0).attr('pointer-events', 'none');
     const xAxis = svg.append('g').attr('class', 'axis').attr('transform', `translate(0,${height - margin.bottom + 8})`)
       .call(d3.axisBottom(x).tickValues([2006, 2010, 2015, 2020, 2025]).tickFormat(d3.format('d')).tickSize(0));
     xAxis.call(g => g.select('.domain').remove());
@@ -1222,7 +1318,7 @@ window.addEventListener("resize", () => { clearTimeout(rt); rt = setTimeout(draw
     svg.append('g').attr('class', 'axis').attr('transform', 'translate(0,48)')
       .call(d3.axisBottom(timelineScale).tickValues([2006, 2010, 2015, 2020, 2025]).tickFormat(d3.format('d')).tickSize(0))
       .call(g => g.select('.domain').attr('stroke', 'var(--rule)'));
-    timelineBrush = d3.brushX().extent([[12, 8], [width - 12, 42]]).on('end', ({ selection, sourceEvent }) => {
+    timelineBrush = d3.brushX().handleSize(10).extent([[12, 8], [width - 12, 42]]).on('end', ({ selection, sourceEvent }) => {
       if (!sourceEvent || !selection) return;
       let start = Math.max(2006, Math.round(timelineScale.invert(selection[0])));
       let end = Math.min(2025, Math.round(timelineScale.invert(selection[1])));
@@ -1274,6 +1370,28 @@ window.addEventListener("resize", () => { clearTimeout(rt); rt = setTimeout(draw
   }, { threshold: .16, rootMargin: '0px 0px -8% 0px' });
   items.forEach(item => observer.observe(item));
 })();
+</script>
+<script>
+// Guide actions operate the existing controls; chart state stays in one place.
+document.querySelectorAll('[data-guide-action]').forEach(button => {
+  button.addEventListener('click', () => {
+    const action = button.dataset.guideAction;
+    let message = '';
+    const reveal = selector => {
+      const target = document.querySelector(selector);
+      target.scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'center' });
+    };
+    if (action === 'year') { document.querySelector('[data-te-year="2018"]').click(); message = 'Showing 2018. Try another year using the handle or milestone buttons.'; }
+    if (action === 'view') { document.querySelector('[data-te-view="ribbons"]').click(); message = 'All suppliers is selected. Each colored segment represents a supplier’s share.'; }
+    if (action === 'product') { document.querySelector('.te-row[aria-label*="HS 85"]').click(); message = 'Electronics selected. Its share history and dollar amounts are shown in the details.'; reveal('.te-selected'); }
+    if (action === 'commodity' || action === 'bubble') { select('85'); message = 'Electronics selected in both the supplier dashboard and concentration chart.'; }
+    if (action === 'range') { setLinkedRange([2017, 2025], { redrawHero: true }); message = '2017–2025 selected. The overview, ranking, and supplier dashboard now share these years.'; }
+    if (action === 'risk') { reveal('#c-risk'); message = 'The highlighted bubble matches the commodity selected in the dashboard.'; }
+    if (action === 'panel') { reveal('#panel'); message = 'These details compare 2017 and 2025 for the selected bubble.'; }
+    if (action === 'dashboard') { reveal('#sd-commodity'); message = 'The supplier dashboard retains your selected commodity.'; }
+    button.closest('.play-guide').querySelector('.guide-result').textContent = message;
+  });
+});
 </script>
 </body>
 </html>
