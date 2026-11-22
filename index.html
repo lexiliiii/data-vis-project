@@ -608,6 +608,37 @@ select:focus-visible, input:focus-visible, a:focus-visible { outline: 3px solid 
 #risk-more .story-pair { position: static; margin-top: 40px; }
 @media(max-width:760px) { .sd-grid { grid-template-columns: 1fr; } .sd-panel-risk { display: block; } .sd-panel-risk .sd-growers { margin-top: 24px; } #trade-explorer .te-layout { gap: 24px; } .pause-row { gap: 12px; grid-template-columns: 42px minmax(0,1fr) 64px; } }
 </style>
+<style id="clear-takeaways">
+#risk-more { padding: 0; border: 1px solid var(--rule); border-radius: 8px; background: var(--sheet); }
+#risk-more > summary { display: flex; align-items: center; gap: 24px; padding: 26px 30px; list-style: none; }
+#risk-more > summary::-webkit-details-marker { display: none; }
+#risk-more > summary:hover { background: color-mix(in srgb,var(--c-Mexico) 5%,var(--sheet)); }
+#risk-more > summary .compare-preview { width: 90px; height: 68px; flex: 0 0 90px; color: var(--c-China); }
+#risk-more > summary .compare-copy { flex: 1; margin: 0; }
+#risk-more > summary .compare-copy b { display: block; color: var(--ink); font: 650 clamp(1.1rem,1.8vw,1.45rem)/1.3 var(--display); }
+#risk-more > summary .compare-copy > span { font-size: .9375rem; margin-top: 8px; }
+#risk-more > summary .compare-action { display: inline-flex; align-items: center; justify-content: center; gap: 14px; padding: 12px 16px; border: 1px solid var(--c-Mexico); border-radius: 5px; color: var(--c-Mexico); background: color-mix(in srgb,var(--c-Mexico) 7%,var(--sheet)); margin: 0; white-space: nowrap; }
+#risk-more > summary .compare-action span { color: inherit; margin: 0; font-weight: 600; font-size: .875rem; }
+#risk-more > summary .compare-action i { font: 400 1.25rem/1 var(--display); }
+#risk-more > summary .when-open { display: none; }
+#risk-more[open] > summary .when-open { display: inline; }
+#risk-more[open] > summary .when-closed { display: none; }
+#risk-more[open] > summary .compare-action i { transform: rotate(45deg); }
+#risk-more .story-pair { padding: 0 24px 28px; }
+#trade-explorer .te-policy-context summary { font-size: 1rem; padding: 8px 0; }
+#trade-explorer .te-policy-date { font-size: .875rem; line-height: 1.5; margin-top: 8px; }
+#trade-explorer .te-event { padding: 0 0 22px 16px; }
+#trade-explorer .te-event strong { font-size: 1.05rem; line-height: 1.4; color: var(--c-China); font-weight: 650; margin: 8px 0; }
+#trade-explorer .te-event time { font-size: .8125rem; font-weight: 600; color: var(--ink); }
+#trade-explorer .te-event .te-small { font-size: .9375rem; line-height: 1.6; color: var(--ink); }
+#trade-explorer .te-event a { display: inline-block; font-size: .8125rem; margin-top: 8px; color: var(--c-Mexico); }
+#trade-explorer .te-scope { font-size: .8125rem; line-height: 1.6; }
+.sd-takeaway { margin: 26px 0 0; padding: 20px 24px; border-left: 2px solid var(--c-China); background: color-mix(in srgb,var(--c-China) 5%,var(--sheet)); color: var(--ink); font: 400 clamp(1rem,1.4vw,1.2rem)/1.6 var(--display); }
+.sd-takeaway strong { color: var(--c-China); font-weight: 650; }
+.takeaway-label { display: block; margin-bottom: 8px; font: 600 .8125rem/1.5 var(--display); color: var(--muted); }
+.takeaway-trend { display: block; margin-top: 8px; font: 400 .875rem/1.5 var(--display); color: var(--muted); }
+@media(max-width:760px) { #risk-more > summary { flex-wrap: wrap; gap: 16px; padding: 20px; } #risk-more > summary .compare-preview { width: 56px; flex-basis: 56px; height: 48px; } #risk-more > summary .compare-action { width: 100%; box-sizing: border-box; } #risk-more .story-pair { padding: 0 16px 24px; } .sd-takeaway { padding: 16px; } }
+</style>
 </head>
 <body>
 <div class="wrap">
@@ -770,6 +801,7 @@ select:focus-visible, input:focus-visible, a:focus-visible { outline: 3px solid 
           <div class="range-picker" data-range-picker><label>From <select data-range-start aria-label="Supplier dashboard: start year"></select></label><label>To <select data-range-end aria-label="Supplier dashboard: end year"></select></label><button type="button" data-range-preset>Try 2017–2025</button></div><svg class="sd-timeline" role="img" aria-label="Brushable timeline from 2006 to 2025"></svg>
         </div>
       </div>
+      <p id="sd-takeaway" class="sd-takeaway" aria-live="polite" aria-atomic="true"></p>
       <div class="sd-grid">
         <article class="sd-panel">
           <h3>A. Who supplies it?</h3>
@@ -798,7 +830,7 @@ select:focus-visible, input:focus-visible, a:focus-visible { outline: 3px solid 
     </div>
   </section>
 
-  <section class="feature-step optional-risk" id="risk-step" aria-labelledby="risk-summary"><details id="risk-more"><summary id="risk-summary">Go deeper · Compare all product groups<span>Open the cross-category concentration chart</span></summary><div class="story-pair">
+  <section class="feature-step optional-risk" id="risk-step" aria-labelledby="risk-summary"><details id="risk-more"><summary id="risk-summary"><svg class="compare-preview" viewBox="0 0 100 72" aria-hidden="true"><path d="M12 8V60H94" fill="none" stroke="currentColor" opacity=".4"/><g fill="currentColor"><circle cx="28" cy="48" r="5"/><circle cx="43" cy="40" r="7"/><circle cx="61" cy="47" r="4"/><circle cx="73" cy="23" r="9"/><circle cx="88" cy="14" r="5"/></g></svg><span class="compare-copy"><b>Which products still depend on one supplier?</b><span>Compare all 16 product groups in an interactive chart.</span></span><span class="compare-action"><span class="when-closed">Open comparison</span><span class="when-open">Close comparison</span><i aria-hidden="true">+</i></span></summary><div class="story-pair">
     <article class="story-copy reveal">
       <div class="rail"><b>06 · What remains</b><span>Cross-category concentration</span></div>
       <h2 id="h-risk">Where does dependence remain?</h2>
@@ -1380,6 +1412,10 @@ window.addEventListener("resize", () => { clearTimeout(rt); rt = setTimeout(draw
   function renderRisk(item) {
     const startIndex = indexFor(state.start), endIndex = indexFor(state.end);
     const leader = item.leaders[endIndex], hhi = item.hhi[endIndex];
+    const concentration = hhi > 2500 ? 'highly concentrated' : hhi >= 1500 ? 'moderately concentrated' : 'spread across multiple suppliers (low concentration)';
+    const change = hhi - item.hhi[startIndex];
+    const trend = Math.abs(change) < .01 ? 'Concentration is unchanged' : `Concentration is ${change > 0 ? 'higher' : 'lower'}`;
+    document.getElementById('sd-takeaway').innerHTML = `<span class="takeaway-label">Your selection · ${item.name} · ${state.end}</span><strong>${leader.name} supplies ${leader.share.toFixed(1)}%</strong> of this category; supply is ${concentration}.<span class="takeaway-trend">${trend} than in ${state.start}, based on HHI.</span>`;
     const level = hhi > 2500 ? 'High concentration' : hhi >= 1500 ? 'Moderate concentration' : 'Low concentration';
     document.getElementById('sd-top-share').textContent = leader.share.toFixed(1) + '%';
     document.getElementById('sd-top-supplier').textContent = `${leader.name} · largest supplier in ${state.end}`;
