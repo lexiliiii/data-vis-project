@@ -542,6 +542,41 @@ select:focus-visible, input:focus-visible, a:focus-visible { outline: 3px solid 
 @media(max-width:760px) { .play-guide .guide-steps { grid-template-columns: 1fr; gap: 0; } .guide-steps li { display: grid; grid-template-columns: 24px 1fr; column-gap: 10px; padding: 12px 0; } .guide-steps li::before { grid-row: 1 / 4; margin-top: 4px; } .guide-steps li button { justify-self: start; } }
 </style>
 
+
+<style id="story-reading">
+.story-copy { padding-top: 0; }
+.story-copy .story-summary, #trade-explorer .feature-heading .story-summary, #supplier-dashboard .sd-heading .story-summary { font: 400 clamp(1.05rem,1.35vw,1.25rem)/1.55 var(--display); color: var(--ink); max-width: 42ch; }
+.story-summary strong, .story-copy .story-summary strong { color: var(--c-China); font-weight: 650; }
+.story-details { margin-top: 18px; font: 400 .875rem/1.6 var(--display); }
+.story-details summary { color: var(--c-Mexico); font-weight: 500; padding-block: 6px; }
+.story-details > div { padding-top: 10px; }
+.story-copy .story-details p, .story-details p { font: 400 .875rem/1.65 var(--display); color: var(--muted); margin: 0 0 10px; }
+/* Keep copy and figure together throughout the sticky interval. */
+.step.scrolly { display: block; }
+.story-pair { display: grid; grid-template-columns: minmax(250px,300px) minmax(0,1fr); gap: clamp(32px,3vw,58px); align-items: start; position: sticky; top: 7vh; }
+.story-pair .story-copy, .story-pair .story-visual { position: static; }
+.story-pair { top: min(7vh, calc(100svh - var(--pair-height, 0px) - 24px)); }
+@media(max-width:900px) { .story-pair { position: static; grid-template-columns: 1fr; gap: 42px; } }
+.closing { min-height: 100svh; box-sizing: border-box; display: grid; align-content: center; padding: 16vh max(7vw,24px) 14vh; border-top: 1px solid var(--rule); background: radial-gradient(circle at 78% 28%, color-mix(in srgb,var(--c-Mexico) 14%,transparent),transparent 28%),radial-gradient(circle at 18% 74%,color-mix(in srgb,var(--c-China) 10%,transparent),transparent 25%); }
+.closing-inner { width: min(1050px,82vw); margin: 0 auto; }
+.closing h2 { font: 800 clamp(2.35rem,5vw,4.7rem)/1.04 var(--display); font-stretch: 92%; letter-spacing: -.035em; margin: 0; text-wrap: balance; }
+.closing h2 span { display: block; margin-top: .24em; font-weight: 430; }
+.closing h2 em { color: var(--c-China); font-style: normal; font-weight: 760; }
+.closing p { max-width: 60ch; margin: 30px 0 0; color: var(--muted); font: 400 clamp(1rem,1.25vw,1.12rem)/1.7 var(--display); }
+.closing p strong { color: var(--ink); font-weight: 600; }
+.closing-links { display: flex; flex-wrap: wrap; gap: 12px 26px; margin-top: 30px; }
+.closing-links a { color: var(--c-Mexico); font: 500 .875rem/1.5 var(--display); text-underline-offset: 5px; }
+@media(max-width:560px) { .closing { padding-inline: 20px; } .closing-inner { width: 100%; } .closing h2 { font-size: clamp(2.15rem,10vw,3.25rem); } }
+</style>
+<style id="repeatable-scroll-motion">
+.scroll-scene, .scroll-scene.reveal.in-view { opacity: var(--scene-opacity, 1); transform: translateY(var(--scene-offset, 0px)); transition: none; }
+/* The parent now owns movement, keeping text and chart in sync. */
+.scroll-scene .reveal { opacity: 1; transform: none; transition: none; }
+.scroll-scene:has(:focus-visible) { opacity: 1; }
+@media (prefers-reduced-motion: reduce) {
+  .scroll-scene, .scroll-scene.reveal.in-view { opacity: 1; transform: none; }
+}
+</style>
 </head>
 <body>
 <div class="wrap">
@@ -580,12 +615,13 @@ select:focus-visible, input:focus-visible, a:focus-visible { outline: 3px solid 
     </figure>
   </section>
 
-  <section class="step scrolly" id="rank-step" aria-labelledby="h-rank">
+  <section class="step scrolly" id="rank-step" aria-labelledby="h-rank"><div class="story-pair">
     <article class="story-copy reveal">
       <div class="rail"><b>02 · A new order</b><span>Trading-partner rank</span></div>
-      <h2 id="h-rank">Twenty years ago the top three were Canada, China and Mexico. Mexico now leads.</h2>
-      <p>Ranked by total trade (imports plus exports), the top of the table held steady for a decade. Then it moved. Mexico passed China in 2019 and passed Canada in 2023. Taiwan climbed from 11th to 4th in eight years, likely driven by AI-related semiconductors. Vietnam was 41st in 2006 and is 7th today. <strong>Ranks 11+</strong> groups every position outside the top ten on one baseline.</p>
-    </article>
+      <h2 id="h-rank">Mexico now leads US trade.</h2>
+
+    <p class="story-summary"><strong>Mexico overtook China in 2019.</strong> Vietnam and Taiwan also moved up the rankings.</p><details class="story-details"><summary>Read the ranking story</summary><div><p>Ranked by total trade (imports plus exports), the top of the table held steady for a decade. Then it moved. Mexico passed China in 2019 and passed Canada in 2023. Taiwan climbed from 11th to 4th in eight years, likely driven by AI-related semiconductors. Vietnam was 41st in 2006 and is 7th today. <strong>Ranks 11+</strong> groups every position outside the top ten on one baseline.</p></div></details>
+</article>
     <div class="story-visual">
       <figure>
         <p class="linked-feedback">Linked years: <strong data-linked-years>2006–2025</strong> · The shaded range and endpoint labels follow your selection. <a href="#overview-controls">Change years in the overview</a>.</p><div class="chart" id="c-rank"></div>
@@ -593,7 +629,7 @@ select:focus-visible, input:focus-visible, a:focus-visible { outline: 3px solid 
         <details><summary>View data table</summary><div class="tbl" id="t-rank"></div></details>
       </figure>
     </div>
-  </section>
+  </div></section>
 
   <aside class="statement" aria-label="Key takeaway">
     <p class="reveal">Dependency did not disappear. It <em>changed addresses.</em></p>
@@ -606,7 +642,7 @@ select:focus-visible, input:focus-visible, a:focus-visible { outline: 3px solid 
       <div class="feature-heading reveal">
         <div class="rail"><b>03 · Explore the shift</b><span>Product groups · 2006–2025</span></div>
         <h2 id="h-explorer">Watch America's reliance on China change.</h2>
-        <p>Drag through the years and select a product group. Compare China's share with its 2017 level, alongside the trade policies and events of the time.</p>
+        <p class="story-summary"><strong>One product. Two perspectives.</strong> Compare China with 2017, or explore all suppliers.</p>
       </div>
       <div class="te-interface">
       <details class="play-guide"><summary>Try the explorer · 3 quick steps</summary><ol class="guide-steps"><li><strong>Move through time</strong><p>Drag the coral handle or choose a milestone. Watch the shares and policy context change.</p><button type="button" data-guide-action="year">Try the 2018 milestone</button></li><li><strong>Switch the comparison</strong><p>Choose All suppliers to compare the colored segments. Switch back to compare China with 2017.</p><button type="button" data-guide-action="view">Show all suppliers</button></li><li><strong>Select a product</strong><p>Click a product row. Its share history and dollar amounts appear beside the chart.</p><button type="button" data-guide-action="product">Select electronics</button></li></ol><output class="guide-result" aria-live="polite"></output></details>
@@ -659,13 +695,14 @@ select:focus-visible, input:focus-visible, a:focus-visible { outline: 3px solid 
     <p class="reveal">The decline was not a clean break. It was a <em>long rerouting.</em></p>
   </aside>
 
-  <section class="step scrolly" id="china-step" aria-labelledby="h-cn">
+  <section class="step scrolly" id="china-step" aria-labelledby="h-cn"><div class="story-pair">
     <article class="story-copy reveal">
       <div class="rail"><b>04 · The turning point</b><span>US–China goods trade</span></div>
-      <h2 id="h-cn">US imports from China peaked at $576 billion in 2022, then fell 43% by 2025.</h2>
-      <p>Imports from China kept growing after the 2018 tariffs and recovered after COVID-19. The steep fall came after 2022. Exports to China moved much less, so the trade deficit with China shrank from $422 billion in 2022 to $221 billion in 2025. This simplified line-and-area view replaces the crowded paired bars.</p>
-      <p class="note">Policy markers show what happened at the same time. They don't show what caused the change.</p>
-    </article>
+      <h2 id="h-cn">China imports fell sharply after 2022.</h2>
+
+
+    <p class="story-summary">Imports fell <strong>43% from their 2022 peak</strong> by 2025. Exports changed much less.</p><details class="story-details"><summary>Read the trade context</summary><div><p>Imports from China kept growing after the 2018 tariffs and recovered after COVID-19. The steep fall came after 2022. Exports to China moved much less, so the trade deficit with China shrank from $422 billion in 2022 to $221 billion in 2025.</p><p class="note">Policy markers show what happened at the same time. They don't show what caused the change.</p></div></details>
+</article>
     <div class="story-visual">
       <figure>
         <div class="key"><span><i style="background:var(--c-China)"></i>Imports from China</span><span><i style="background:var(--ink)"></i>Exports to China</span></div>
@@ -674,13 +711,13 @@ select:focus-visible, input:focus-visible, a:focus-visible { outline: 3px solid 
         <details><summary>View data table</summary><div class="tbl" id="t-cn"></div></details>
       </figure>
     </div>
-  </section>
+  </div></section>
 
   <section class="feature-step" id="supplier-dashboard" aria-labelledby="h-supplier-dashboard">
     <div class="sd-heading reveal">
       <div class="rail"><b>05 · Supplier options</b><span>Linked sourcing dashboard</span></div>
       <h2 id="h-supplier-dashboard">Is the US too dependent on one country—and who else is gaining ground?</h2>
-      <p>Choose a commodity, then brush a time period. The three views update together to show the leading suppliers, how their shares changed, and which established alternatives grew fastest.</p>
+      <p class="story-summary">Choose a product and years. <strong>Compare suppliers, share changes, and concentration.</strong></p>
     </div>
     <div class="sd-shell">
       <details class="play-guide"><summary>Try the linked charts · 3 quick steps</summary><ol class="guide-steps"><li><strong>Choose a commodity</strong><p>Use the selector to update all three panels and the selected bubble below.</p><button type="button" data-guide-action="commodity">Try electronics</button></li><li><strong>Set a time range</strong><p>Drag either timeline edge or use From / To. The overview and ranking follow these years too.</p><button type="button" data-guide-action="range">Compare 2017–2025</button></li><li><strong>See the linked selection</strong><p>Open the concentration chart to inspect the same commodity’s 2017–2025 comparison.</p><button type="button" data-guide-action="risk">Show selected bubble</button></li></ol><output class="guide-result" aria-live="polite"></output></details>
@@ -717,17 +754,18 @@ select:focus-visible, input:focus-visible, a:focus-visible { outline: 3px solid 
           <div class="sd-growers"><h4>Fastest-growing alternatives</h4><ol id="sd-growers"></ol></div>
         </article>
       </div>
-      <p class="sd-note">“Alternatives” means suppliers that already reached at least 1% of this US import market in one or more years. Growth is change in import share, not a forecast of capacity, price, quality, or geopolitical feasibility.</p>
+      <details class="story-details"><summary>What counts as an alternative?</summary><div><p>“Alternatives” means suppliers that already reached at least 1% of this US import market in one or more years. Growth is change in import share, not a forecast of capacity, price, quality, or geopolitical feasibility.</p></div></details>
       <div class="te-status" id="sd-status" role="status" aria-live="polite"></div>
     </div>
   </section>
 
-  <section class="step scrolly" id="risk-step" aria-labelledby="h-risk">
+  <section class="step scrolly" id="risk-step" aria-labelledby="h-risk"><div class="story-pair">
     <article class="story-copy reveal">
       <div class="rail"><b>06 · What remains</b><span>Cross-category concentration</span></div>
-      <h2 id="h-risk">Where is the US still relying on a single supplier?</h2>
-      <p>Each dot is a product group. Further right means the top supplier holds a larger share of US imports. Higher means that share grew between 2017 and 2025. Groups in the top right are the most exposed. Select a dot to see who supplies it; the chart now labels both axes directly.</p>
-    </article>
+      <h2 id="h-risk">Where does dependence remain?</h2>
+
+    <p class="story-summary"><strong>Further right: a larger leading supplier.</strong> Higher up: the largest supplier’s share grew.</p><details class="story-details"><summary>How to read this chart</summary><div><p>Each dot is a product group. Further right means the top supplier holds a larger share of US imports. Higher means that share grew between 2017 and 2025. Groups in the top right are the most exposed. Select a dot to see who supplies it.</p></div></details>
+</article>
     <div class="story-visual">
       <details class="play-guide"><summary>Explore the bubbles · 3 quick steps</summary><ol class="guide-steps"><li><strong>Select a bubble</strong><p>Click a bubble, or Tab to one and press Enter. Its supplier details update beside it.</p><button type="button" data-guide-action="bubble">Select electronics</button></li><li><strong>Read the comparison</strong><p>Compare the selected product’s supplier, share, and HHI across the two years.</p><button type="button" data-guide-action="panel">Show supplier details</button></li><li><strong>Explore its suppliers</strong><p>The supplier dashboard uses the same commodity. Return there to explore other year ranges.</p><button type="button" data-guide-action="dashboard">Show linked dashboard</button></li></ol><output class="guide-result" aria-live="polite"></output></details>
       <div class="risk">
@@ -738,6 +776,15 @@ select:focus-visible, input:focus-visible, a:focus-visible { outline: 3px solid 
         <aside class="panel" id="panel" aria-live="polite"></aside>
       </div>
       <details><summary>View data table</summary><div class="tbl" id="t-risk"></div></details>
+    </div>
+  </div></section>
+
+  <section class="closing" aria-labelledby="h-closing">
+    <div class="closing-inner reveal">
+      <span class="kicker">The takeaway</span>
+      <h2 id="h-closing">The US diversified its suppliers.<span>Dependence <em>did not disappear.</em></span></h2>
+      <p>China’s share of US imports fell from 21.9% in 2017 to 9.4% in 2025, while Mexico, Vietnam, and Taiwan gained share. The shift broadened the supplier network, but some product groups still rely heavily on one country. <strong>Diversification is uneven: dependence must be assessed product by product.</strong></p>
+      <nav class="closing-links" aria-label="Revisit the story"><a href="#overview-controls">Revisit the overview</a><a href="#supplier-dashboard">Explore supplier dependence</a></nav>
     </div>
   </section>
 
@@ -1355,20 +1402,57 @@ window.addEventListener("resize", () => { clearTimeout(rt); rt = setTimeout(draw
 </script>
 <script>
 (() => {
-  const items = document.querySelectorAll('.reveal');
-  if (!('IntersectionObserver' in window) || matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    items.forEach(item => item.classList.add('in-view'));
-    return;
+  // Keep expanded details reachable when a paired section is taller than the viewport.
+  if ('ResizeObserver' in window) {
+    const pairs = new ResizeObserver(entries => entries.forEach(({ target, contentRect }) => target.style.setProperty('--pair-height', `${contentRect.height}px`)));
+    document.querySelectorAll('.story-pair').forEach(pair => pairs.observe(pair));
   }
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('in-view');
-        observer.unobserve(entry.target);
-      }
+  // Animate whole story units together, using section bounds rather than
+  // transformed/sticky children. Progress reverses naturally when scrolling up.
+  const motion = matchMedia('(prefers-reduced-motion: reduce)');
+  document.querySelectorAll('.reveal').forEach(item => item.classList.add('in-view'));
+  const scenes = [...document.querySelectorAll('.hero, .opening-viz, .step.scrolly, .feature-step, .statement, .closing')].map(section => {
+    const targets = section.matches('.step.scrolly') ? [...section.querySelectorAll(':scope > .story-pair')]
+      : section.matches('.hero') ? [...section.querySelectorAll(':scope > .hero-inner')]
+      : section.matches('.closing') ? [...section.querySelectorAll(':scope > .closing-inner')]
+      : [...section.children];
+    targets.forEach(target => target.classList.add('scroll-scene'));
+    return { section, targets };
+  });
+  const clamp = value => Math.max(0, Math.min(1, value));
+  const ease = value => { const t = clamp(value); return t * t * (3 - 2 * t); };
+  let queued = false;
+  function paint() {
+    queued = false;
+    const height = window.innerHeight;
+    const frames = scenes.map(({ section, targets }) => {
+      const rect = section.getBoundingClientRect();
+      const style = getComputedStyle(section);
+      const contentTop = rect.top + parseFloat(style.paddingTop);
+      const contentBottom = rect.bottom - parseFloat(style.paddingBottom);
+      const entering = ease((height * .94 - contentTop) / (height * .38));
+      // Fade before the trailing section padding reaches the viewport,
+      // rather than leaving the outgoing chart visible across the gap.
+      const leaving = ease((contentBottom - height * .12) / (height * .62));
+      return { targets, opacity: motion.matches ? 1 : Math.min(entering, leaving),
+        offset: motion.matches ? 0 : (1 - entering) * 28 - (1 - leaving) * 20 };
     });
-  }, { threshold: .16, rootMargin: '0px 0px -8% 0px' });
-  items.forEach(item => observer.observe(item));
+    frames.forEach(({ targets, opacity, offset }) => targets.forEach(target => {
+      target.style.setProperty('--scene-opacity', opacity.toFixed(4));
+      target.style.setProperty('--scene-offset', `${offset.toFixed(2)}px`);
+    }));
+  }
+  function schedule() {
+    if (!queued) { queued = true; requestAnimationFrame(paint); }
+  }
+  window.addEventListener('scroll', schedule, { passive: true });
+  window.addEventListener('resize', schedule);
+  motion.addEventListener('change', schedule);
+  if ('ResizeObserver' in window) {
+    const observer = new ResizeObserver(schedule);
+    scenes.forEach(({ section }) => observer.observe(section));
+  }
+  paint();
 })();
 </script>
 <script>
