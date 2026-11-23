@@ -5,7 +5,7 @@ Final project for CS 6730 Data Visualization. This interactive data story examin
 ## Project links
 
 - **Public website:** https://lexiliiii.github.io/data-vis-project/
-- **Three-minute screencast:** **[ADD FINAL VIDEO URL BEFORE SUBMISSION]**
+- **Three-minute screencast:** https://drive.google.com/file/d/1SXZ0tkBRVgUP3POB7ge9NqrPbbdw76Dt/view?usp=drive_link
 - **Source repository:** https://github.com/lexiliiii/data-vis-project
 
 ## What is included
