@@ -65,7 +65,7 @@ Then open http://localhost:8000/.
 
 An interactive **Share trails / Supplier ribbons** section appears after the partner-ranking story. It uses eight selected HS2 categories from the existing 2006–2025 annual Comtrade extract, matching the rest of the page.
 
-- Switch between **Share trails** and **Supplier ribbons**. Ribbons show China, Mexico, Vietnam, Taiwan, and all other suppliers as a 100% stacked bar; the year, selected category, and inflation setting are shared between views.
+- Switch between **Share trails** and **Supplier ribbons**. Ribbons show China, Mexico, Vietnam, Taiwan, and all other suppliers as a 100% stacked bar; the year and selected category are shared between views.
 - Drag the year slider, or jump to a milestone year; marks animate from their previous positions and respect reduced-motion settings.
 - Select a category to view its share history, change from 2017, dollar amounts, and sourced policy context as of the selected year-end.
 
